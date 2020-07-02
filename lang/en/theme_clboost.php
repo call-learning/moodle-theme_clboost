@@ -37,6 +37,18 @@ $string['configtitle'] = 'CALL Learning Boost';
 $string['fontsize'] = 'Theme base fontsize';
 $string['fontsize_desc'] = 'Enter a fontsize in %';
 $string['generalsettings'] = 'General settings';
+
+$string['kids:tagline'] = 'Kids preset Tagline';
+$string['kids:tagline_desc'] = 'Kids preset Tagline (on front page)';
+$string['kids:tagline:default'] = 'Learn, Play, Enjoy !';
+$string['kids:carousel:label1'] = 'Why not try our platform !!!!!!';
+$string['kids:carousel:label2'] = 'Learn English with fun activities online';
+
+$string['kids:slogan'] = 'Kids preset Slogan';
+$string['kids:slogan_desc'] = 'Kids preset Slogan (on front page)';
+$string['kids:slogan:default'] = 'A new way of learning English, provided by CALL Learning.';
+$string['kids:settings'] = 'Kids preset Settings';
+
 $string['nobootswatch'] = 'None';
 $string['pluginname'] = 'CALL Learning Boost';
 $string['presetfiles'] = 'Additional theme preset files';

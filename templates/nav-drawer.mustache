@@ -1,0 +1,13 @@
+{{!
+    @template theme_boost/nav-drawer
+
+    Admin time setting template.
+
+    Same as boost column2 except that we use our flat_navigation definition
+    Example context (json): {}
+}}
+<div id="nav-drawer" data-region="drawer" class="d-print-none moodle-has-zindex {{^navdraweropen}}closed{{/navdraweropen}}" aria-hidden="{{#navdraweropen}}false{{/navdraweropen}}{{^navdraweropen}}true{{/navdraweropen}}" tabindex="-1">
+    <!--- Theme boost change -->
+    {{> theme_clboost/flat_navigation }}
+    <!--- END Theme boost change -->
+</div>

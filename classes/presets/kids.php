@@ -33,23 +33,38 @@ class kids extends presets_base {
 
         // Raw SCSS to include before the content.
         $setting = new \admin_setting_configtext('theme_clboost/kids_tagline',
-            get_string('kids:tagline', 'theme_clboost'), get_string('kids:tagline_desc', 'theme_clboost'), '', PARAM_RAW);
+            get_string('kids:tagline', 'theme_clboost'),
+            get_string('kids:tagline_desc', 'theme_clboost'),
+            get_string('kids:slogan:default', 'theme_clboost'),
+            PARAM_RAW);
         $page->add($setting);
         $setting = new \admin_setting_configtext('theme_clboost/kids_slogan',
-            get_string('kids:slogan', 'theme_clboost'), get_string('kids:slogan_desc', 'theme_clboost'), '', PARAM_RAW);
+            get_string('kids:slogan', 'theme_clboost'),
+            get_string('kids:slogan_desc', 'theme_clboost'),
+            get_string('kids:slogan:default', 'theme_clboost'),
+            PARAM_RAW);
         $page->add($setting);
         return $page;
     }
 
     public function get_extra_context() {
         global $CFG;
+        $clboostconfig = get_config('theme_clboost');
         return [
             'carousel' => [
                 ['image' => $CFG->wwwroot . '/theme/clboost/pix/kids/carousel/img-1.jpg',
                     'label' => get_string('kids:carousel:label1', 'theme_clboost')],
                 ['image' => $CFG->wwwroot . '/theme/clboost/pix/kids/carousel/img-2.jpg',
                     'label' => get_string('kids:carousel:label2', 'theme_clboost')]
-            ]
+            ],
+            'footerimages' => [
+                $CFG->wwwroot . '/theme/clboost/pix/kids/sisters.png'
+            ],
+            'headerimages' => [
+                $CFG->wwwroot . '/theme/clboost/pix/kids/kidsplay.png',
+                $CFG->wwwroot . '/theme/clboost/pix/kids/kidscards.png',
+            ],
+            'themeconfig' => (array) $clboostconfig
         ];
     }
 }

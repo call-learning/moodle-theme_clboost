@@ -24,10 +24,13 @@
 
 namespace theme_clboost\presets;
 
-abstract class presets_base {
+use moodle_exception;
+use ReflectionClass;
 
+abstract class presets_base {
     /**
      * Get additional setting page
+     *
      * @return \admin_settingpage
      */
     public abstract function get_additional_settings_page();
@@ -38,11 +41,27 @@ abstract class presets_base {
     public abstract function get_extra_context();
 
     /**
+     * Get extra footer content
+     */
+    public function get_extra_footer_content() {
+        $currentcontext = $this->get_extra_context();
+        $presetname = (new ReflectionClass($this))->getShortName();
+        // Specific context for the preset.
+            try {
+                global $OUTPUT;
+                return $OUTPUT->render_from_template("theme_clboost/{$presetname}-footer-content", $currentcontext);
+            } catch (moodle_exception $e) {
+                // We just carry on if the template is not found.
+            }
+        return '';
+    }
+
+    /**
      * Return current preset instance
      */
     public static function get_current_preset_instance() {
-        $currentpresetname = get_config('theme_clboost','preset');
-        $presetclassname = '\\theme_clboost\presets\\'.$currentpresetname;
+        $currentpresetname = get_config('theme_clboost', 'preset');
+        $presetclassname = '\\theme_clboost\presets\\' . $currentpresetname;
         if (class_exists($presetclassname)) {
             return new $presetclassname();
         }

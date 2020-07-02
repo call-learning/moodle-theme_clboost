@@ -29,22 +29,20 @@ defined('MOODLE_INTERNAL') || die();
 $bodyattributes = $OUTPUT->body_attributes([]);
 $contextcoursesite = context_course::instance(SITEID);
 
-
 // Here we render the templates that are related to the preset, if not we display the default information.
 $presetcontent = '';
 try {
-    $clboostconfig = get_config('theme_clboost');
     $presetname = \theme_clboost\presets\utils::get_current_preset();
     // Specific context for the preset.
     $pinstance = \theme_clboost\presets\presets_base::get_current_preset_instance();
     $currentcontext = [
-        'loggedin' => isloggedin(),
-        'themeconfig' => (array) $clboostconfig
+        'ctaurl' => isloggedin() ? $CFG->wwwroot . '/my' : get_login_url(),
+        'ctalabel' => isloggedin() ? get_string('mycourses') : get_string('login')
     ];
     if ($pinstance) {
         $currentcontext = array_merge($currentcontext, $pinstance->get_extra_context());
     }
-    $presetcontent  = $OUTPUT->render_from_template("theme_clboost/{$presetname}-frontpage-content", $currentcontext);
+    $presetcontent = $OUTPUT->render_from_template("theme_clboost/{$presetname}-frontpage-content", $currentcontext);
 } catch (moodle_exception $e) {
     // We just carry on if the template is not found.
 }
@@ -58,8 +56,6 @@ $templatecontext = [
 ];
 /* @var core_renderer $OUTPUT */
 echo $OUTPUT->render_from_template('theme_clboost/frontpage', $templatecontext);
-
-
 
 // Bit of a hack here: we prevent the index page from displaying anything else than we decided to in the template.
 // It would usually display the course list, news, and so on (see @core_renderer::frontpage).

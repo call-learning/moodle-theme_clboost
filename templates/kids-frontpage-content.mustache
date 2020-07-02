@@ -19,27 +19,41 @@
 
     Example context (json):
     {
-        "isloggedin": true,
+        "ctaurl": 'url',
+        "ctalabel": 'label'
     }
 }}
 <div>
-    <div class="jumbotron p-4 p-md-5 pb-5 mb-1 text-white rounded bg-primary">
-        <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">{{themeconfig.kids_tagline}}</span></h1>
+    <div class="jumbotron p-4 p-md-5 pb-5 mb-1 text-white rounded bg-white text-dark">
+        <div class="d-flex">
+            <img src="{{config.wwwroot}}/theme/clboost/pix/kids/fp-x-mark.png" role="presentation" class="img-fluid"/>
+            <div>
+        <h1 class="display-4 font-italic">{{themeconfig.kids_tagline}}</h1>
             <p class="lead my-3">{{themeconfig.kids_slogan}}</p>
-            <p class="lead my-3"><br></p>
+                <img src="{{config.wwwroot}}/theme/clboost/pix/kids/kidsplay.png" role="presentation" class="img-fluid"/>
+            </div>
         </div>
-        <p class="lead text-center">
-            <a class="btn btn-secondary btn-lg" href="/login/index.php" role="button">Connect</a>
+        <p class="lead text-right">
+            <a class="btn btn-secondary btn-lg" href="{{ctaurl}}" role="button">{{ctalabel}}</a>
         </p>
     </div>
-    <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div id="fp-carousel" class="carousel slide">
         <div class="carousel-inner">
             {{#carousel}}
-                <div class="carousel-item active">
+                <div class="carousel-item">
                     <img src="{{image}}" alt="{{label}}" class="d-block w-100">
                 </div>
             {{/carousel}}
         </div>
     </div>
 </div>
+
+{{#js}}
+    M.util.js_pending('theme_boost/carousel');
+    require(['theme_boost/carousel'], function() {
+    M.util.js_complete('theme_boost/carousel');
+    $('#fp-carousel .carousel-item').first().addClass('active');
+    $('#fp-carousel').carousel();
+    });
+
+{{/js}}

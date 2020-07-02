@@ -100,7 +100,11 @@ function theme_clboost_get_main_scss_content($theme) {
                 break;
         }
     }
-    return $scss;
+    // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
+    $pre = file_get_contents($CFG->dirroot . '/theme/clboost/scss/pre.scss');
+    // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
+    $post = file_get_contents($CFG->dirroot . '/theme/clboost/scss/post.scss');
+    return $pre. $scss . $post;
 }
 
 /**
