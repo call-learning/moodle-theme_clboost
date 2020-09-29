@@ -413,4 +413,13 @@ trait core_renderer_override_trait {
         return $this->render_from_template('core/full_header', $header);
     }
 
+    /**
+     * This will return the current template finder.
+     *
+     * @return mixed
+     */
+    public function get_mustache_template_finder() {
+        return new \theme_clboost\output\mustache_template_finder();
+    }
+
 }

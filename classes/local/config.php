@@ -68,8 +68,8 @@ class config {
             // The site home page.
             'frontpage' => array(
                 'file' => 'frontpage.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre',
+                'regions' => array('content'),
+                'defaultregion' => 'content',
                 'options' => array('nonavbar' => true),
             ),
             // Server administration scripts.

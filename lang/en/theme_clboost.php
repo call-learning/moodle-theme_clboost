@@ -60,3 +60,5 @@ $string['slogan'] = 'Preset Slogan';
 $string['slogan_desc'] = 'Preset Slogan (on front page)';
 $string['slogan:default'] = 'A new way of learning English, provided by CALL Learning.';
 $string['settings'] = 'Preset Settings';
+
+$string['region-content'] = 'Content';

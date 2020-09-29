@@ -43,7 +43,7 @@ class utils {
      */
     public static function get_real_theme_path($theme, $subpath = '') {
         global $CFG;
-        $roodir = $CFG->themedir ? $theme->themedir : $CFG->dirroot . '/theme/';
+        $roodir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme/';
         $themetrypath = [
             "{$roodir}/{$theme->name}/$subpath",
             "{$roodir}/clboost/$subpath",
