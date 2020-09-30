@@ -85,17 +85,7 @@ function theme_clboost_get_main_scss_content($theme) {
  */
 function theme_clboost_get_precompiled_css($theme) {
     global $CFG;
-    $stylefolder = utils::get_real_theme_path($theme, 'style');
-    $cdir = scandir($stylefolder);
-    $content = '';
-    foreach ($cdir as $key => $value) {
-        if (!in_array($value, array(".", ".."))) {
-            if (is_file($cdir . DIRECTORY_SEPARATOR . $value)) {
-                $content .= '\n' . file_get_contents();
-            }
-        }
-    }
-    return $content;
+    return file_get_contents($CFG->dirroot . '/theme/boost/style/moodle.css');
 }
 
 /**

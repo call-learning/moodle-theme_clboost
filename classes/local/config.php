@@ -148,7 +148,8 @@ class config {
 
     public static function setup_config(&$theme, $themename = 'clboost') {
         $theme->name = $themename;
-        $theme->sheets = [];
+        // Automatically add all sheets / CSS defined in this theme.
+        $theme->sheets = static::get_all_stylesheets($themename);
         $theme->editor_sheets = [];
         $theme->editor_scss = ['editor'];
         $theme->usefallback = true;
@@ -176,6 +177,23 @@ class config {
         $theme->iconsystem = \core\output\icon_system::FONTAWESOME;
     }
 
+    protected static function get_all_stylesheets($themename) {
+        global $CFG;
+        $stylefolder = "{$CFG->dirroot}/theme/{$themename}/style";
+        $stylesfiles = [];
+        if (is_dir($stylefolder)) {
+            $cdir = scandir($stylefolder);
+            foreach ($cdir as $key => $value) {
+                if (!in_array($value, array(".", ".."))) {
+                    $filepath = $stylefolder . DIRECTORY_SEPARATOR . $value;
+                    if (is_file($filepath)) {
+                        $stylesfiles[] = basename($filepath,'.css');
+                    }
+                }
+            }
+        }
+        return $stylesfiles;
+    }
     protected static function get_theme_callback($functioname, $themename) {
         $themefunction = $themename . '_' . $functioname;
         if (function_exists($themefunction)) {
