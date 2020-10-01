@@ -60,7 +60,8 @@ function theme_clboost_get_extra_scss($theme) {
  * @throws coding_exception
  */
 function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    return theme_clboost\local\utils::generic_pluginfile('clboost', $course, $cm, $context, $filearea, $args, $forcedownload, $options);
+    return theme_clboost\local\utils::generic_pluginfile('clboost', $course, $cm, $context, $filearea, $args, $forcedownload,
+        $options);
 }
 
 /**
@@ -81,6 +82,7 @@ function theme_clboost_get_main_scss_content($theme) {
 /**
  * Get compiled css.
  *
+ * @param theme_config $theme
  * @return string compiled css
  */
 function theme_clboost_get_precompiled_css($theme) {
@@ -92,7 +94,8 @@ function theme_clboost_get_precompiled_css($theme) {
  * Get SCSS to prepend.
  *
  * @param theme_config $theme The theme config object.
- * @return array
+ * @return string
+ * @throws dml_exception
  */
 function theme_clboost_get_pre_scss($theme) {
     global $CFG;

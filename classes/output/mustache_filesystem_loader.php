@@ -32,15 +32,19 @@ namespace theme_clboost\output;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_filesystem_loader extends \core\output\mustache_filesystem_loader {
+    // @codingStandardsIgnoreStart
     /**
      * Helper function for getting a Mustache template file name.
      * Uses the leading component to restrict us specific directories.
      *
      * @param string $name
      * @return string Template file name
+     * @throws \coding_exception
+     * @throws \moodle_exception
      */
     protected function getFileName($name) {
         // Call the Moodle template finder and look for preset files.
         return \theme_clboost\output\mustache_template_finder::get_template_filepath($name);
     }
+    // @codingStandardsIgnoreEn
 }

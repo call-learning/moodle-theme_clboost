@@ -44,13 +44,16 @@ class settings {
 
     /**
      * Create settings for the current theme (clboost by default)
-     * @param $currentthemename
+     *
+     * @param string $currentthemename
+     * @return theme_boost_admin_settingspage_tabs
      */
     public static function create_settings($currentthemename = 'clboost') {
         $themefullname = 'theme_' . $currentthemename;
 
         $settings =
-            new theme_boost_admin_settingspage_tabs('themesetting' . $currentthemename, static::get_string('configtitle', $themefullname));
+            new theme_boost_admin_settingspage_tabs('themesetting' . $currentthemename,
+                static::get_string('configtitle', $themefullname));
         $page = new admin_settingpage($themefullname . '_general', static::get_string('generalsettings', $themefullname));
 
         // Background image setting.
@@ -107,13 +110,27 @@ class settings {
             PARAM_RAW);
         $page->add($setting);
         $settings->add($page);
+
+        static::additional_settings($settings);
         return $settings;
     }
 
     /**
+     * Additional settings
+     *
+     * This is intended to be overriden in the subtheme to add new pages for example.
+     *
+     * @param admin_settingpage $settings
+     */
+    protected static function additional_settings(admin_settingpage $settings) {
+        // To be overriden in any sub theme.
+    }
+
+    /**
      * Make sure we fetch the string from the subtheme if it exists
-     * @param $stringid
-     * @param $currentheme
+     *
+     * @param string $stringid
+     * @param string $currentheme
      * @return string
      */
     public static function get_string($stringid, $currentheme) {

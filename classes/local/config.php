@@ -24,6 +24,9 @@
 
 namespace theme_clboost\local;
 
+use core\plugininfo\theme;
+use theme_boost\autoprefixer;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -34,6 +37,11 @@ defined('MOODLE_INTERNAL') || die;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class config {
+    /**
+     * Get layout settings
+     *
+     * @return array[]
+     */
     public static function get_layouts() {
         return [
             // Most backwards compatible layout without the blocks - this is the layout used by default.
@@ -146,6 +154,12 @@ class config {
         ];
     }
 
+    /**
+     * Setup the theme config
+     *
+     * @param \theme_config $theme
+     * @param string $themename
+     */
     public static function setup_config(&$theme, $themename = 'clboost') {
         $theme->name = $themename;
         // Automatically add all sheets / CSS defined in this theme.
@@ -177,6 +191,12 @@ class config {
         $theme->iconsystem = \core\output\icon_system::FONTAWESOME;
     }
 
+    /**
+     * Get all stylesheets
+     *
+     * @param string $themename
+     * @return array
+     */
     protected static function get_all_stylesheets($themename) {
         global $CFG;
         $stylefolder = "{$CFG->dirroot}/theme/{$themename}/style";
@@ -187,13 +207,21 @@ class config {
                 if (!in_array($value, array(".", ".."))) {
                     $filepath = $stylefolder . DIRECTORY_SEPARATOR . $value;
                     if (is_file($filepath)) {
-                        $stylesfiles[] = basename($filepath,'.css');
+                        $stylesfiles[] = basename($filepath, '.css');
                     }
                 }
             }
         }
         return $stylesfiles;
     }
+
+    /**
+     * Get the theme callback
+     *
+     * @param string $functioname
+     * @param string $themename
+     * @return string
+     */
     protected static function get_theme_callback($functioname, $themename) {
         $themefunction = $themename . '_' . $functioname;
         if (function_exists($themefunction)) {

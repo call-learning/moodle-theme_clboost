@@ -34,18 +34,20 @@ defined('MOODLE_INTERNAL') || die;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \theme_boost\output\core_renderer {
-    use \theme_clboost\output\core_renderer_override_trait;
-
+    use core_renderer_override_misc;
+    use core_renderer_override_logos;
+    use core_renderer_override_menus;
+    use core_renderer_override_mustache;
     /**
      * Add more info that can then be used in the mustache template.
      */
     public function get_template_additional_information() {
-        global $PAGE, $CFG;
+        global $CFG;
 
         $additionalinfo = new \stdClass();
         // To check if user is logged in , in all templates.
         $additionalinfo->isloggedin = isloggedin() && !isguestuser();
-        $themename = $PAGE->theme->name;
+        $themename = $this->page->theme->name;
         // To fetch the right path for an image in a theme pix folder.
         $additionalinfo->themebasepath = $CFG->dirroot . '/theme/' . $themename;
         if (isset($CFG->themedir)) {
@@ -55,3 +57,4 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
 }
+

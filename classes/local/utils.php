@@ -24,6 +24,10 @@
 
 namespace theme_clboost\local;
 
+use coding_exception;
+use context;
+use stdClass;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -40,6 +44,11 @@ class utils {
      * in the subtheme
      *
      * This is also meant to be used in the child theme
+     *
+     * @param \theme_config $theme
+     * @param string $subpath
+     * @return string
+     * @throws \moodle_exception
      */
     public static function get_real_theme_path($theme, $subpath = '') {
         global $CFG;
@@ -61,6 +70,7 @@ class utils {
     /**
      * Serves any files associated with the theme settings.
      *
+     * @param string $themename
      * @param stdClass $course
      * @param stdClass $cm
      * @param context $context
@@ -71,7 +81,8 @@ class utils {
      * @return bool
      * @throws coding_exception
      */
-    public static function generic_pluginfile($themename, $course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    public static function generic_pluginfile($themename, $course, $cm, $context, $filearea, $args, $forcedownload,
+        array $options = array()) {
         if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage')) {
             $theme = \theme_config::load($themename);
             // By default, theme files must be cache-able by both browsers and proxies.
