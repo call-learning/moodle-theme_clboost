@@ -55,6 +55,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (isset($CFG->themedir)) {
             $additionalinfo->themebasepath = $CFG->themedir . '/' . $themename;
         }
+        $additionalinfo->themename = $themename;
         return $additionalinfo;
     }
 

@@ -122,7 +122,7 @@ class settings {
      *
      * @param admin_settingpage $settings
      */
-    protected static function additional_settings(admin_settingpage $settings) {
+    protected static function additional_settings(admin_settingpage &$settings) {
         // To be overriden in any sub theme.
     }
 

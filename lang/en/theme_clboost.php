@@ -64,3 +64,6 @@ $string['settings'] = 'Preset Settings';
 $string['region-content'] = 'Content';
 $string['boostwatchpreview'] = 'Boostwatch Preview';
 $string['elementlibrary'] = 'Element Library';
+
+$string['expandmore'] = 'Expand More';
+

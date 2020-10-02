@@ -72,11 +72,18 @@ function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @throws dml_exception
  */
 function theme_clboost_get_main_scss_content($theme) {
+    $preclboost = $postclboost = '';
+    if ($theme->name != 'clboost') {
+        // Get CLBoost theme definitions first.
+        $clboostconf = theme_config::load('clboost');
+        $preclboost = file_get_contents(utils::get_real_theme_path($clboostconf, 'scss/pre.scss'));
+        $postclboost = file_get_contents(utils::get_real_theme_path($clboostconf, 'scss/post.scss'));
+    }
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
     $pre = file_get_contents(utils::get_real_theme_path($theme, 'scss/pre.scss'));
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
     $post = file_get_contents(utils::get_real_theme_path($theme, 'scss/post.scss'));
-    return $pre . $post;
+    return $preclboost . $pre . $postclboost . $post;
 }
 
 /**

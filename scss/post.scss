@@ -1,4 +1,4 @@
-// This file is intentionally empty.
+
 .pagelayout-frontpage {
     #region-main {
         border: initial;
@@ -8,4 +8,81 @@
 
 .header-image {
     max-height: 140px;
+}
+
+// Two state drawer
+
+[data-region="drawer-toggle"] {
+    width: $drawer-width-semi-expanded;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+    // This will allow the button to be centered.
+    padding-right: 1.5rem;
+    margin-left: -.5rem;
+}
+
+body.drawer-fully-expanded [data-region="drawer-toggle"] {
+    width: $drawer-width;
+}
+
+[data-region="drawer"] {
+    width: $drawer-width-semi-expanded;
+
+    .media-body {
+        white-space: nowrap; // Prevent two line in resizing menu.
+        overflow: hidden;
+        text-overflow: clip;
+        visibility: hidden;
+    }
+
+    &.fully-expanded {
+        width: $drawer-width;
+        .media-body {
+            visibility: visible;
+        }
+    }
+
+    .nav-drawer-maximise {
+        .list-group-item {
+            background-color: transparent;
+            border: none;
+            margin: auto;
+            i.icon {
+                font-size: 24px;
+                width: 24px;
+                height: 16px;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+    &.fully-expanded, &.closed {
+        .nav-drawer-maximise {
+            display: none;
+        }
+    }
+    -webkit-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
+    -moz-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
+    transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
+}
+
+body.drawer-open-left {
+    margin-left: $drawer-width-semi-expanded;
+
+    &.drawer-fully-expanded {
+        @include media-breakpoint-up(md) {
+            margin-left: $drawer-width;
+        }
+    }
+}
+
+body.drawer-open-right {
+    margin-right: $drawer-width-semi-expanded;
+
+    &.drawer-fully-expanded {
+        @include media-breakpoint-up(md) {
+            margin-right: $drawer-width;
+        }
+    }
 }
