@@ -1,0 +1,4 @@
+<?php
+global $CFG, $PAGE, $OUTPUT;
+echo $OUTPUT->heading('H1 Heading', 1);
+?>

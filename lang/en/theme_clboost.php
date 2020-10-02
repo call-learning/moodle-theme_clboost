@@ -62,3 +62,5 @@ $string['slogan:default'] = 'A new way of learning English, provided by CALL Lea
 $string['settings'] = 'Preset Settings';
 
 $string['region-content'] = 'Content';
+$string['boostwatchpreview'] = 'Boostwatch Preview';
+$string['elementlibrary'] = 'Element Library';
