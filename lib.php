@@ -67,6 +67,10 @@ function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $for
 /**
  * Returns the main SCSS content.
  *
+ * This includes the post.css file from CL Boost and only the pre.css file
+ * from clboost if the one from the current theme is empty.
+ * This will avoid the double inclusion of the font-awesome, moodle scss file.
+ *
  * @param theme_config $theme The theme config object.
  * @return string
  * @throws dml_exception
@@ -83,7 +87,7 @@ function theme_clboost_get_main_scss_content($theme) {
     $pre = file_get_contents(utils::get_real_theme_path($theme, 'scss/pre.scss'));
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
     $post = file_get_contents(utils::get_real_theme_path($theme, 'scss/post.scss'));
-    return $preclboost . $pre . $postclboost . $post;
+    return (empty(trim($pre)) ? $preclboost : '') . $pre . $postclboost . $post;
 }
 
 /**

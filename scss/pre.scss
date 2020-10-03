@@ -1,4 +1,9 @@
-// Bootstrap variables
+// Bootstrap variables (CLBoost)
+
+//
+// Color system
+//
+
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -49,6 +54,10 @@ $navbar-dark-hover-color:           rgba($white, 1) !default;
 $navbar-light-color:                rgba($black, 0.6) !default;
 $navbar-light-hover-color:          rgba($black, .9) !default;
 
+// Navdrawer
+$drawer-width: 285px !default;
+$drawer-width-semi-expanded: 106px !default;
+
 // Breadcrumbs
 $breadcrumb-padding-y:              .25rem !default;
 $breadcrumb-padding-x:              0 !default;
@@ -94,7 +103,7 @@ $theme-colors: map-merge((
 // Import Core moodle CSS
 @import "moodle";
 
-// Preset CSS
+// Reset a couple of values
 
 body {
     -webkit-font-smoothing: antialiased;
@@ -127,7 +136,3 @@ body {
 }
 
 @include bg-variant(".bg-gray", $gray-200);
-
-// Navdrawer
-$drawer-width: 285px !default;
-$drawer-width-semi-expanded: 106px !default;

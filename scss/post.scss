@@ -1,3 +1,4 @@
+// Post CSS From CLBoost
 
 .pagelayout-frontpage {
     #region-main {
@@ -38,6 +39,7 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
 
     &.fully-expanded {
         width: $drawer-width;
+
         .media-body {
             visibility: visible;
         }
@@ -48,6 +50,7 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
             background-color: transparent;
             border: none;
             margin: auto;
+
             i.icon {
                 font-size: 24px;
                 width: 24px;
@@ -57,11 +60,13 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
             }
         }
     }
+
     &.fully-expanded, &.closed {
         .nav-drawer-maximise {
             display: none;
         }
     }
+
     -webkit-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
     -moz-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
     transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
