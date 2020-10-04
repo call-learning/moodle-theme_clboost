@@ -32,9 +32,13 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
 
     .media-body {
         white-space: nowrap; // Prevent two line in resizing menu.
+        // As per accessibility guidelines we should not use display: none;
         overflow: hidden;
         text-overflow: clip;
         visibility: hidden;
+        // This will prevent the media-body to take any space at all.
+        max-width: 0px;
+        width: 0px;
     }
 
     &.fully-expanded {
@@ -42,6 +46,7 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
 
         .media-body {
             visibility: visible;
+            max-width: initial;
         }
     }
 

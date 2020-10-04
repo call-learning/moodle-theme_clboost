@@ -95,4 +95,34 @@ class utils {
         }
     }
 
+    /**
+     * Generic way to convert config for format similar to the context menu
+     *
+     * @param $configtext
+     * @param $lineparser
+     * @param string $separator
+     * @return array
+     */
+    public static function convert_from_config($configtext, $lineparser, $separator = '|') {
+        $lines = explode("\n", $configtext);
+        $results = [];
+        foreach ($lines as $linenumber => $line) {
+            $line = trim($line);
+            if (strlen($line) == 0) {
+                continue;
+            }
+            $settings = explode($separator, $line);
+            $currentobject = new \stdClass();
+            foreach ($settings as $i => $setting) {
+                $setting = trim($setting);
+                if (!empty($setting)) {
+                    $lineparser($settings, $i, $currentobject);
+                }
+            }
+            if (!empty((array) $currentobject)) {
+                $results[] = $currentobject;
+            }
+        }
+        return $results;
+    }
 }
