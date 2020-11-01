@@ -42,7 +42,7 @@ defined('MOODLE_INTERNAL') || die;
 trait core_renderer_override_menus {
     /**
      * This is a integral copy of the core_renderer method as we will need to override
-     * the trigger button class. This should be removed as soon as possible !
+     * the trigger button class and remove bracket around the connexion link.
      *
      * @param stdClass $user A user object, usually $USER.
      * @param bool $withlinks true if a dropdown should be built.
@@ -81,9 +81,10 @@ trait core_renderer_override_menus {
         $loginurl = get_login_url();
         // If not logged in, show the typical not-logged-in string.
         if (!isloggedin()) {
-            $returnstr = get_string('loggedinnot', 'moodle');
-            if (!$loginpage) {
-                $returnstr .= " (<a  href=\"$loginurl\"  class=\"text-light\" >" . get_string('login') . '</a>)';
+            $returnstr = ''; // CL BOOST : We change this here.
+            if (!$loginpage && $withlinks) {
+                $returnstr = "<a href=\"$loginurl\">" . get_string('login') . '</a>';
+                // CL BOOST : We change this here.
             }
             return html_writer::div(
                 html_writer::span(
@@ -97,9 +98,10 @@ trait core_renderer_override_menus {
 
         // If logged in as a guest user, show a string to that effect.
         if (isguestuser()) {
-            $returnstr = get_string('loggedinasguest');
+            $returnstr = ''; // CL BOOST : We change this here.
             if (!$loginpage && $withlinks) {
-                $returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
+                $returnstr = "<a href=\"$loginurl\">" . get_string('login') . '</a>';
+                // CL BOOST : We change this here.
             }
 
             return html_writer::div(
@@ -178,7 +180,7 @@ trait core_renderer_override_menus {
         $am = new action_menu();
         $am->set_menu_trigger(
             $returnstr,
-            'nav-link' // CL BOOST : this is the only change here !
+            'nav-link' // CL BOOST : We changed this here.
         );
         $am->set_action_label(get_string('usermenu'));
         $am->set_alignment(action_menu::TR, action_menu::BR);

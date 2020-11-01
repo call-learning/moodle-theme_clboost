@@ -15,11 +15,11 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost/columns2
+    @template theme_boost/frontpage
 
     Admin time setting template.
 
-    Boost 2 column layout template.
+    Boost 2 column layout template for the frontpage.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -58,9 +58,10 @@
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_boost/navbar }}
+    {{> theme_boost/nav-drawer }}
 
     <div id="page" class="container-fluid d-print-block">
-        {{{ output.full_header }}}
+        {{{ output.context_header_settings_menu }}}
 
         <div id="page-content" class="row pb-3 d-print-block">
             <div id="region-main-box" class="col-12">
@@ -69,30 +70,43 @@
                     <div> {{{ output.region_main_settings_menu }}} </div>
                 </div>
                 {{/hasregionmainsettingsmenu}}
-                <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
+                <section id="region-main" aria-label="{{#str}}content{{/str}}">
 
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
                     {{/hasregionmainsettingsmenu}}
                     {{{ output.course_content_header }}}
+                    {{#hasblocks}}
+                        {{{ contentblocks }}}
+                    {{/hasblocks}}
                     {{{ output.main_content }}}
                     {{{ output.activity_navigation }}}
                     {{{ output.course_content_footer }}}
-
                 </section>
-                {{#hasblocks}}
-                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-                    {{{ sidepreblocks }}}
-                </section>
-                {{/hasblocks}}
             </div>
         </div>
     </div>
     {{{ output.standard_after_main_region_html }}}
-    {{> theme_boost/nav-drawer }}
     {{> theme_boost/footer }}
 </div>
 
 </body>
 </html>
+<<<<<<< HEAD
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+
+// TWO STATE DRAWER
+M.util.js_pending('theme_clboost/tsdrawer');
+require(['theme_clboost/tsdrawer'], function(mod) {
+    mod.init();
+    M.util.js_complete('theme_clboost/tsdrawer');
+});
+// TWO STATE DRAWER
+{{/js}}
+=======
 {{> theme_clboost/twostatedrawer }}
+>>>>>>> fbefde35ef4aa8a2b451a9bf5557efecaf74615d

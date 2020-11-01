@@ -95,4 +95,20 @@
 
 </body>
 </html>
+<<<<<<< HEAD
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+  M.util.js_complete('theme_boost/loader');
+});
+// TWO STATE DRAWER
+M.util.js_pending('theme_clboost/tsdrawer');
+require(['theme_clboost/tsdrawer'], function(mod) {
+    mod.init();
+    M.util.js_complete('theme_clboost/tsdrawer');
+});
+// TWO STATE DRAWER
+{{/js}}
+=======
 {{> theme_clboost/twostatedrawer }}
+>>>>>>> fbefde35ef4aa8a2b451a9bf5557efecaf74615d

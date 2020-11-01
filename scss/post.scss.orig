@@ -8,7 +8,7 @@
 }
 
 .header-image {
-    max-height: 140px;
+    max-height: $navbar-height;
 }
 
 // Two state drawer
@@ -104,6 +104,7 @@ body.drawer-open-right {
     }
 }
 
+<<<<<<< HEAD
 // Fix: Make sure that nav-item do not go over the navbar max height
 
 nav.fixed-top.navbar {
@@ -111,3 +112,5 @@ nav.fixed-top.navbar {
         max-height: $navbar-height;
     }
 }
+=======
+>>>>>>> fbefde35ef4aa8a2b451a9bf5557efecaf74615d
