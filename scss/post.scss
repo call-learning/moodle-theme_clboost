@@ -8,7 +8,7 @@
 }
 
 .header-image {
-    max-height: 140px;
+    max-height: $navbar-height;
 }
 
 // Two state drawer
@@ -37,8 +37,8 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
         text-overflow: clip;
         visibility: hidden;
         // This will prevent the media-body to take any space at all.
-        max-width: 0px;
-        width: 0px;
+        max-width: 0;
+        width: 0;
     }
 
     &.fully-expanded {
@@ -66,7 +66,8 @@ body.drawer-fully-expanded [data-region="drawer-toggle"] {
         }
     }
 
-    &.fully-expanded, &.closed {
+    &.fully-expanded,
+    &.closed {
         .nav-drawer-maximise {
             display: none;
         }
@@ -94,5 +95,13 @@ body.drawer-open-right {
         @include media-breakpoint-up(md) {
             margin-right: $drawer-width;
         }
+    }
+}
+
+// Fix: Make sure that nav-item do not go over the navbar max height
+
+nav.fixed-top.navbar {
+    .nav-item {
+        max-height: $navbar-height;
     }
 }

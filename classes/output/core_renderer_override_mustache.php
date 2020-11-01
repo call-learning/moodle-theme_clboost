@@ -117,14 +117,4 @@ trait core_renderer_override_mustache {
 
         return $this->mustache;
     }
-
-    /**
-     * This will return the current template finder.
-     *
-     * @return mixed
-     */
-    public function get_mustache_template_finder() {
-        return new \theme_clboost\output\mustache_template_finder();
-    }
-
 }

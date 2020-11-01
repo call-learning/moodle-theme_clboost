@@ -52,7 +52,8 @@ class utils {
      */
     public static function get_real_theme_path($theme, $subpath = '') {
         global $CFG;
-        $roodir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme/';
+        $subpath = trim($subpath, '/');
+        $roodir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme';
         $themetrypath = [
             "{$roodir}/{$theme->name}/$subpath",
             "{$roodir}/clboost/$subpath",
@@ -98,8 +99,8 @@ class utils {
     /**
      * Generic way to convert config for format similar to the context menu
      *
-     * @param $configtext
-     * @param $lineparser
+     * @param string $configtext
+     * @param function $lineparser
      * @param string $separator
      * @return array
      */

@@ -25,6 +25,7 @@
 namespace theme_clboost\output;
 
 use coding_exception;
+use theme_config;
 
 /**
  * Get information about valid locations for mustache templates.
@@ -70,18 +71,23 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
         foreach ($parents as $parent) {
             $dirs[] = $CFG->dirroot . '/theme/' . $parent . '/templates/';
             if (isset($CFG->themedir)) {
-                $dirs[] = $CFG->themedir . '/' . $parent  . '/templates/';
+                $dirs[] = $CFG->themedir . '/' . $parent . '/templates/';
             }
         }
 
-        return $dirs;
+        // Normalise directories if component is not set or empty.
+        return array_map(function($d) {
+            return str_replace('//', '/', $d);
+        }, $dirs);
     }
+
     /**
      * Helper function for getting a filename for a template from the template name.
      *
      * @param string $name - This is the componentname/templatename combined.
      * @param string $themename - This is the current theme name.
      * @return string
+     * @throws coding_exception
      */
     public static function get_template_filepath($name, $themename = '') {
         global $CFG, $PAGE;
