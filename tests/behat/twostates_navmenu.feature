@@ -1,7 +1,6 @@
-@theme_clboost @theme @tool
+@theme_clboost @theme @javascript
 Feature: As I navigate through the site I can maximise the navigation menu or leave it minimized
 
-  @javascript
   Scenario: I can maximise the menu and hide it
     Given I log in as "admin"
     And I am on homepage
@@ -26,7 +25,6 @@ Feature: As I navigate through the site I can maximise the navigation menu or le
     # Step 4. The drawer should be fully expanded
     And the "class" attribute of "#nav-drawer" "css_element" should contain "fully-expanded"
 
-  @javascript
   Scenario: I can maximise the menu via the maximise button in the drawer
     Given I log in as "admin"
     And I am on homepage

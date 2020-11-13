@@ -90,25 +90,6 @@ class settings {
             static::get_string('rawscss_desc', $themefullname), '', PARAM_RAW);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
-
-        $settings->add($page);
-
-        // Advanced settings.
-        $page = new admin_settingpage($themefullname, static::get_string('settings', $themefullname));
-
-        // Raw SCSS to include before the content.
-        $setting = new admin_setting_configtext($themefullname . '/tagline',
-            static::get_string('tagline', $themefullname),
-            static::get_string('tagline_desc', $themefullname),
-            static::get_string('slogan:default', $themefullname),
-            PARAM_RAW);
-        $page->add($setting);
-        $setting = new admin_setting_configtext($themefullname . '/slogan',
-            static::get_string('slogan', $themefullname),
-            static::get_string('slogan_desc', $themefullname),
-            static::get_string('slogan:default', $themefullname),
-            PARAM_RAW);
-        $page->add($setting);
         $settings->add($page);
 
         static::additional_settings($settings);

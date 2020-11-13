@@ -71,4 +71,36 @@ class theme_clboost_utils_test extends advanced_testcase {
         $this->assertEquals($expectedresults , $parsed1);
         $this->assertEquals($expectedresults, $parsed2);
     }
+    public function test_convert_from_config_with_empties() {
+        $lineparser = function ($setting, $index, &$currentobject) {
+            if (!empty($setting[$index])) {
+                $val = trim($setting[$index]);
+                switch ($index) {
+                    case 0:
+                        $currentobject->title = $val;
+                        break;
+                    case 1:
+                        $currentobject->address = $val;
+                        break;
+                    case 2:
+                        $currentobject->postcode = $val;
+                        break;
+                    case 2:
+                        $currentobject->tel = $val;
+                        break;
+                }
+            }
+        };
+        $testconfig = "AddressName1|PostalAddress1||Tel1\nAddressName2|PostalAddress2|Postcode|Tel2\n";
+        $testconfig2 = "AddressName1;PostalAddress1;;Tel1\nAddressName2;PostalAddress2;Postcode;Tel2\n";
+
+        $parsed1 = utils::convert_from_config($testconfig, $lineparser);
+        $parsed2 = utils::convert_from_config($testconfig2, $lineparser, ';');
+        $expectedresults =
+            json_decode(
+                '[{"title":"AddressName1","address":"PostalAddress1","postcode":"","tel":"Tel1"},'
+                .'{"title":"AddressName2","address":"PostalAddress2","postcode":"Postcode","tel":"Tel2"}]');
+        $this->assertEquals($expectedresults , $parsed1);
+        $this->assertEquals($expectedresults, $parsed2);
+    }
 }

@@ -100,7 +100,7 @@ class utils {
      * Generic way to convert config for format similar to the context menu
      *
      * @param string $configtext
-     * @param function $lineparser
+     * @param callable $lineparser
      * @param string $separator
      * @return array
      */
@@ -116,9 +116,7 @@ class utils {
             $currentobject = new \stdClass();
             foreach ($settings as $i => $setting) {
                 $setting = trim($setting);
-                if (!empty($setting)) {
-                    $lineparser($settings, $i, $currentobject);
-                }
+                $lineparser($setting, $i, $currentobject);
             }
             if (!empty((array) $currentobject)) {
                 $results[] = $currentobject;
