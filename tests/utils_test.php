@@ -44,17 +44,16 @@ class theme_clboost_utils_test extends advanced_testcase {
     }
     public function test_convert_from_config() {
         $lineparser = function ($setting, $index, &$currentobject) {
-            if (!empty($setting[$index])) {
-                $val = trim($setting[$index]);
+            if (!empty($setting)) {
                 switch ($index) {
                     case 0:
-                        $currentobject->title = $val;
+                        $currentobject->title = $setting;
                         break;
                     case 1:
-                        $currentobject->address = $val;
+                        $currentobject->address = $setting;
                         break;
                     case 2:
-                        $currentobject->tel = $val;
+                        $currentobject->tel = $setting;
                         break;
                 }
             }
@@ -73,20 +72,19 @@ class theme_clboost_utils_test extends advanced_testcase {
     }
     public function test_convert_from_config_with_empties() {
         $lineparser = function ($setting, $index, &$currentobject) {
-            if (!empty($setting[$index])) {
-                $val = trim($setting[$index]);
+            if (!empty($setting)) {
                 switch ($index) {
                     case 0:
-                        $currentobject->title = $val;
+                        $currentobject->title = $setting;
                         break;
                     case 1:
-                        $currentobject->address = $val;
+                        $currentobject->address = $setting;
                         break;
                     case 2:
-                        $currentobject->postcode = $val;
+                        $currentobject->postcode = $setting;
                         break;
                     case 2:
-                        $currentobject->tel = $val;
+                        $currentobject->tel = $setting;
                         break;
                 }
             }
