@@ -18,7 +18,7 @@
  * Mustache template loader with Preset managements
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace theme_clboost\output;
  * Perform some custom name mapping for template file names.
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_filesystem_loader extends \core\output\mustache_filesystem_loader {

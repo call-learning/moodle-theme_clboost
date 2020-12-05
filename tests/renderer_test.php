@@ -19,7 +19,7 @@
  *
  * @package   theme_clboost
  * @category  test
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Unit tests for theme_clboost\output
  *
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class theme_clboost_renderer_test extends advanced_testcase {

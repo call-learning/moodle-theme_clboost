@@ -18,7 +18,7 @@
  * Mustache template loader with Preset managements
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use theme_config;
  * Get information about valid locations for mustache templates.
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mustache_template_finder extends \core\output\mustache_template_finder {

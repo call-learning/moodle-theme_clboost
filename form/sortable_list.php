@@ -18,7 +18,7 @@
  * Sortable list form element.
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ require_once($CFG->libdir . '/form/templatable_form_element.php');
  * The listing sortable list form element.
  *
  * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class MoodleQuickForm_sortable_list extends HTML_QuickForm_input implements templatable {
