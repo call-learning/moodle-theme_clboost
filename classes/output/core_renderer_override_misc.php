@@ -74,4 +74,27 @@ trait core_renderer_override_misc {
         return $this->render_from_template('core/full_header', $header);
     }
 
+    /**
+     * Add google analytics code
+     */
+    public function standard_head_html() {
+        $output = parent::standard_head_html();
+        $currentthemename = $this->page->theme->name;
+        $gacode = get_config('theme_' . $currentthemename, 'ganalytics');
+        if ($gacode) {
+            $output .= \html_writer::tag('script', '', array(
+                'src' => "https://www.googletagmanager.com/gtag/js?id={$gacode}",
+                'async' => ''
+            ));
+            $output .= \html_writer::script("
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '{$gacode}');
+                    "
+            );
+        }
+        return $output;
+    }
+
 }

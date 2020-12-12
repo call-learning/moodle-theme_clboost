@@ -41,6 +41,8 @@ $string['elementlibrary'] = 'Element Library';
 $string['expandmore'] = 'Expand More';
 $string['fontsize'] = 'Theme base fontsize';
 $string['fontsize_desc'] = 'Enter a fontsize in %';
+$string['ganalytics'] = 'Google Analytics';
+$string['ganalytics_desc'] = 'Google Analytics ID (UA-XXXXX-1)';
 $string['generalsettings'] = 'General settings';
 $string['nobootswatch'] = 'None';
 $string['pluginname'] = 'CALL Learning Boost';
@@ -66,4 +68,3 @@ $string['rawscsspre_desc'] =
     'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 $string['region-content'] = 'Content';
 $string['region-side-pre'] = 'Right';
-

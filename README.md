@@ -40,6 +40,12 @@ In this case it means that usual boost overrides (columns2.mustache, ...) will n
 The new mustache template finder will always add the parent theme root folder to the end of the list so the templates
 can be overriden and we do not need to repeat them in the clboost theme.
 
+Google Analytics
+==
+
+* Google analytics code can be inserted into the page header. The settings will
+also appear in the subthemes.
+  
 TODO
 ==
 

@@ -79,6 +79,14 @@ class settings {
         // Advanced settings.
         $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
 
+        $setting = new \admin_setting_configtext($themefullname . '/ganalytics',
+            static::get_string('ganalytics', $themefullname),
+            static::get_string('ganalytics_desc', $themefullname),
+            '',
+            PARAM_ALPHANUMEXT
+        );
+        $page->add($setting);
+
         // Raw SCSS to include before the content.
         $setting = new admin_setting_scsscode($themefullname . '/scsspre',
             static::get_string('rawscsspre', $themefullname), static::get_string('rawscsspre_desc', $themefullname), '', PARAM_RAW);
@@ -90,6 +98,7 @@ class settings {
             static::get_string('rawscss_desc', $themefullname), '', PARAM_RAW);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
+
         $settings->add($page);
 
         static::additional_settings($settings);
