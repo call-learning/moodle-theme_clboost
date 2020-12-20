@@ -45,9 +45,9 @@ class theme_clboost_renderer_test extends advanced_testcase {
      */
     public function setUp() {
         parent::setUp();
+        $this->resetAfterTest();
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
-        $theme = theme_config::load('clboost');
         $page = new moodle_page();
         $page->set_pagelayout('standard');
         $page->set_context(context_system::instance());
@@ -118,5 +118,23 @@ class theme_clboost_renderer_test extends advanced_testcase {
                 $CFG->dirroot . '/theme/boost/templates/'
             ),
             $folders);
+    }
+
+    /**
+     * Get logo and compact logo url
+     */
+    public function test_get_analytics_code() {
+        global $SITE;
+        $this->resetAfterTest();
+        // This is to prevent CLI target override for tested renderer so get_renderer
+        // returns the theme core renderer instead of the CLI renderer.
+        $page = new moodle_page();
+        $page->set_pagelayout('embedded'); // We use this layout to prevent issues when blocks are set.
+        $page->set_course($SITE);
+        $page->force_theme('clboost');
+        $gacode = 'ABCDEFGHIJKLL';
+        set_config('ganalytics', $gacode, 'theme_clboost');
+        $output = new \theme_clboost\output\core_renderer($page, 'general');
+        $this->assertContains($gacode, $output->standard_head_html());
     }
 }
