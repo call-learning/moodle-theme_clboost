@@ -55,13 +55,13 @@
         ]
     }
 }}
-<nav class="list-group d-flex flex-column flex-grow-1" aria-label="{{firstcollectionlabel}}">
+<nav class="list-group d-flex flex-column" aria-label="{{firstcollectionlabel}}">
 <ul>
 {{# flatnavigation }}
     {{#showdivider}}
         </ul>
         </nav>
-        <nav class="list-group mt-1" aria-label="{{get_collectionlabel}}">
+        <nav class="list-group mt-5" aria-label="{{get_collectionlabel}}">
         <ul>
     {{/showdivider}}
     {{#action}}
@@ -114,7 +114,7 @@
 {{/ flatnavigation }}
 </ul>
 </nav>
-<nav class="list-group nav-drawer-maximise mt-auto mb-2">
+<nav class="list-group nav-drawer-maximise mt-auto mb-2 flex-grow-1 justify-content-end">
     <ul>
         <li>
             <a class="list-group-item list-group-item-action" href="#">
