@@ -83,7 +83,7 @@ class theme_clboost_utils_test extends advanced_testcase {
                     case 2:
                         $currentobject->postcode = $setting;
                         break;
-                    case 2:
+                    case 3:
                         $currentobject->tel = $setting;
                         break;
                 }
@@ -96,7 +96,7 @@ class theme_clboost_utils_test extends advanced_testcase {
         $parsed2 = utils::convert_from_config($testconfig2, $lineparser, ';');
         $expectedresults =
             json_decode(
-                '[{"title":"AddressName1","address":"PostalAddress1","postcode":"","tel":"Tel1"},'
+                '[{"title":"AddressName1","address":"PostalAddress1","tel":"Tel1"},'
                 .'{"title":"AddressName2","address":"PostalAddress2","postcode":"Postcode","tel":"Tel2"}]');
         $this->assertEquals($expectedresults , $parsed1);
         $this->assertEquals($expectedresults, $parsed2);

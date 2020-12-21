@@ -109,8 +109,6 @@ function theme_clboost_get_precompiled_css($theme) {
  * @throws dml_exception
  */
 function theme_clboost_get_pre_scss($theme) {
-    global $CFG;
-
     $scss = '';
 
     $allthemeconfig = get_config('theme_' . $theme->name);

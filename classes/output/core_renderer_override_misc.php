@@ -82,11 +82,11 @@ trait core_renderer_override_misc {
         $currentthemename = $this->page->theme->name;
         $gacode = get_config('theme_' . $currentthemename, 'ganalytics');
         if ($gacode) {
-            $output .= \html_writer::tag('script', '', array(
+            $output .= html_writer::tag('script', '', array(
                 'src' => "https://www.googletagmanager.com/gtag/js?id={$gacode}",
                 'async' => ''
             ));
-            $output .= \html_writer::script("
+            $output .= html_writer::script("
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());

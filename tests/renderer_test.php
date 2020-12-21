@@ -22,6 +22,9 @@
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+use theme_clboost\output\mustache_template_finder;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -73,7 +76,6 @@ class theme_clboost_renderer_test extends advanced_testcase {
      * Get logo and compact logo url
      */
     public function test_get_logo_url() {
-        global $PAGE;
         $logourl = $this->output->get_logo_url();
         $this->assertEquals('https://www.example.com/moodle/theme/clboost/pix/logo.png',
             $logourl->out());
@@ -85,7 +87,7 @@ class theme_clboost_renderer_test extends advanced_testcase {
     public function test_get_mustache_template() {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
-        $templatefinder = new \theme_clboost\output\mustache_template_finder();
+        $templatefinder = new mustache_template_finder();
         $this->assertEquals($CFG->dirroot . '/theme/boost/templates/secure.mustache',
             $templatefinder->get_template_filepath('theme_boost/secure'));
         $this->assertEquals($CFG->dirroot . '/theme/clboost/templates/theme_boost/navbar.mustache',
@@ -99,7 +101,7 @@ class theme_clboost_renderer_test extends advanced_testcase {
     public function test_get_mustache_template_dirs() {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
-        $templatefinder = new \theme_clboost\output\mustache_template_finder();
+        $templatefinder = new mustache_template_finder();
         $folders = $templatefinder->get_template_directories_for_component('block_myoverview');
         $this->assertEquals(
             array (

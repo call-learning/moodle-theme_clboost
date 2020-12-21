@@ -25,6 +25,7 @@
 namespace theme_clboost\output;
 
 use coding_exception;
+use moodle_exception;
 use theme_config;
 
 /**
@@ -44,6 +45,7 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
      * @param string $component The component to search
      * @param string $themename The current theme name
      * @return string[] List of valid directories for templates for this compoonent. Directories are not checked for existence.
+     * @throws coding_exception
      */
     public static function get_template_directories_for_component($component, $themename = '') {
         global $CFG, $PAGE;
@@ -90,7 +92,6 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
      * @throws coding_exception
      */
     public static function get_template_filepath($name, $themename = '') {
-        global $CFG, $PAGE;
 
         if (strpos($name, '/') === false) {
             throw new coding_exception('Templates names must be specified as "componentname/templatename"' .
@@ -110,6 +111,6 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
             }
         }
 
-        throw new \moodle_exception('filenotfound', 'error', '', null, $name);
+        throw new moodle_exception('filenotfound', 'error', '', null, $name);
     }
 }

@@ -24,6 +24,8 @@
 
 namespace theme_clboost\output;
 
+use stdClass;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -42,11 +44,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * Add more info that can then be used in the mustache template.
      *
      * For example {{# additionalinfo.isloggedin }} {{/ additionalinfo.isloggedin }}
+     * @return stdClass
      */
     public function get_template_additional_information() {
         global $CFG;
 
-        $additionalinfo = new \stdClass();
+        $additionalinfo = new stdClass();
         // To check if user is logged in , in all templates.
         $additionalinfo->isloggedin = isloggedin() && !isguestuser();
         $themename = $this->page->theme->name;

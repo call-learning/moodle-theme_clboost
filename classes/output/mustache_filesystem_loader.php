@@ -44,7 +44,7 @@ class mustache_filesystem_loader extends \core\output\mustache_filesystem_loader
      */
     protected function getFileName($name) {
         // Call the Moodle template finder and look for preset files.
-        return \theme_clboost\output\mustache_template_finder::get_template_filepath($name);
+        return mustache_template_finder::get_template_filepath($name);
     }
     // @codingStandardsIgnoreEn
 }

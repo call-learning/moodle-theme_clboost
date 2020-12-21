@@ -27,6 +27,7 @@ namespace theme_clboost\output;
 use action_menu;
 use action_menu_filler;
 use action_menu_link_secondary;
+use core_text;
 use html_writer;
 use pix_icon;
 use stdClass;
