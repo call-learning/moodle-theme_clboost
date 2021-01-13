@@ -76,23 +76,31 @@ trait core_renderer_override_misc {
 
     /**
      * Add google analytics code
+     * Do not add analytics for admin user
      */
     public function standard_head_html() {
         $output = parent::standard_head_html();
         $currentthemename = $this->page->theme->name;
         $gacode = get_config('theme_' . $currentthemename, 'ganalytics');
-        if ($gacode) {
-            $output .= html_writer::tag('script', '', array(
-                'src' => "https://www.googletagmanager.com/gtag/js?id={$gacode}",
-                'async' => ''
-            ));
+        if ($gacode && !is_siteadmin()) {
             $output .= html_writer::script("
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '{$gacode}');
-                    "
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                "
             );
+            $this->page->requires->js_amd_inline("$(document).on('user_cookie_already_accepted', 
+                    function(event, consent) {
+                        if (consent) {
+                            ga('create', '{$gacode}', 'auto');
+                            ga('set', 'anonymizeIp', true);
+                            ga('set', 'allowAdFeatures', false);
+                            ga('send', 'pageview');
+                        }                        
+                    }
+                 );");
+
         }
         return $output;
     }
