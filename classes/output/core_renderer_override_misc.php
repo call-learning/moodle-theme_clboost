@@ -90,14 +90,14 @@ trait core_renderer_override_misc {
                  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
                 "
             );
-            $this->page->requires->js_amd_inline("$(document).on('user_cookie_already_accepted', 
+            $this->page->requires->js_amd_inline("$(document).on('user_cookie_already_accepted',
                     function(event, consent) {
-                        if (consent) {
+                    if (consent) {
                             ga('create', '{$gacode}', 'auto');
                             ga('set', 'anonymizeIp', true);
                             ga('set', 'allowAdFeatures', false);
                             ga('send', 'pageview');
-                        }                        
+                        }
                     }
                  );");
 

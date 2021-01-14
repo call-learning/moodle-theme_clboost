@@ -128,6 +128,7 @@ class theme_clboost_renderer_test extends advanced_testcase {
     public function test_get_analytics_code() {
         global $SITE;
         $this->resetAfterTest();
+        $this->setUser();
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
         $page = new moodle_page();
@@ -137,6 +138,28 @@ class theme_clboost_renderer_test extends advanced_testcase {
         $gacode = 'ABCDEFGHIJKLL';
         set_config('ganalytics', $gacode, 'theme_clboost');
         $output = new \theme_clboost\output\core_renderer($page, 'general');
-        $this->assertContains($gacode, $output->standard_head_html());
+        $headcode = $output->standard_head_html();
+        $this->assertContains($gacode, $page->requires->get_end_code($output));
+        $this->assertContains('GoogleAnalyticsObject', $headcode);
+    }
+    /**
+     * Check that admin do not have GA enabled
+     */
+    public function test_get_analytics_code_admin() {
+        global $SITE;
+        $this->resetAfterTest();
+        $this->setAdminUser();
+        // This is to prevent CLI target override for tested renderer so get_renderer
+        // returns the theme core renderer instead of the CLI renderer.
+        $page = new moodle_page();
+        $page->set_pagelayout('embedded'); // We use this layout to prevent issues when blocks are set.
+        $page->set_course($SITE);
+        $page->force_theme('clboost');
+        $gacode = 'ABCDEFGHIJKLL';
+        set_config('ganalytics', $gacode, 'theme_clboost');
+        $output = new \theme_clboost\output\core_renderer($page, 'general');
+        $headcode = $output->standard_head_html();
+        $this->assertNotContains('GoogleAnalyticsObject', $headcode);
+        $this->assertNotContains($gacode, $page->requires->get_end_code($output));
     }
 }
