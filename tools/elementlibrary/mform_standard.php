@@ -145,7 +145,7 @@ class standard_form_elements extends moodleform {
         $mform->disabledIf('multiselectfield', 'disableelements', 'checked');
 
         // To disable individual options, build the select manually.
-        $select2 = HTML_QuickForm::createElement('select', 'selectwithdisabledoptionsfield', 'Select with disabled options');
+        $select2 = $mform->createElement('select', 'selectwithdisabledoptionsfield', 'Select with disabled options');
         $select2->addOption('An active option', '');
         $select2->addOption('A disabled option', '', array('disabled' => 'disabled'));
         $select2->addOption('Another active option', '');
@@ -184,19 +184,23 @@ class standard_form_elements extends moodleform {
         // No 'size' attribute, use CSS definitions.
         $mform->addElement('text', 'textfield', 'Text field');
         $mform->setDefault('textfield', 'Default text');
+        $mform->setType('textfield', PARAM_RAW);
         $mform->disabledIf('textfield', 'disableelements', 'checked');
 
         $mform->addElement('textarea', 'textareafield', 'Textarea field', 'wrap="virtual" rows="20" cols="50"');
         $mform->setDefault('textareafield', 'Default text');
+        $mform->setType('textarea', PARAM_RAW);
         $mform->disabledIf('textareafield', 'disableelements', 'checked');
 
         $mform->addElement('static', 'tagsdesc', '',
             'The tags field has options to show just official tags, just user tags or both. Here is both:');
         $mform->addElement('tags', 'tagsfield', 'Tags');
+        $mform->setType('tagsfield', PARAM_RAW);
         $mform->disabledIf('tagsfield', 'disableelements', 'checked');
 
         $mform->addElement('static', 'datedes', '', 'Don\'t forget to style the popup dialog');
         $mform->addElement('url', 'urlfield', 'URL');
+        $mform->setType('urlfield', PARAM_RAW);
         $mform->disabledIf('urlfield', 'disableelements', 'checked');
 
         $mform->addElement('header', null, 'Another Header element');
@@ -212,7 +216,7 @@ class standard_form_elements extends moodleform {
      * @param array $formelements
      * @return array
      */
-    public function validation($formelements) {
+    public function validation($formelements, $files) {
         $err = array();
         foreach ($formelements as $name => $value) {
             $err[$name] = 'Custom validation message for ' . $name;

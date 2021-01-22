@@ -54,10 +54,6 @@ $navbar-dark-hover-color:           rgba($white, 1) !default;
 $navbar-light-color:                rgba($black, 0.6) !default;
 $navbar-light-hover-color:          rgba($black, .9) !default;
 
-// Navdrawer
-$drawer-width: 285px !default;
-$drawer-width-semi-expanded: 106px !default;
-
 // Breadcrumbs
 $breadcrumb-padding-y:              .25rem !default;
 $breadcrumb-padding-x:              0 !default;
@@ -82,57 +78,9 @@ $input-btn-focus-color: rgba($primary, .75) !default;
 
 $input-border-color: $gray-500 !default;
 
-// stylelint-disable
-$theme-colors: () !default;
-$theme-colors: map-merge((
-        primary: $primary,
-        secondary: $secondary,
-        success: $success,
-        info: $info,
-        warning: $warning,
-        danger: $danger,
-), $theme-colors);
-// stylelint-enable
+// Navdrawer
+$drawer-width: 285px !default;
+$drawer-width-semi-expanded: 106px !default;
 
-// Import FontAwesome.
-@import "fontawesome";
-
-// Import All of Bootstrap
-@import "bootstrap";
-
-// Import Core moodle CSS
-@import "moodle";
-
-// Reset a couple of values
-
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
-}
-
-// Rounded user pictures
-.userpicture {
-    border-radius: 50%;
-}
-
-// Reset the default styling back to the bootstrap defaults for
-// the secondary outline button because gray-200 is much too light
-// for an outline button.
-.btn-outline-secondary {
-    @include button-outline-variant($gray-600);
-    border-color: $gray-600;
-}
-
-.btn-outline-info {
-    @include button-outline-variant($info-outline);
-}
-
-.btn-outline-warning {
-    @include button-outline-variant($warning-outline);
-}
-
+// Specific to some version of Moodle.
 @include bg-variant(".bg-gray", $gray-200);

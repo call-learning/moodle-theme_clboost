@@ -30,9 +30,10 @@
 require_once(dirname(__FILE__) . '../../../../../config.php');
 global $CFG, $PAGE, $OUTPUT;
 require_once($CFG->libdir . '/adminlib.php');
-
+require_once(__DIR__.'/lib.php');
 $strheading = 'Element Library: Common tags';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/common.php');
+
 
 // Start setting up the page.
 $params = array();
