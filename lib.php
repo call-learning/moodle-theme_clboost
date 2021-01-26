@@ -81,16 +81,7 @@ function theme_clboost_get_main_scss_content($theme) {
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
     $post = file_get_contents(utils::get_real_theme_path($theme, 'scss/post.scss'));
 
-    // Now load the common CSS.
-    $clboostconf = theme_config::load('clboost');
-    $clcommon = file_get_contents(utils::get_real_theme_path($clboostconf, 'scss/clboost_common.scss'));
-
-    if ($theme->name != 'clboost') {
-        // Get CLBoost theme definitions first.
-        $post =  file_get_contents(utils::get_real_theme_path($clboostconf, 'scss/post.scss')) . $post;
-    }
-
-    return  $pre . $clcommon . $post;
+    return  $pre . $theme->settings->scss . $post;
 }
 
 /**

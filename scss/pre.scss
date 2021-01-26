@@ -81,6 +81,3 @@ $input-border-color: $gray-500 !default;
 // Navdrawer
 $drawer-width: 285px !default;
 $drawer-width-semi-expanded: 106px !default;
-
-// Specific to some version of Moodle.
-@include bg-variant(".bg-gray", $gray-200);

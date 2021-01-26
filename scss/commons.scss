@@ -56,3 +56,16 @@ body {
 .btn-outline-warning {
     @include button-outline-variant($warning-outline);
 }
+// Specific to some version of Moodle.
+@include bg-variant(".bg-gray", $gray-200);
+
+.pagelayout-frontpage {
+    #region-main {
+        border: initial;
+        padding: initial;
+    }
+}
+
+.header-image {
+    max-height: 140px;
+}

@@ -214,6 +214,7 @@ class standard_form_elements extends moodleform {
      * Validate  form
      *
      * @param array $formelements
+     * @param array $files
      * @return array
      */
     public function validation($formelements, $files) {
