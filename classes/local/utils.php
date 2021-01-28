@@ -26,6 +26,7 @@ namespace theme_clboost\local;
 
 use coding_exception;
 use context;
+use context_course;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
@@ -84,7 +85,7 @@ class utils {
      */
     public static function generic_pluginfile($themename, $course, $cm, $context, $filearea, $args, $forcedownload,
         array $options = array()) {
-        if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage')) {
+        if ($context->contextlevel == CONTEXT_SYSTEM) {
             $theme = \theme_config::load($themename);
             // By default, theme files must be cache-able by both browsers and proxies.
             if (!array_key_exists('cacheability', $options)) {
@@ -123,5 +124,60 @@ class utils {
             }
         }
         return $results;
+    }
+
+    /**
+     * Prepare standard page
+     *
+     * Code is common to several layouts.
+     *
+     * @param \core_renderer $output
+     * @param \moodle_page $page
+     * @param string $blockside
+     * @return array
+     * @throws coding_exception
+     */
+    public static function prepare_standard_page($output, $page, $blockside = 'content') {
+        global $CFG, $SITE;
+        user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+        require_once($CFG->libdir . '/behat/lib.php');
+
+        if (isloggedin() && !isguestuser()) {
+            $navdraweropen = (get_user_preferences('drawer-open-nav', 'false') == 'true');
+        } else {
+            $navdraweropen = false;
+        }
+        $extraclasses = [];
+        if ($navdraweropen) {
+            $extraclasses[] = 'drawer-open-left';
+        }
+        $bodyattributes = $output->body_attributes($extraclasses);
+        $blockshtml = $output->blocks($blockside);
+        $hasblocks = strpos($blockshtml, 'data-block=') !== false;
+        $buildregionmainsettings = !$page->include_region_main_settings_in_header_actions();
+        // If the settings menu will be included in the header then don't add it here.
+        $regionmainsettingsmenu = $buildregionmainsettings ? $output->region_main_settings_menu() : false;
+        $templatecontext = [
+            'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+            'output' => $output,
+            'hasblocks' => $hasblocks,
+            'bodyattributes' => $bodyattributes,
+            'navdraweropen' => $navdraweropen,
+            'regionmainsettingsmenu' => $regionmainsettingsmenu,
+            'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+        ];
+
+        switch ($blockside) {
+            case 'content':
+                $templatecontext['contentblocks'] = $blockshtml;
+                break;
+            case 'side-pre':
+                $templatecontext['sidepreblocks'] = $blockshtml;
+                break;
+        }
+        $nav = $page->flatnav;
+        $templatecontext['flatnavigation'] = $nav;
+        $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+        return $templatecontext;
     }
 }

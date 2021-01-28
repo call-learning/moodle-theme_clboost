@@ -109,9 +109,9 @@ function theme_clboost_get_pre_scss($theme) {
 
     $configurable = [];
     $prefix = 'branding_';
-    foreach ($allthemeconfig as $conf) {
-        if (substr($conf, 0, strlen($prefix)) == $prefix) {
-            $configurable[$conf] = substr($conf, strlen($prefix));
+    foreach ($allthemeconfig as $name => $value) {
+        if (substr($name, 0, strlen($prefix)) == $prefix) {
+            $configurable[$name] = substr($name, strlen($prefix));
         }
     }
 

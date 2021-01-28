@@ -15,9 +15,9 @@
 
 [data-region="drawer-toggle"] {
     width: $drawer-width-semi-expanded;
-    -webkit-transition: width 0.5s ease;
-    -moz-transition: width 0.5s ease;
-    transition: width 0.5s ease;
+}
+
+[data-region="drawer-toggle"] {
     // This will allow the button to be centered.
     padding-right: 1.5rem;
     margin-left: -.5rem;
@@ -25,6 +25,13 @@
 
 [data-region="drawer"] {
     width: $drawer-width;
+
+    &.closed {
+        width: $drawer-width-semi-expanded;
+    }
+}
+
+[data-region="drawer"] {
     .media-body {
         white-space: nowrap; // Prevent two line in resizing menu.
         // As per accessibility guidelines we should not use display: none;
@@ -52,50 +59,91 @@
             }
         }
     }
+
     .nav-drawer-maximise-action {
         display: none;
-    }
-    &.closed {
-        width: $drawer-width-semi-expanded;
-        .media-body {
-            visibility: hidden;
-            // This will prevent the media-body to take any space at all.
-            max-width: 0;
-            display: none;
-        }
-        .nav-drawer-maximise-action {
-            display: flex;
-        }
     }
 
     -webkit-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
     -moz-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
     transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
 
+    &.closed {
+        .media-body {
+            visibility: hidden;
+            // This will prevent the media-body to take any space at all.
+            max-width: 0;
+        }
+
+        .nav-drawer-maximise-action {
+            display: flex;
+        }
+    }
+
     padding: 20px 20px; // Padding in all cases.
 }
+
+@include media-breakpoint-down(md) {
+    [data-region="drawer"],
+    [data-region="drawer-toggle"] {
+        -webkit-transition: initial;
+        -moz-transition: initial;
+        transition: initial;
+    }
+}
+// If user not logged in, the navbar should not appear
+body.notloggedin {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 @include media-breakpoint-up(md) {
     // The toggle should take the full width.
     // Here we work around the fact that css does not allow a list of selector in the not operator.
-
-    body:not(.drawer-open-left) {
-        &.drawer-left {
-            margin-left: $drawer-width-semi-expanded;
-            [data-region="drawer-toggle"] {
-                width: $drawer-width-semi-expanded;
-            }
-
+    body {
+        margin-left: $drawer-width-semi-expanded;
+        [data-region="drawer-toggle"] {
+            width: $drawer-width-semi-expanded;
         }
     }
-    body:not(.drawer-open-right) {
-        &.drawer-right {
-            margin-right: $drawer-width-semi-expanded;
-            [data-region="drawer-toggle"] {
-                width: $drawer-width-semi-expanded;
-            }
-        }
+    body.drawer-left {
+        margin-left: $drawer-width-semi-expanded;
+        margin-right: auto;
     }
+    body.drawer-right {
+        margin-right: $drawer-width-semi-expanded;
+        margin-left: auto;
+    }
+    body.drawer-open-right {
+        margin-right: $drawer-width;
+    }
+    body.drawer-open-left {
+        margin-left: $drawer-width;
+    }
+    body.notloggedin {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    //body:not(.drawer-open-left):not(.notloggedin) {
+    //    &:not(.drawer-right) {
+    //        margin-left: $drawer-width-semi-expanded;
+    //
+    //        [data-region="drawer-toggle"] {
+    //            width: $drawer-width-semi-expanded;
+    //        }
+    //
+    //    }
+    //}
+    //body:not(.drawer-open-right):not(.notloggedin) {
+    //    &:not(.drawer-left) {
+    //        margin-right: $drawer-width-semi-expanded;
+    //
+    //        [data-region="drawer-toggle"] {
+    //            width: $drawer-width-semi-expanded;
+    //        }
+    //    }
+    //}
 }
 
 // Fix: Make sure that nav-item do not go over the navbar max height
@@ -103,5 +151,19 @@
 nav.fixed-top.navbar {
     .nav-item {
         max-height: $navbar-height;
+    }
+}
+
+// For responsive menus at the top.
+.custom-menu-small {
+    @extend .dropdown-menu;
+    width: 100%;
+    left: 0px;
+    border: initial;
+}
+
+@include media-breakpoint-down(md) {
+    #nav-drawer {
+        z-index: $zindex-fixed + 2; // The nav drawer should be at the top of the menu.
     }
 }

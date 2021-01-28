@@ -223,7 +223,7 @@ class config {
      * @return string
      */
     protected static function get_theme_callback($functioname, $themename) {
-        $themefunction = $themename . '_' . $functioname;
+        $themefunction = "theme_{$themename}_{$functioname}";
         if (function_exists($themefunction)) {
             return $themefunction;
         }

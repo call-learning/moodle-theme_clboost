@@ -15,11 +15,26 @@ Logos can be found in the theme directly in the pix folder (two versions logo.pn
 Foldable navigations menu
 ==
 
-The boost navigation menu has 3 stages :
-1. Fully collapsed
-2. Just show icons
-3. Fully unfolded
+The boost navigation menu has 2 stages :
+1. Just show icons
+2. Fully unfolded
 
+The navigation stays responsive and disappear completely on small screen when not needed.
+
+Menus that are present in the header will be displayed at the top as foldable items.
+
+Branding
+==
+
+Additional branding can be added throught the use of scss variable.
+For example if a setting in the theme starts with branding_xxxx (for example branding_primary), then
+the xxxx variable will be created and assigned.
+
+For example if branding_primary is set to #0A0A0A, then a variable named:
+
+    $primary: #0A0A0A
+
+Will be appended at the top of the scss file.
 
 Templates
 ==
@@ -45,7 +60,8 @@ Google Analytics
 
 * Google analytics code can be inserted into the page header. The settings will
 also appear in the subthemes.
-  
+They will only be enabled the user has accepted the cookies policy (see tools_policy).
+   
 TODO
 ==
 

@@ -59,8 +59,6 @@ $string['slogan_desc'] = 'Preset Slogan (on front page)';
 $string['slogan:default'] = 'A new way of learning English, provided by CALL Learning.';
 $string['settings'] = 'Preset Settings';
 
-$string['randomimage'] = 'Random Image';
-$string['randomimage_desc'] = 'A random image that can be used anywhere in the theme';
 $string['rawscss'] = 'Raw SCSS';
 $string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
 $string['rawscsspre'] = 'Raw initial SCSS';

@@ -41,8 +41,10 @@ define(['jquery', 'theme_boost/drawer'],
                 var maximisebutton = $(SELECTORS.DRAWER + ' .nav-drawer-maximise-action');
 
                 if (maximisebutton) {
-                    maximisebutton.on('click', function () {
-                        $(SELECTORS.TOGGLE_ACTION).trigger("click");
+                    maximisebutton.click(function (e) {
+                        $(SELECTORS.TOGGLE_ACTION).triggerHandler("click");
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
                     });
                 }
                 $(SELECTORS.TOGGLE_REGION).each(function(index, ele) {
