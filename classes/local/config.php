@@ -158,10 +158,10 @@ class config {
      * Setup the theme config
      *
      * @param \theme_config $theme
-     * @param string $themename
+     * @param string $themeparentname
      */
-    public static function setup_config(&$theme, $themename = 'clboost') {
-        $theme->name = $themename;
+    public static function setup_config(&$theme, $themeparentname = 'clboost') {
+        $themename = $theme->name;
         // Automatically add all sheets / CSS defined in this theme.
         $theme->sheets = static::get_all_stylesheets($themename);
         $theme->editor_sheets = [];
@@ -174,8 +174,8 @@ class config {
 
         $theme->layouts = static::get_layouts();
 
-        $theme->parents = [];
-        if ($themename != 'clboost') {
+        $theme->parents = [ $themeparentname ];
+        if ($themeparentname != 'clboost') {
             $theme->parents[] = 'clboost';
         }
         $theme->parents[] = 'boost';

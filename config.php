@@ -28,4 +28,4 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/lib.php');
 
-config::setup_config($THEME, 'clboost');
+config::setup_config($THEME);

@@ -54,11 +54,13 @@ class utils {
     public static function get_real_theme_path($theme, $subpath = '') {
         global $CFG;
         $subpath = trim($subpath, '/');
-        $roodir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme';
-        $themetrypath = [
-            "{$roodir}/{$theme->name}/$subpath",
-            "{$roodir}/clboost/$subpath",
+        $rootdir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme';
+        $themetrypath =  [
+            "{$rootdir}/{$theme->name}/$subpath",
         ];
+        foreach($theme->parents as $parenttheme) {
+            $themetrypath[]= "{$rootdir}/{$parenttheme}/{$subpath}";
+        }
         foreach ($themetrypath as $p) {
             if (is_dir($p) || is_file($p)) {
                 return $p;
