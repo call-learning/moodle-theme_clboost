@@ -31,6 +31,7 @@ use core_text;
 use html_writer;
 use pix_icon;
 use stdClass;
+use theme_clboost\local\utils;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -44,6 +45,9 @@ trait core_renderer_override_menus {
     /**
      * This is a integral copy of the core_renderer method as we will need to override
      * the trigger button class and remove bracket around the connexion link.
+     *
+     * In case we are not showing the side menu, some additional items will need to be added (like
+     * preferences, grades, ...)
      *
      * @param stdClass $user A user object, usually $USER.
      * @param bool $withlinks true if a dropdown should be built.
@@ -117,6 +121,45 @@ trait core_renderer_override_menus {
         // Get some navigation opts.
         $opts = user_get_user_navigation_info($user, $this->page);
 
+        // CLBOOST Specific.
+
+        if (!utils::has_nav_drawer($this->page)) {
+            if ($this->page->context->contextlevel == CONTEXT_COURSE
+                || $this->page->context->contextlevel == CONTEXT_MODULE) {
+                // Here we add additional menus.
+                // Links: Dashboard.
+                $course =  $this->page->course;
+                if (!empty($course)) {
+                    $logoutitem = array_pop($opts->navitems);
+                    $opts->navitems[] = (object) [
+                        'itemtype' => 'divider',
+                    ];
+                    $opts->navitems[] = (object) [
+                        'itemtype' => 'link',
+                        'url' => new \moodle_url('/calendar/view.php', ['view'=> 'month', 'course' => $course->id]),
+                        'title' => get_string('courseevent', 'calendar'),
+                        'titleidentifier' => 'coursecalendar',
+                        'pix' => 'i/calendar'
+                    ];
+                    $opts->navitems[] = (object) [
+                        'itemtype' => 'link',
+                        'url' => new \moodle_url('/grade/report/mygrades.php', ['id' => $course->id]),
+                        'title' => get_string('coursegrades'),
+                        'titleidentifier' => 'coursegrades',
+                        'pix' => 'i/grades'
+                    ];
+                    $opts->navitems[] = (object) [
+                        'itemtype' => 'link',
+                        'url' => new \moodle_url('/badges/view.php', ['type'=> BADGE_TYPE_COURSE, 'id' => $course->id]),
+                        'title' => get_string('coursebadges', 'badges'),
+                        'titleidentifier' => 'coursebadges',
+                        'pix' => 'i/badge'
+                    ];
+                    $opts->navitems[] = $logoutitem;
+                }
+            }
+        }
+        // END CLBOOST Specific.
         $avatarclasses = "avatars";
         $avatarcontents = html_writer::span($opts->metadata['useravatar'], 'avatar current');
         $usertextcontents = $opts->metadata['userfullname'];

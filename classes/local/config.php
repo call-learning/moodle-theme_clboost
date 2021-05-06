@@ -174,7 +174,9 @@ class config {
 
         $theme->layouts = static::get_layouts();
 
-        $theme->parents = [ $themeparentname ];
+        if ($themeparentname != $theme->name) { // Avoid infinite loop.
+            $theme->parents = [$themeparentname];
+        }
         if ($themeparentname != 'clboost') {
             $theme->parents[] = 'clboost';
         }

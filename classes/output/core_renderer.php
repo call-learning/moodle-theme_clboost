@@ -25,6 +25,7 @@
 namespace theme_clboost\output;
 
 use stdClass;
+use theme_clboost\local\utils;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -48,10 +49,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function get_template_additional_information() {
         global $CFG;
-
         $additionalinfo = new stdClass();
         // To check if user is logged in , in all templates.
         $additionalinfo->isloggedin = isloggedin() && !isguestuser();
+        $additionalinfo->hasnavdrawer = utils::has_nav_drawer($this->page);
+
         $themename = $this->page->theme->name;
         // To fetch the right path for an image in a theme pix folder.
         $additionalinfo->themebasepath = $CFG->dirroot . '/theme/' . $themename;

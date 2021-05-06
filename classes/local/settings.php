@@ -87,6 +87,14 @@ class settings {
         );
         $page->add($setting);
 
+        $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
+
+        $setting = new \admin_setting_configcheckbox($themefullname . '/hasnavdrawer',
+            static::get_string('hasnavdrawer', $themefullname),
+            static::get_string('hasnavdrawer_desc', $themefullname),
+            true
+        );
+        $page->add($setting);
         // Raw SCSS to include before the content.
         $setting = new admin_setting_scsscode($themefullname . '/scsspre',
             static::get_string('rawscsspre', $themefullname), static::get_string('rawscsspre_desc', $themefullname), '', PARAM_RAW);

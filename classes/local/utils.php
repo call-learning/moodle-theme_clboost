@@ -144,7 +144,8 @@ class utils {
         user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
         require_once($CFG->libdir . '/behat/lib.php');
 
-        if (isloggedin() && !isguestuser()) {
+        $hasnavdrawer = utils::has_nav_drawer($page);
+        if ($hasnavdrawer && isloggedin() && !isguestuser()) {
             $navdraweropen = (get_user_preferences('drawer-open-nav', 'false') == 'true');
         } else {
             $navdraweropen = false;
@@ -181,5 +182,22 @@ class utils {
         $templatecontext['flatnavigation'] = $nav;
         $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
         return $templatecontext;
+    }
+
+    /**
+     * Check if navdrawer is enabled
+     *
+     * Note : nav drawer is always enabled for admins.
+     *
+     * @param \moodle_page $page
+     * @return bool|mixed|object|string|null
+     * @throws \dml_exception
+     */
+    public static function has_nav_drawer(\moodle_page $page) {
+        $currentthemename = $page->theme->name;
+        $hasnavdrawer = get_config('theme_' . $currentthemename, 'hasnavdrawer');
+        $result = is_siteadmin();
+        $result = $result || is_null($hasnavdrawer) ? true : boolval($hasnavdrawer);
+        return $result;
     }
 }
