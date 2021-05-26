@@ -1,0 +1,57 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_clboost/teacherdashboard_menu
+    Teacher dashboard, very similar to Fordson teacher dashboard but more in line with
+    moodle core.
+
+    Example context (json):
+    {
+        "nodejson": '{
+            "text": "Root of menu",
+            "key": "test0",
+            "display": true,
+            "children": [
+                {
+                    "text": "Child of menu",
+                    "key": "test1",
+                    "display": true,
+                    "children": []
+                }
+            ]
+        }'
+    }
+}}
+<div class="teacherdashboard-menu mr-4">
+{{#action}}
+{{< core/action_link }}
+{{/ core/action_link}}
+{{/action}}
+{{#js}}
+    require(['jquery', 'core/templates', 'core/modal_factory'], function($, Templates, ModalFactory) {
+        var trigger = $('#{{action.id}}');
+        var linktable = {{{nodejson}}};
+        var modalPromise = ModalFactory.create({large: true, type: ModalFactory.types.CANCEL}, trigger);
+        var renderedMenuPromise = Templates.render('theme_clboost/modal_settings_link_page', linktable)
+        $.when(modalPromise).done(function (modal) {
+            modal.setTitle('{{#str}} teacherdashboardmenu, theme_clboost {{/str}}');
+            modal.setBody(renderedMenuPromise);
+        });
+    });
+{{/js}}
+
+</div>

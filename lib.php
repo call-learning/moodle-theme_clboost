@@ -133,3 +133,12 @@ function theme_clboost_get_pre_scss($theme) {
 
     return $scss;
 }
+
+/**
+ * Map icons for font-awesome themes.
+ */
+function theme_clboost_get_fontawesome_icon_map() {
+    return [
+        'theme_clboost:teacherdb' => 'fa-cogs'
+    ];
+}

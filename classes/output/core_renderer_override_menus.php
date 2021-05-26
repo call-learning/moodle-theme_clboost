@@ -42,6 +42,21 @@ defined('MOODLE_INTERNAL') || die;
  * @package theme_clboost
  */
 trait core_renderer_override_menus {
+
+    /**
+     * Course additional menu
+     * Show all course menu option in one go
+     */
+    public function page_heading_button() {
+        $currentheader = parent::page_heading_button();
+        if ($this->page->course && $this->page->course->id != SITEID) {
+            if ($this->page->user_allowed_editing()) {
+                $currentheader = $this->render(new teacherdashboard_menu($this->page->course)) . $currentheader;
+            }
+        }
+        return $currentheader;
+    }
+
     /**
      * This is a integral copy of the core_renderer method as we will need to override
      * the trigger button class and remove bracket around the connexion link.
