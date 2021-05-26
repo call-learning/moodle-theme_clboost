@@ -60,7 +60,7 @@ $string['slogan'] = 'Preset Slogan';
 $string['slogan_desc'] = 'Preset Slogan (on front page)';
 $string['slogan:default'] = 'A new way of learning English, provided by CALL Learning.';
 $string['settings'] = 'Preset Settings';
-
+$string['teacherdashboardmenu'] = 'Teacher dashboard menu';
 $string['rawscss'] = 'Raw SCSS';
 $string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
 $string['rawscsspre'] = 'Raw initial SCSS';
