@@ -17,8 +17,8 @@
 /**
  * Teacher menu modal
  *
- * @package   theme_vetagro
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @package   theme_clboost
+ * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,8 +41,8 @@ use templatable;
 /**
  * Class teacherdashboard_menu
  *
- * @package   theme_vetagro
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning>
+ * @package   theme_clboost
+ * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class teacherdashboard_menu implements renderable, templatable {
@@ -86,7 +86,7 @@ class teacherdashboard_menu implements renderable, templatable {
                 new moodle_url(''),
                 '',
                 null,
-                array('class' => 'btn btn-outline-dark'),
+                array('class' => 'btn btn-outline-dark', 'role' => 'button'),
                 new pix_icon('teacherdb', get_string('teacherdashboardmenu', 'theme_clboost'), 'theme_clboost')
             );
             $data->action = $action->export_for_template($output);

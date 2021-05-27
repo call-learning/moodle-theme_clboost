@@ -1,4 +1,4 @@
-@theme_clboost @theme @javascript
+@javascript @theme @theme_clboost
 Feature: As I navigate through the site I can maximise the navigation menu or leave it minimized
 
   Scenario: I can maximise the menu and minimize it
@@ -40,3 +40,7 @@ Feature: As I navigate through the site I can maximise the navigation menu or le
     And I wait "2" seconds
     And the "class" attribute of "#nav-drawer" "css_element" should not contain "closed"
     Then "#nav-drawer > .nav-drawer-maximise-action" "css_element" should not be visible
+
+  Scenario: The nav drawer is not visible on the home page when not logged in
+    And I am on homepage
+    Then I should not see "#nav-drawer"

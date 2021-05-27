@@ -35,6 +35,12 @@ defined('MOODLE_INTERNAL') || die();
  */
 class theme_clboost_utils_test extends advanced_testcase {
 
+    /**
+     * Test real theme path
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
     public function test_get_real_theme_path() {
         global $CFG;
         $theme = theme_config::load('clboost');
@@ -42,6 +48,10 @@ class theme_clboost_utils_test extends advanced_testcase {
         $this->assertEquals($CFG->dirroot . '/theme/clboost/layout/frontpage.php',
             utils::get_real_theme_path($theme, 'layout/frontpage.php'));
     }
+
+    /**
+     * Convert from config
+     */
     public function test_convert_from_config() {
         $lineparser = function ($setting, $index, &$currentobject) {
             if (!empty($setting)) {
@@ -70,6 +80,10 @@ class theme_clboost_utils_test extends advanced_testcase {
         $this->assertEquals($expectedresults , $parsed1);
         $this->assertEquals($expectedresults, $parsed2);
     }
+
+    /**
+     * Convert from config with empties
+     */
     public function test_convert_from_config_with_empties() {
         $lineparser = function ($setting, $index, &$currentobject) {
             if (!empty($setting)) {
