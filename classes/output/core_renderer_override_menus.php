@@ -143,7 +143,7 @@ trait core_renderer_override_menus {
                 || $this->page->context->contextlevel == CONTEXT_MODULE) {
                 // Here we add additional menus.
                 // Links: Dashboard.
-                $course =  $this->page->course;
+                $course = $this->page->course;
                 if (!empty($course)) {
                     $logoutitem = array_pop($opts->navitems);
                     $opts->navitems[] = (object) [
@@ -151,7 +151,7 @@ trait core_renderer_override_menus {
                     ];
                     $opts->navitems[] = (object) [
                         'itemtype' => 'link',
-                        'url' => new \moodle_url('/calendar/view.php', ['view'=> 'month', 'course' => $course->id]),
+                        'url' => new \moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id]),
                         'title' => get_string('courseevent', 'calendar'),
                         'titleidentifier' => 'coursecalendar',
                         'pix' => 'i/calendar'
@@ -165,7 +165,7 @@ trait core_renderer_override_menus {
                     ];
                     $opts->navitems[] = (object) [
                         'itemtype' => 'link',
-                        'url' => new \moodle_url('/badges/view.php', ['type'=> BADGE_TYPE_COURSE, 'id' => $course->id]),
+                        'url' => new \moodle_url('/badges/view.php', ['type' => BADGE_TYPE_COURSE, 'id' => $course->id]),
                         'title' => get_string('coursebadges', 'badges'),
                         'titleidentifier' => 'coursebadges',
                         'pix' => 'i/badge'

@@ -47,6 +47,7 @@ $string['hasnavdrawer'] = 'Has nav drawer ?';
 $string['hasnavdrawer_desc'] = 'Show or hide the navigation drawer (additional menus are then pushed into the user menu)';
 $string['generalsettings'] = 'General settings';
 $string['nobootswatch'] = 'None';
+$string['navbaraction'] = 'Action';
 $string['pluginname'] = 'CALL Learning Boost';
 $string['privacy:metadata'] = 'The Boost theme does not store any personal data about any user.';
 $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';

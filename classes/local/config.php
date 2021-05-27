@@ -205,7 +205,7 @@ class config {
         $stylesfiles = [];
         if (is_dir($stylefolder)) {
             $cdir = scandir($stylefolder);
-            foreach ($cdir as $key => $value) {
+            foreach ($cdir as $value) {
                 if (!in_array($value, array(".", ".."))) {
                     $filepath = $stylefolder . DIRECTORY_SEPARATOR . $value;
                     if (is_file($filepath)) {

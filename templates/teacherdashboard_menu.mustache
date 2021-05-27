@@ -16,25 +16,35 @@
 }}
 {{!
     @template theme_clboost/teacherdashboard_menu
+
     Teacher dashboard, very similar to Fordson teacher dashboard but more in line with
     moodle core.
 
     Example context (json):
     {
-        "nodejson": '{
-            "text": "Root of menu",
-            "key": "test0",
-            "display": true,
-            "children": [
-                {
-                    "text": "Child of menu",
-                    "key": "test1",
-                    "display": true,
-                    "children": []
-                }
-            ]
-        }'
+    "nodejson": "{}",
+    "action": {
+        "id": "action_link60b4ecfec45ac55",
+        "disabled": false,
+        "text": "",
+        "url": "",
+        "icon": {
+            "key": "teacherdb",
+            "component": "theme_clboost",
+            "title": "Teacher dashboard menu"
+        },
+        "classes": "btn btn-outline-dark",
+        "attributes": [
+            {
+                "name": "role",
+                "value": "button"
+            }
+        ],
+        "actions": [],
+        "hasactions": false
+        }
     }
+
 }}
 <div class="teacherdashboard-menu mr-4">
 {{#action}}

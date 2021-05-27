@@ -55,11 +55,11 @@ class utils {
         global $CFG;
         $subpath = trim($subpath, '/');
         $rootdir = !empty($CFG->themedir) ? $theme->themedir : $CFG->dirroot . '/theme';
-        $themetrypath =  [
+        $themetrypath = [
             "{$rootdir}/{$theme->name}/$subpath",
         ];
-        foreach($theme->parents as $parenttheme) {
-            $themetrypath[]= "{$rootdir}/{$parenttheme}/{$subpath}";
+        foreach ($theme->parents as $parenttheme) {
+            $themetrypath[] = "{$rootdir}/{$parenttheme}/{$subpath}";
         }
         foreach ($themetrypath as $p) {
             if (is_dir($p) || is_file($p)) {
@@ -110,7 +110,7 @@ class utils {
     public static function convert_from_config($configtext, $lineparser, $separator = '|') {
         $lines = explode("\n", $configtext);
         $results = [];
-        foreach ($lines as $linenumber => $line) {
+        foreach ($lines as $line) {
             $line = trim($line);
             if (strlen($line) == 0) {
                 continue;
@@ -144,7 +144,7 @@ class utils {
         user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
         require_once($CFG->libdir . '/behat/lib.php');
 
-        $hasnavdrawer = utils::has_nav_drawer($page);
+        $hasnavdrawer = static::has_nav_drawer($page);
         if ($hasnavdrawer && isloggedin() && !isguestuser()) {
             $navdraweropen = (get_user_preferences('drawer-open-nav', 'false') == 'true');
         } else {

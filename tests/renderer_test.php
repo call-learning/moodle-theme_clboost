@@ -49,13 +49,26 @@ class theme_clboost_renderer_test extends advanced_testcase {
     public function setUp() {
         parent::setUp();
         $this->resetAfterTest();
+        $this->setAdminUser();
+        list($this->output) = $this->create_output();
+    }
+
+    /**
+     * Setup output page
+     * @param string $layout
+     * @return array
+     * @throws coding_exception
+     *
+     */
+    protected function create_output($layout='standard') {
+        global $SITE;
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
         $page = new moodle_page();
-        $page->set_pagelayout('standard');
-        $page->set_context(context_system::instance());
+        $page->set_pagelayout($layout); // We use this layout to prevent issues when blocks are set.
+        $page->set_course($SITE);
         $page->force_theme('clboost');
-        $this->output = new \theme_clboost\output\core_renderer($page, 'general');;
+        return [new \theme_clboost\output\core_renderer($page, 'general'), $page];
     }
 
     /**
@@ -65,9 +78,10 @@ class theme_clboost_renderer_test extends advanced_testcase {
         global $CFG;
         $additionalinfo = $this->output->get_template_additional_information();
         $expected = (object) array(
-            'isloggedin' => false,
+            'isloggedin' => true,
             'themebasepath' => $CFG->dirroot . '/theme/clboost',
             'themename' => 'clboost',
+            'hasnavdrawer' => true
         );
         $this->assertEquals($expected, $additionalinfo);
     }
@@ -84,6 +98,11 @@ class theme_clboost_renderer_test extends advanced_testcase {
             $clogourl->out());
     }
 
+    /**
+     * Get the mustache template
+     *
+     * @throws coding_exception
+     */
     public function test_get_mustache_template() {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
@@ -98,6 +117,11 @@ class theme_clboost_renderer_test extends advanced_testcase {
             $templatefinder->get_template_filepath('theme_boost/navbar-secure'));
     }
 
+    /**
+     * Get mustache template dirs
+     *
+     * @throws coding_exception
+     */
     public function test_get_mustache_template_dirs() {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
@@ -126,38 +150,29 @@ class theme_clboost_renderer_test extends advanced_testcase {
      * Get logo and compact logo url
      */
     public function test_get_analytics_code() {
-        global $SITE;
         $this->resetAfterTest();
         $this->setUser();
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
-        $page = new moodle_page();
-        $page->set_pagelayout('embedded'); // We use this layout to prevent issues when blocks are set.
-        $page->set_course($SITE);
-        $page->force_theme('clboost');
         $gacode = 'ABCDEFGHIJKLL';
         set_config('ganalytics', $gacode, 'theme_clboost');
-        $output = new \theme_clboost\output\core_renderer($page, 'general');
+        list($output, $page) = $this->create_output('embedded');
         $headcode = $output->standard_head_html();
         $this->assertContains($gacode, $page->requires->get_end_code($output));
         $this->assertContains('GoogleAnalyticsObject', $headcode);
     }
+
     /**
      * Check that admin do not have GA enabled
      */
     public function test_get_analytics_code_admin() {
-        global $SITE;
         $this->resetAfterTest();
         $this->setAdminUser();
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
-        $page = new moodle_page();
-        $page->set_pagelayout('embedded'); // We use this layout to prevent issues when blocks are set.
-        $page->set_course($SITE);
-        $page->force_theme('clboost');
         $gacode = 'ABCDEFGHIJKLL';
         set_config('ganalytics', $gacode, 'theme_clboost');
-        $output = new \theme_clboost\output\core_renderer($page, 'general');
+        list($output, $page) = $this->create_output('embedded');
         $headcode = $output->standard_head_html();
         $this->assertNotContains('GoogleAnalyticsObject', $headcode);
         $this->assertNotContains($gacode, $page->requires->get_end_code($output));
