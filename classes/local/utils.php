@@ -154,6 +154,9 @@ class utils {
         if ($navdraweropen) {
             $extraclasses[] = 'drawer-open-left';
         }
+        if (!$hasnavdrawer) {
+            $extraclasses[] = 'no-nav-drawer';
+        }
         $bodyattributes = $output->body_attributes($extraclasses);
         $blockshtml = $output->blocks($blockside);
         $hasblocks = strpos($blockshtml, 'data-block=') !== false;

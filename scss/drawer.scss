@@ -125,6 +125,10 @@ body.notloggedin {
         margin-left: auto;
         margin-right: auto;
     }
+    body.no-nav-drawer {
+        margin-left: auto;
+        margin-right: auto;
+    }
     //body:not(.drawer-open-left):not(.notloggedin) {
     //    &:not(.drawer-right) {
     //        margin-left: $drawer-width-semi-expanded;
