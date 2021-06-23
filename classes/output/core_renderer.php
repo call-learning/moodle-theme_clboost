@@ -41,11 +41,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
     use core_renderer_override_logos;
     use core_renderer_override_menus;
     use core_renderer_override_mustache;
+
     /**
      * Add more info that can then be used in the mustache template.
      *
      * For example {{# additionalinfo.isloggedin }} {{/ additionalinfo.isloggedin }}
+     *
      * @return stdClass
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function get_template_additional_information() {
         global $CFG;
