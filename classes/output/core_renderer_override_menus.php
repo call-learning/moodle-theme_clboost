@@ -144,8 +144,9 @@ trait core_renderer_override_menus {
                 // Here we add additional menus.
                 // Links: Dashboard.
                 $course = $this->page->course;
+                $logoutitem = array_pop($opts->navitems);
+                $this->additional_user_menus_nonavbar($opts, $course);
                 if (!empty($course)) {
-                    $logoutitem = array_pop($opts->navitems);
                     $opts->navitems[] = (object) [
                         'itemtype' => 'divider',
                     ];
@@ -170,8 +171,8 @@ trait core_renderer_override_menus {
                         'titleidentifier' => 'coursebadges',
                         'pix' => 'i/badge'
                     ];
-                    $opts->navitems[] = $logoutitem;
                 }
+                $opts->navitems[] = $logoutitem;
             }
         }
         // END CLBOOST Specific.
@@ -298,5 +299,16 @@ trait core_renderer_override_menus {
             $this->render($am),
             $usermenuclasses
         );
+    }
+
+    /**
+     * Allow for additional user menu in navigation bar in case we have no boost navbar.
+     *
+     * @param $opts stdClass $returnobj navigation information object (see @user_get_user_navigation_info)
+     * @param $course
+     */
+    protected function additional_user_menus_nonavbar(&$opts, $course){
+        // Add $opts->navitems[] here.
+        // Nothing for now.
     }
 }
