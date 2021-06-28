@@ -29,6 +29,7 @@ use action_menu_filler;
 use action_menu_link_secondary;
 use core_text;
 use html_writer;
+use moodle_url;
 use pix_icon;
 use stdClass;
 use theme_clboost\local\utils;
@@ -144,35 +145,55 @@ trait core_renderer_override_menus {
                 // Here we add additional menus.
                 // Links: Dashboard.
                 $course = $this->page->course;
-                $logoutitem = array_pop($opts->navitems);
+                $dashboardmenu = array_shift($opts->navitems);
                 $this->additional_user_menus_nonavbar($opts, $course);
-                if (!empty($course)) {
-                    $opts->navitems[] = (object) [
-                        'itemtype' => 'divider',
-                    ];
-                    $opts->navitems[] = (object) [
-                        'itemtype' => 'link',
-                        'url' => new \moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id]),
-                        'title' => get_string('courseevent', 'calendar'),
-                        'titleidentifier' => 'coursecalendar',
-                        'pix' => 'i/calendar'
-                    ];
-                    $opts->navitems[] = (object) [
-                        'itemtype' => 'link',
-                        'url' => new \moodle_url('/grade/report/mygrades.php', ['id' => $course->id]),
-                        'title' => get_string('coursegrades'),
-                        'titleidentifier' => 'coursegrades',
-                        'pix' => 'i/grades'
-                    ];
-                    $opts->navitems[] = (object) [
-                        'itemtype' => 'link',
-                        'url' => new \moodle_url('/badges/view.php', ['type' => BADGE_TYPE_COURSE, 'id' => $course->id]),
-                        'title' => get_string('coursebadges', 'badges'),
-                        'titleidentifier' => 'coursebadges',
-                        'pix' => 'i/badge'
-                    ];
+                if ($this->page->user_can_edit_blocks() && $this->page->user_is_editing()) {
+                    $url = new moodle_url($this->page->url, ['bui_addblock' => '', 'sesskey' => sesskey()]);
+                    array_unshift($opts->navitems,
+                        (object) [
+                            'itemtype' => 'link',
+                            'url' => $url,
+                            'title' => get_string('addblock',),
+                            'titleidentifier' => 'addblock',
+                            'pix' => 'i/addblock'
+                        ],
+                        (object) [
+                            'itemtype' => 'divider']);
+                    $addable = $this->page->blocks->get_addable_blocks();
+                    $blocks = [];
+                    foreach ($addable as $block) {
+                        $blocks[] = $block->name;
+                    }
+                    $params = array('blocks' => $blocks, 'url' => '?' . $url->get_query_string(false));
+                    $this->page->requires->js_call_amd('core/addblockmodal', 'init', array($params));
                 }
-                $opts->navitems[] = $logoutitem;
+                if (!empty($course)) {
+                    array_unshift($opts->navitems,
+                        (object) [
+                            'itemtype' => 'link',
+                            'url' => new \moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id]),
+                            'title' => get_string('courseevent', 'calendar'),
+                            'titleidentifier' => 'coursecalendar',
+                            'pix' => 'i/calendar'
+                        ],
+                        (object) [
+                            'itemtype' => 'link',
+                            'url' => new \moodle_url('/grade/report/mygrades.php', ['id' => $course->id]),
+                            'title' => get_string('coursegrades'),
+                            'titleidentifier' => 'coursegrades',
+                            'pix' => 'i/grades'
+                        ], (object) [
+                            'itemtype' => 'link',
+                            'url' => new \moodle_url('/badges/view.php', ['type' => BADGE_TYPE_COURSE, 'id' => $course->id]),
+                            'title' => get_string('coursebadges', 'badges'),
+                            'titleidentifier' => 'coursebadges',
+                            'pix' => 'i/badge'
+                        ],
+                        (object) [
+                            'itemtype' => 'divider'],
+                    );
+                }
+                array_unshift($opts->navitems, $dashboardmenu);
             }
         }
         // END CLBOOST Specific.
@@ -304,10 +325,10 @@ trait core_renderer_override_menus {
     /**
      * Allow for additional user menu in navigation bar in case we have no boost navbar.
      *
-     * @param $opts stdClass $returnobj navigation information object (see @user_get_user_navigation_info)
-     * @param $course
+     * @param object $opts $returnobj navigation information object (see @user_get_user_navigation_info)
+     * @param object $course
      */
-    protected function additional_user_menus_nonavbar(&$opts, $course){
+    protected function additional_user_menus_nonavbar(&$opts, $course) {
         // Add $opts->navitems[] here.
         // Nothing for now.
     }
