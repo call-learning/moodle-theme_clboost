@@ -153,7 +153,7 @@ trait core_renderer_override_menus {
                         (object) [
                             'itemtype' => 'link',
                             'url' => $url,
-                            'title' => get_string('addblock',),
+                            'title' => get_string('addblock'),
                             'titleidentifier' => 'addblock',
                             'pix' => 'i/addblock'
                         ],
@@ -178,7 +178,7 @@ trait core_renderer_override_menus {
                         ],
                         (object) [
                             'itemtype' => 'link',
-                            'url' => new \moodle_url('/grade/report/mygrades.php', ['id' => $course->id]),
+                            'url' => new \moodle_url('/grade/report/grader/index.php', ['id' => $course->id]),
                             'title' => get_string('coursegrades'),
                             'titleidentifier' => 'coursegrades',
                             'pix' => 'i/grades'
