@@ -168,6 +168,8 @@ trait core_renderer_override_menus {
                     $this->page->requires->js_call_amd('core/addblockmodal', 'init', array($params));
                 }
                 if (!empty($course)) {
+                    $gradertype = has_capability('gradereport/grader:view', \context_course::instance($course->id)) ?
+                        'grader' : 'user';
                     array_unshift($opts->navitems,
                         (object) [
                             'itemtype' => 'link',
@@ -178,7 +180,7 @@ trait core_renderer_override_menus {
                         ],
                         (object) [
                             'itemtype' => 'link',
-                            'url' => new \moodle_url('/grade/report/grader/index.php', ['id' => $course->id]),
+                            'url' => new \moodle_url("/grade/report/{$gradertype}/index.php", ['id' => $course->id]),
                             'title' => get_string('coursegrades'),
                             'titleidentifier' => 'coursegrades',
                             'pix' => 'i/grades'
