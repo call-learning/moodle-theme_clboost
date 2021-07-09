@@ -189,8 +189,7 @@ trait core_renderer_override_menus {
                             'titleidentifier' => 'coursebadges',
                             'pix' => 'i/badge'
                         ],
-                        (object) [
-                            'itemtype' => 'divider'],
+                        (object) ['itemtype' => 'divider']
                     );
                 }
                 array_unshift($opts->navitems, $dashboardmenu);
