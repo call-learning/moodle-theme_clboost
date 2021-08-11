@@ -30,6 +30,7 @@ use action_menu_link_secondary;
 use core_text;
 use html_writer;
 use moodle_url;
+use navigation_node;
 use pix_icon;
 use stdClass;
 use theme_clboost\local\utils;
@@ -51,7 +52,8 @@ trait core_renderer_override_menus {
     public function page_heading_button() {
         $currentheader = parent::page_heading_button();
         if ($this->page->course && $this->page->course->id != SITEID) {
-            if ($this->page->user_allowed_editing()) {
+            $settingsnode = $this->page->settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
+            if ($settingsnode) {
                 $currentheader = $this->render(new teacherdashboard_menu($this->page->course)) . $currentheader;
             }
         }

@@ -104,5 +104,4 @@ trait core_renderer_override_misc {
         }
         return $output;
     }
-
 }

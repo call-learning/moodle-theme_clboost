@@ -1,4 +1,4 @@
-@javascript @theme @theme_clboost
+@theme @theme_clboost @javascript
 Feature: Teacher dashboard: I can edit a course I have a quick menu that leads to a full set of course edition menu in a popup
   Background:
     Given the following "courses" exist:
