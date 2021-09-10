@@ -11,8 +11,11 @@ $theme-colors: map-merge((
 ), $theme-colors);
 
 // Make sure the background does not clash with foreground.
-$dropdown-link-hover-color: lighten($primary, 20%);
-$dropdown-link-hover-bg: darken($primary, 20%);
+$dropdown-link-hover-color: lighten($primary, 20%) !default;
+$dropdown-link-hover-bg: darken($primary, 20%) !default;
+
+// Drawer height.
+$drawer-height: 140px !default;
 
 // stylelint-enable
 
@@ -67,5 +70,5 @@ body {
 }
 
 .header-image {
-    max-height: 140px;
+    max-height: $drawer-height;
 }
