@@ -111,12 +111,12 @@ class setup_utils {
      * @param array $files
      */
     public static function upload_files_in_block($blockinstance, $files) {
-        global $DB, $CFG;
+        global $DB;
         $configdata = unserialize(base64_decode($blockinstance->configdata));
         $context = context_block::instance($blockinstance->id);
         foreach ($files as $filename => $filespec) {
             static::upload_file($context->id, 'block_' . $blockinstance->blockname, $filespec['filearea'] ?? 'content',
-                $blockinstance->id, $CFG->dirroot .$filespec['filepath'], $filename);
+                $filespec['itemid'] ?? 0, $filespec['filepath'], $filename);
             $textfields = $filespec['textfields'] ?? ['text'];
             static::adjust_plugin_file_url($configdata, $textfields, $context->id, 'block_' . $blockinstance->blockname,
                 $filespec['filearea'] ?? 'content', $blockinstance->id, $filename);
@@ -136,16 +136,19 @@ class setup_utils {
      * @param string $component
      * @param string $filearea
      * @param int $itemid
-     * @param string $filepath directory name
+     * @param string $originalfilepath fullpath for the original file. If it does not start with / we add $CFG->dirroot
      * @param string $filename
      * @return bool|\stored_file
      */
-    public static function upload_file($contextid, $component, $filearea, $itemid, $filepath, $filename) {
-        $fullpath = "$filepath/$filename";
+    public static function upload_file($contextid, $component, $filearea, $itemid, $originalfilepath, $filename) {
+        global $CFG;
         // Create an area to upload the file.
         $fs = get_file_storage();
+        if (substr($originalfilepath, 0, 1) != '/') {
+            $originalfilepath = $CFG->dirroot . '/' . $originalfilepath;
+        }
         // Create a file from the string that we made earlier.
-        if (!($file = $fs->get_file($contextid, $component, $filearea, $itemid, $filepath, $filename))) {
+        if (!($file = $fs->get_file($contextid, $component, $filearea, $itemid, '/', $filename))) {
             global $CFG;
             $file = $fs->create_file_from_pathname(
                 [
@@ -155,7 +158,7 @@ class setup_utils {
                     'itemid' => $itemid,
                     'filepath' => '/',
                     'filename' => $filename
-                ], $fullpath);
+                ], $originalfilepath);
         }
         return $file;
     }

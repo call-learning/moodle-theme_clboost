@@ -71,7 +71,7 @@ class theme_clboost_setup_utils_test extends advanced_testcase {
             $component,
             $filearea,
             $itemid,
-            $CFG->dirroot . '/theme/clboost/tests/fixtures/',
+            'theme/clboost/tests/fixtures/sample.jpg',
             'sample.jpg');
         $allareafiles = $fs->get_area_files($context->id, 'theme_clboost', 'test');
         $this->assertCount(2, $allareafiles);
@@ -97,7 +97,7 @@ class theme_clboost_setup_utils_test extends advanced_testcase {
                     'defaultweight' => '4',
                     'files' => [
                         'sample.jpg' => [
-                            'filepath' => $CFG->dirroot . '/theme/clboost/tests/fixtures/',
+                            'filepath' => 'theme/clboost/tests/fixtures/sample.jpg',
                         ]
                     ],
                     'configdata' => [
