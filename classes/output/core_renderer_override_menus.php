@@ -27,6 +27,7 @@ namespace theme_clboost\output;
 use action_menu;
 use action_menu_filler;
 use action_menu_link_secondary;
+use context_user;
 use core_text;
 use html_writer;
 use moodle_url;
@@ -73,7 +74,7 @@ trait core_renderer_override_menus {
      * @throws \coding_exception
      */
     public function user_menu($user = null, $withlinks = null) {
-        global $USER, $CFG;
+        global $USER, $CFG, $SITE;
         require_once($CFG->dirroot . '/user/lib.php');
 
         if (is_null($user)) {
@@ -142,11 +143,26 @@ trait core_renderer_override_menus {
         // CLBOOST Specific.
 
         if (!utils::has_nav_drawer($this->page)) {
+            // Add the "My private files" link.
+            // This link doesn't have a unique display for course context so only display it under the user's profile.
+            $iscurrentuser = ($user->id == $USER->id);
+            $course = $this->page->course;
+            $usercontext = context_user::instance($user->id);
+            if ($course->id == $SITE->id && $iscurrentuser && has_capability('moodle/user:manageownfiles', $usercontext)) {
+                $url = new moodle_url('/user/files.php');
+                array_unshift($opts->navitems,
+                    (object) ['itemtype' => 'link',
+                        'url' => $url,
+                        'title' => get_string('privatefiles'),
+                        'titleidentifier' => 'privatefiles',
+                        'pix' => 'i/files'
+                    ]
+                );
+            }
             if ($this->page->context->contextlevel == CONTEXT_COURSE
                 || $this->page->context->contextlevel == CONTEXT_MODULE) {
                 // Here we add additional menus.
                 // Links: Dashboard.
-                $course = $this->page->course;
                 $dashboardmenu = array_shift($opts->navitems);
                 $this->additional_user_menus_nonavbar($opts, $course);
                 if ($this->page->user_can_edit_blocks() && $this->page->user_is_editing()) {
