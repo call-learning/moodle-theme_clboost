@@ -94,6 +94,11 @@ class settings {
             static::get_string('hasnavdrawer_desc', $themefullname),
             true
         );
+        $setting = new \admin_setting_configtext($themefullname . '/additionalmenusitems',
+            static::get_string('additionalmenusitems', $themefullname),
+            static::get_string('additionalmenusitems_desc', $themefullname),
+            'participants,calendar,grades,badgesview'
+        );
         $page->add($setting);
         // Raw SCSS to include before the content.
         $setting = new admin_setting_scsscode($themefullname . '/scsspre',

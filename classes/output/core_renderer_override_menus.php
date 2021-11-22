@@ -185,32 +185,34 @@ trait core_renderer_override_menus {
                     $params = array('blocks' => $blocks, 'url' => '?' . $url->get_query_string(false));
                     $this->page->requires->js_call_amd('core/addblockmodal', 'init', array($params));
                 }
-                if (!empty($course)) {
-                    $gradertype = has_capability('gradereport/grader:view', \context_course::instance($course->id)) ?
-                        'grader' : 'user';
-                    array_unshift($opts->navitems,
-                        (object) [
-                            'itemtype' => 'link',
-                            'url' => new \moodle_url('/calendar/view.php', ['view' => 'month', 'course' => $course->id]),
-                            'title' => get_string('courseevent', 'calendar'),
-                            'titleidentifier' => 'coursecalendar',
-                            'pix' => 'i/calendar'
-                        ],
-                        (object) [
-                            'itemtype' => 'link',
-                            'url' => new \moodle_url("/grade/report/{$gradertype}/index.php", ['id' => $course->id]),
-                            'title' => get_string('coursegrades'),
-                            'titleidentifier' => 'coursegrades',
-                            'pix' => 'i/grades'
-                        ], (object) [
-                            'itemtype' => 'link',
-                            'url' => new \moodle_url('/badges/view.php', ['type' => BADGE_TYPE_COURSE, 'id' => $course->id]),
-                            'title' => get_string('coursebadges', 'badges'),
-                            'titleidentifier' => 'coursebadges',
-                            'pix' => 'i/badge'
-                        ],
-                        (object) ['itemtype' => 'divider']
-                    );
+                $flatnav = $this->page->flatnav;
+                if (!empty($flatnav) && !empty($course)) {
+                    $additionalmenus = [];
+                    $additionalmenuitems = get_config('theme_'.$this->page->theme->name, 'additionalmenusitems');
+                    if ($additionalmenuitems) {
+                        foreach (explode(',', $additionalmenuitems) as $itemname) {
+                            $node = $flatnav->get($itemname);
+                            if ($node) {
+                                $pix = $node->icon->export_for_pix();
+                                $newmenu = (object) [
+                                    'itemtype' => 'link',
+                                    'url' => $node->action(),
+                                    'title' => $node->text,
+                                    'titleidentifier' => $itemname,
+                                ];
+                                if (!empty($pix['key'])) {
+                                    $newmenu->pix = $pix['key'];
+                                }
+                                $additionalmenus[] = $newmenu;
+                            }
+                        }
+                        $additionalmenus[] = (object) ['itemtype' => 'divider'];
+                        if (!empty($additionalmenus)) {
+                            foreach (array_reverse($additionalmenus) as $menu) {
+                                array_unshift($opts->navitems, $menu);
+                            }
+                        }
+                    }
                 }
                 array_unshift($opts->navitems, $dashboardmenu);
             }

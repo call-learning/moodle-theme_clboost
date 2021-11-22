@@ -25,6 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['advancedsettings'] = 'Advanced settings';
+$string['additionalmenusitems'] = 'Additional menu items';
+$string['additionalmenusitems_desc'] = 'Additional menu items: comma separated list of menu items to shift from flatnav to user menu';
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] =
     'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
