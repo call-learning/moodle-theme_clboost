@@ -74,7 +74,8 @@ trait core_renderer_override_misc {
         $output = parent::standard_head_html();
         $currentthemename = $this->page->theme->name;
         $gacode = get_config('theme_' . $currentthemename, 'ganalytics');
-        if ($gacode && !is_siteadmin()) {
+        $gatriggerid = get_config('theme_' . $currentthemename, 'ganalyticstrigger');
+        if ($gacode && !is_siteadmin() && $gatriggerid) {
             $output .= html_writer::script("
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -82,9 +83,11 @@ trait core_renderer_override_misc {
                  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
                 "
             );
-            $this->page->requires->js_amd_inline("$(document).on('user_cookie_already_accepted',
-                    function(event, consent) {
-                    if (consent) {
+            $this->page->requires->js_amd_inline("$(document).on('grpd_policies_accepted',
+                    function(event, policies) {
+                    if (policies) {
+                        const found = policies.find((policy) => { return policy.id === {$gatriggerid}; }
+                        if (found) {
                             ga('create', '{$gacode}', 'auto');
                             ga('set', 'anonymizeIp', true);
                             ga('set', 'allowAdFeatures', false);

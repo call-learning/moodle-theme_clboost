@@ -19,6 +19,8 @@ use admin_setting_configstoredfile;
 use admin_setting_scsscode;
 use admin_settingpage;
 use theme_boost_admin_settingspage_tabs;
+use tool_policy\api;
+use tool_policy\policy_version;
 
 /**
  * Theme settings. In one place.
@@ -73,6 +75,21 @@ class settings {
             PARAM_ALPHANUMEXT
         );
         $page->add($setting);
+
+        if (!during_initial_install()) {
+            $policies = api::list_current_versions(policy_version::AUDIENCE_ALL) ?? [];
+            $policyset = [];
+            foreach ($policies as $p) {
+                $policyset[$p->id] = $p->name;
+            }
+            $setting = new \admin_setting_configselect($themefullname . '/ganalyticstrigger',
+                static::get_string('ganalytics_policy_trigger', $themefullname),
+                static::get_string('ganalytics_policy_trigger_desc', $themefullname),
+                0,
+                $policyset
+            );
+            $page->add($setting);
+        }
 
         $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
 
