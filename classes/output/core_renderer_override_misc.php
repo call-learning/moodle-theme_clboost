@@ -91,18 +91,7 @@ trait core_renderer_override_misc {
                  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
                 "
             );
-            $this->page->requires->js_amd_inline("$(document).on('grpd_policies_accepted',
-                    function(event, policies) {
-                    if (policies) {
-                        const found = policies.find((policy) => { return policy.id === {$gatriggerid}; }
-                        if (found) {
-                            ga('create', '{$gacode}', 'auto');
-                            ga('set', 'anonymizeIp', true);
-                            ga('set', 'allowAdFeatures', false);
-                            ga('send', 'pageview');
-                        }
-                    }
-                 );");
+            $this->page->requires->js_call_amd('theme_clboost/analytics', 'init', [$gatriggerid, $gacode]);
 
         }
         return $output;
