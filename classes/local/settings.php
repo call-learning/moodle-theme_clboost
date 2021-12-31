@@ -91,8 +91,6 @@ class settings {
             $page->add($setting);
         }
 
-        $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
-
         $setting = new \admin_setting_configcheckbox($themefullname . '/hasnavdrawer',
             static::get_string('hasnavdrawer', $themefullname),
             static::get_string('hasnavdrawer_desc', $themefullname),
