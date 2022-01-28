@@ -102,7 +102,7 @@ body.notloggedin {
     // The toggle should take the full width.
     // Here we work around the fact that css does not allow a list of selector in the not operator.
     body {
-        margin-left: $drawer-width-semi-expanded;
+        margin-left: auto;
         [data-region="drawer-toggle"] {
             width: $drawer-width-semi-expanded;
         }
