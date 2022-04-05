@@ -114,7 +114,7 @@ class settings {
 
         $settings->add($page);
 
-        static::additional_settings($settings);
+        static::additional_settings($settings, $currentthemename);
         return $settings;
     }
 
@@ -124,8 +124,9 @@ class settings {
      * This is intended to be overriden in the subtheme to add new pages for example.
      *
      * @param admin_settingpage $settings
+     * @param string $currentthemename
      */
-    protected static function additional_settings(admin_settingpage &$settings) {
+    protected static function additional_settings(admin_settingpage &$settings, $currentthemename = 'clboost') {
         // To be overriden in any sub theme.
     }
 
