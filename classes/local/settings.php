@@ -13,25 +13,12 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * All constant in one place
- *
- * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_clboost\local;
-
 use admin_setting_configcolourpicker;
 use admin_setting_configstoredfile;
-use admin_setting_configtext;
 use admin_setting_scsscode;
 use admin_settingpage;
 use theme_boost_admin_settingspage_tabs;
-
-defined('MOODLE_INTERNAL') || die;
 
 /**
  * Theme settings. In one place.

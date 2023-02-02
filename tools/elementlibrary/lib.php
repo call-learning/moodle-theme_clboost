@@ -27,8 +27,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 define('LOREMIPSUM', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu accumsan nulla.' .
     ' Cras elementum tincidunt dictum. Phasellus varius, est non ornare mattis, leo velit congue libero, vitae suscipit ipsum urna'
     .

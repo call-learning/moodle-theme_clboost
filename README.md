@@ -1,7 +1,7 @@
 CALL Learning Boost Based theme
 ==
 
-[![Build Status](https://travis-ci.org/call-learning/moodle-theme_clboost.svg?branch=master)](https://travis-ci.org/call-learning/moodle-theme_clboost)
+[![Moodle plugin CI for Moodle 3.9 and 3.10](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml/badge.svg)](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml)
 
 This theme is intended to be used as a parent theme. It brings additional utilities
 and fixes from the standard boost theme. 
@@ -62,9 +62,10 @@ Google Analytics
 also appear in the subthemes.
 They will only be enabled the user has accepted the cookies policy (see tools_policy).
    
-TODO
+Testing
 ==
 
+``php admin/tool/behat/cli/init.php --runt-with-theme clboost``
 
 Features
 ==

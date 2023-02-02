@@ -13,24 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * All constant in one place
- *
- * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_clboost\local;
 
-use core\plugininfo\theme;
-use theme_boost\autoprefixer;
-
-defined('MOODLE_INTERNAL') || die;
-
 /**
- * Theme constants. In one place.
+ * Theme config. In one place.
  *
  * @package   theme_clboost
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>

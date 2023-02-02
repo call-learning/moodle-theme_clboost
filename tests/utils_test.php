@@ -22,10 +22,10 @@
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+namespace theme_clboost;
+use advanced_testcase;
 use theme_clboost\local\utils;
-
-defined('MOODLE_INTERNAL') || die();
+use theme_config;
 
 /**
  * Unit tests for theme_clboost\local\utils
@@ -33,13 +33,12 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_clboost_utils_test extends advanced_testcase {
+class utils_test extends advanced_testcase {
 
     /**
      * Test real theme path
      *
-     * @throws coding_exception
-     * @throws moodle_exception
+     * @covers \theme_clboost\local\utils::get_real_theme_path
      */
     public function test_get_real_theme_path() {
         global $CFG;
@@ -51,6 +50,8 @@ class theme_clboost_utils_test extends advanced_testcase {
 
     /**
      * Convert from config
+     *
+     * @covers \theme_clboost\local\utils::convert_from_config
      */
     public function test_convert_from_config() {
         $lineparser = function ($setting, $index, &$currentobject) {
@@ -83,6 +84,7 @@ class theme_clboost_utils_test extends advanced_testcase {
 
     /**
      * Convert from config with empties
+     * @covers \theme_clboost\local\utils::convert_from_config
      */
     public function test_convert_from_config_with_empties() {
         $lineparser = function ($setting, $index, &$currentobject) {

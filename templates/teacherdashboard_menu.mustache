@@ -56,8 +56,8 @@
         var trigger = $('#{{action.id}}');
         var linktable = {{{nodejson}}};
         var modalPromise = ModalFactory.create({large: true, type: ModalFactory.types.CANCEL}, trigger);
-        var renderedMenuPromise = Templates.render('theme_clboost/modal_settings_link_page', linktable)
-        $.when(modalPromise).done(function (modal) {
+        var renderedMenuPromise = Templates.render('theme_clboost/modal_settings_link_page', linktable);
+        $.when(modalPromise).done(function(modal) {
             modal.setTitle('{{#str}} teacherdashboardmenu, theme_clboost {{/str}}');
             modal.setBody(renderedMenuPromise);
         });

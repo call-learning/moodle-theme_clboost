@@ -1,4 +1,4 @@
-@theme_clboost @javascript
+@theme_clboost @theme @javascript
 Feature: As I navigate through the site I can maximise the navigation menu or leave it minimized
 
   Scenario: I can maximise the menu and minimize it

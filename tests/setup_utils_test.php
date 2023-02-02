@@ -22,10 +22,9 @@
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-use theme_clboost\setup_utils;
-
-defined('MOODLE_INTERNAL') || die();
+namespace theme_clboost;
+use advanced_testcase;
+use context_system;
 
 /**
  * Unit tests for theme_clboost\setup_utils
@@ -33,11 +32,12 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_clboost_setup_utils_test extends advanced_testcase {
+class setup_utils_test extends advanced_testcase {
 
     /**
-     * Test real theme path
+     * Test Set virtual global page
      *
+     * @covers \theme_clboost\local\setup_utils::set_virtual_global_page
      */
     public function test_set_virtual_global_page() {
         $this->resetAfterTest();
@@ -51,7 +51,9 @@ class theme_clboost_setup_utils_test extends advanced_testcase {
     }
 
     /**
-     * Convert from config
+     * Upload file
+     *
+     * @covers \theme_clboost\local\setup_utils::upload_file
      */
     public function test_upload_file() {
         $this->resetAfterTest();
@@ -82,6 +84,8 @@ class theme_clboost_setup_utils_test extends advanced_testcase {
 
     /**
      * Setup page block
+     *
+     * @covers \theme_clboost\local\setup_utils::set_virtual_global_page
      */
     public function test_setup_page_blocks() {
         global $CFG, $OUTPUT;

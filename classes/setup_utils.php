@@ -13,14 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace theme_clboost;
-
 use context_block;
 use context_system;
 use moodle_page;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Utilities for setting up blocks, page and so on.
@@ -168,12 +164,12 @@ class setup_utils {
      *
      * @param object $originalobject
      * @param array $textfields the list of text fields to adjust
-     * @param $contextid
-     * @param $component
-     * @param $filearea
-     * @param $itemid
-     * @param $filepath
-     * @param null $filename
+     * @param int $contextid
+     * @param string $component
+     * @param string $filearea
+     * @param int $itemid
+     * @param string $filepath
+     * @param string $filename
      * @return mixed
      */
     public static function adjust_plugin_file_url(&$originalobject, $textfields, $contextid, $component, $filearea, $itemid,

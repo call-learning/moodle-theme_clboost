@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Unit tests for theme_clboost\local\utils
  *
@@ -22,10 +21,11 @@
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+namespace theme_clboost;
+use advanced_testcase;
+use moodle_page;
 use theme_clboost\output\mustache_template_finder;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Unit tests for theme_clboost\output
@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_clboost_renderer_test extends advanced_testcase {
+class renderer_test extends advanced_testcase {
 
     /**
      * @var \theme_clboost\output\core_renderer $output
@@ -43,8 +43,6 @@ class theme_clboost_renderer_test extends advanced_testcase {
     /**
      * Get this theme's renderer
      *
-     * @throws coding_exception
-     * @throws dml_exception
      */
     public function setUp() {
         parent::setUp();
@@ -55,10 +53,9 @@ class theme_clboost_renderer_test extends advanced_testcase {
 
     /**
      * Setup output page
+     *
      * @param string $layout
      * @return array
-     * @throws coding_exception
-     *
      */
     protected function create_output($layout='standard') {
         global $SITE;
@@ -73,6 +70,8 @@ class theme_clboost_renderer_test extends advanced_testcase {
 
     /**
      * Test that we get additional info  for the template
+     *
+     * @covers \theme_clboost\output\core_renderer::get_template_additional_information
      */
     public function test_template_additional_information() {
         global $CFG;
@@ -88,6 +87,9 @@ class theme_clboost_renderer_test extends advanced_testcase {
 
     /**
      * Get logo and compact logo url
+     *
+     * @covers \theme_clboost\output\core_renderer::get_logo_url
+     * @covers \theme_clboost\output\core_renderer::get_compact_logo_url
      */
     public function test_get_logo_url() {
         $logourl = $this->output->get_logo_url();
@@ -101,7 +103,7 @@ class theme_clboost_renderer_test extends advanced_testcase {
     /**
      * Get the mustache template
      *
-     * @throws coding_exception
+     * @covers \theme_clboost\output\mustache_template_finder::get_template_filepath
      */
     public function test_get_mustache_template() {
         global $CFG, $PAGE;
@@ -120,7 +122,7 @@ class theme_clboost_renderer_test extends advanced_testcase {
     /**
      * Get mustache template dirs
      *
-     * @throws coding_exception
+     * @covers \theme_clboost\output\mustache_template_finder::get_template_directories_for_component
      */
     public function test_get_mustache_template_dirs() {
         global $CFG, $PAGE;
@@ -147,7 +149,9 @@ class theme_clboost_renderer_test extends advanced_testcase {
     }
 
     /**
-     * Get logo and compact logo url
+     * Get Analytics code
+     *
+     * @covers \theme_clboost\output\core_renderer::standard_head_html
      */
     public function test_get_analytics_code() {
         $this->resetAfterTest();
@@ -164,6 +168,8 @@ class theme_clboost_renderer_test extends advanced_testcase {
 
     /**
      * Check that admin do not have GA enabled
+     *
+     * @covers \theme_clboost\output\core_renderer::standard_head_html
      */
     public function test_get_analytics_code_admin() {
         $this->resetAfterTest();

@@ -13,15 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Teacher menu modal
- *
- * @package   theme_clboost
- * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_clboost\output;
 
 use action_link;
@@ -39,7 +30,7 @@ use stdClass;
 use templatable;
 
 /**
- * Class teacherdashboard_menu
+ * Teacher menu modal
  *
  * @package   theme_clboost
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning>

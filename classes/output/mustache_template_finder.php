@@ -13,15 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Mustache template loader with Preset managements
- *
- * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_clboost\output;
 
 use coding_exception;
@@ -29,6 +20,8 @@ use moodle_exception;
 use theme_config;
 
 /**
+ * Mustache template loader with Preset managements
+ *
  * Get information about valid locations for mustache templates.
  *
  * @package   theme_clboost

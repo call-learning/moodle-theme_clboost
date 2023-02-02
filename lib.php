@@ -24,8 +24,6 @@
 
 use theme_clboost\local\utils;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Post process the CSS tree.
  *

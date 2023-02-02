@@ -13,23 +13,15 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Core renderer functionalities
- *
- * @package   theme_clboost
- * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_clboost\output;
 
 use html_writer;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die;
 
 /**
+ * Core renderer functionalities
+ *
  * This trait is hopefully temporary. Here we override functions from core renderer
  * that would need to be broken down into more manageable (and configurable pieces)
  *
