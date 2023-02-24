@@ -55,75 +55,63 @@
         ]
     }
 }}
-<nav class="list-group d-flex flex-column" aria-label="{{firstcollectionlabel}}">
-<ul>
+
+<nav class="nav-drawer-list" aria-label="{{firstcollectionlabel}}">
 {{# flatnavigation }}
     {{#showdivider}}
-        </ul>
-        </nav>
-        <nav class="list-group mt-5" aria-label="{{get_collectionlabel}}">
-        <ul>
+    <div class="divider w-11 my-1 border-top border-gray030 {{key}}"></div>
     {{/showdivider}}
     {{#action}}
-            <li>
-                <a class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}}" href="{{{action}}}" data-key="{{key}}" data-isexpandable="{{isexpandable}}"
-                   data-indent="{{get_indent}}" data-showdivider="{{showdivider}}" data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}"
-                   data-forceopen="{{forceopen}}" data-isactive="{{isactive}}" data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}"
-                   {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
-                    <div class="ml-{{get_indent}}">
-                        <div class="media">
-                            {{#icon.pix}}
-                                <span class="media-left">
-                                    {{#pix}}{{{icon.pix}}}, {{{icon.component}}}, {{{icon.alt}}}{{/pix}}
-                                </span>
-                            {{/icon.pix}}
-                            {{^icon.pix}}
-                                <span class="media-left">
-                                    {{#pix}} t/collapsed_empty, core, {{#str}} navbaraction, theme_clboost {{/str}}{{/pix}}
-                                </span>
-                            {{/icon.pix}}
-                            <span class="media-body {{#isactive}}font-weight-bold{{/isactive}}">{{{text}}}</span>
-                        </div>
-                    </div>
-                </a>
-            </li>
+        <a class="drawer-item {{#isactive}}active{{/isactive}}" href="{{{action}}}" data-key="{{key}}" data-isexpandable="{{isexpandable}}"
+            data-indent="{{get_indent}}" data-showdivider="{{showdivider}}" data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}"
+            data-forceopen="{{forceopen}}" data-isactive="{{isactive}}" data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}"
+            {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
+            <div class="item-inner ml-{{get_indent}}">
+                <div class="d-flex align-items-center">
+                    {{#icon.pix}}
+                        <span class="iconcontainer" data-toggle="tooltip" data-placement="right" title="{{{text}}}" >
+                            {{#pix}}{{{icon.pix}}}, {{{icon.component}}}, {{{icon.alt}}}{{/pix}}
+                        </span>
+                    {{/icon.pix}}
+                    {{^icon.pix}}
+                        <span class="iconcontainer">
+                            {{#pix}} t/collapsed_empty, core, {{#str}} navbaraction, theme_clboost {{/str}}{{/pix}}
+                        </span>
+                    {{/icon.pix}}
+                    <span class="navname ml-1 text-truncate">{{{text}}}</span>
+                </div>
+            </div>
+        </a>
     {{/action}}
     {{^action}}
-            <li>
-                <div class="list-group-item" data-key="{{key}}" data-isexpandable="{{isexpandable}}" data-indent="{{get_indent}}" data-showdivider="{{showdivider}}"
-                     data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}" data-forceopen="{{forceopen}}" data-isactive="{{isactive}}"
-                     data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}" {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
-                    <div class="ml-{{get_indent}}">
-                        <div class="media">
-                            {{#icon.pix}}
-                                <span class="media-left">
-                                    {{#pix}}{{{icon.pix}}}, {{{icon.component}}}, {{{icon.alt}}}{{/pix}}
-                                </span>
-                            {{/icon.pix}}
-                            {{^icon.pix}}
-                                <span class="media-left">
-                                    {{#pix}} t/collapsed_empty, core, {{#str}} navbaraction, theme_clboost {{/str}}{{/pix}}
-                                </span>
-                            {{/icon.pix}}
-                            <span class="media-body">{{{text}}}</span>
-                        </div>
-                    </div>
+        <div class="drawer-item {{#isactive}}active{{/isactive}}" data-key="{{key}}" data-isexpandable="{{isexpandable}}" data-indent="{{get_indent}}" data-showdivider="{{showdivider}}"
+                data-type="{{type}}" data-nodetype="{{nodetype}}" data-collapse="{{collapse}}" data-forceopen="{{forceopen}}" data-isactive="{{isactive}}"
+                data-hidden="{{hidden}}" data-preceedwithhr="{{preceedwithhr}}" {{#parent.key}}data-parent-key="{{.}}"{{/parent.key}}>
+            <div class="item-inner ml-{{get_indent}}">
+                <div class="d-flex align-items-center item-inner">
+                    {{#icon.pix}}
+                        <span class="iconcontainer">
+                            {{#pix}}{{{icon.pix}}}, {{{icon.component}}}, {{{icon.alt}}}{{/pix}}
+                        </span>
+                    {{/icon.pix}}
+                    {{^icon.pix}}
+                        <span class="iconcontainer">
+                            {{#pix}} t/collapsed_empty, core, {{#str}} navbaraction, theme_clboost {{/str}}{{/pix}}
+                        </span>
+                    {{/icon.pix}}
+                    <span class="navname ml-1 text-truncate">{{{text}}}</span>
                 </div>
-            </li>
+            </div>
+        </div>
     {{/action}}
 {{/ flatnavigation }}
-</ul>
 </nav>
-<nav class="list-group nav-drawer-maximise-action mt-auto mb-2 flex-grow-1 justify-content-end">
-    <ul>
-        <li>
-            <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <span class="media-left">
-                      {{#pix}} t/collapsed, core, {{#str}} expandmore, theme_clboost {{/str}}{{/pix}}
-                  </span>
-                </div>
-            </a>
-        </li>
-    </ul>
+<nav class="nav-drawer-list nav-drawer-maximise-action mt-auto mb-2 justify-content-end">
+    <a class="drawer-item" href="#">
+        <div class="d-flex align-items-center item-inner">
+            <span class="iconcontainer">
+                {{#pix}} t/collapsed, core, {{#str}} expandmore, theme_clboost {{/str}}{{/pix}}
+            </span>
+        </div>
+    </a>
 </nav>

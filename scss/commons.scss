@@ -10,9 +10,6 @@ $theme-colors: map-merge((
         danger: $danger,
 ), $theme-colors);
 
-// Make sure the background does not clash with foreground.
-$dropdown-link-hover-color: lighten($primary, 20%) !default;
-$dropdown-link-hover-bg: darken($primary, 20%) !default;
 
 // Drawer height.
 $drawer-height: 140px !default;
