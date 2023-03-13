@@ -32,30 +32,30 @@ class config {
         return [
             // Most backwards compatible layout without the blocks - this is the layout used by default.
             'base' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array(),
             ),
             // Standard layout with blocks, this is recommended for most pages with general information.
             'standard' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
             // Main course page.
             'course' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
                 'options' => array('langmenu' => true),
             ),
             'coursecategory' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
             // Part of course, typical for modules - default page layout if $cm specified in require_login().
             'incourse' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
@@ -68,20 +68,20 @@ class config {
             ),
             // Server administration scripts.
             'admin' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
             // My dashboard page.
             'mydashboard' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
                 'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
             ),
             // My public page.
             'mypublic' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
@@ -127,7 +127,7 @@ class config {
             ),
             // The pagelayout used for reports.
             'report' => array(
-                'file' => 'columns2.php',
+                'file' => 'drawers.php',
                 'regions' => array('side-pre'),
                 'defaultregion' => 'side-pre',
             ),
@@ -177,6 +177,13 @@ class config {
         $theme->requiredblocks = '';
         $theme->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
         $theme->iconsystem = \core\output\icon_system::FONTAWESOME;
+        $theme->haseditswitch = true;
+        $theme->usescourseindex = true;
+        // By default, all boost theme do not need their titles displayed.
+        $theme->activityheaderconfig = [
+            'notitle' => true
+        ];
+        return $theme;
     }
 
     /**

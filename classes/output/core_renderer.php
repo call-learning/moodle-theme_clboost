@@ -44,7 +44,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $additionalinfo = new stdClass();
         // To check if user is logged in , in all templates.
         $additionalinfo->isloggedin = isloggedin() && !isguestuser();
-        $additionalinfo->hasnavdrawer = utils::has_nav_drawer($this->page);
 
         $themename = $this->page->theme->name;
         // To fetch the right path for an image in a theme pix folder.

@@ -1,20 +1,4 @@
-// Common to all themes (from Boost)
-// stylelint-disable
-$theme-colors: () !default;
-$theme-colors: map-merge((
-        primary: $primary,
-        secondary: $secondary,
-        success: $success,
-        info: $info,
-        warning: $warning,
-        danger: $danger,
-), $theme-colors);
-
-
-// Drawer height.
-$drawer-height: 140px !default;
-
-// stylelint-enable
+@import "pre";
 
 // Import FontAwesome.
 @import "fontawesome";
@@ -24,6 +8,8 @@ $drawer-height: 140px !default;
 
 // Import Core moodle CSS
 @import "moodle";
+
+@import "post";
 
 // Reset a couple of values
 
@@ -69,3 +55,4 @@ body {
 .header-image {
     max-height: $drawer-height;
 }
+

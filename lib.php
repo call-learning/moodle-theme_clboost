@@ -25,16 +25,6 @@
 use theme_clboost\local\utils;
 
 /**
- * Post process the CSS tree.
- *
- * @param string $tree The CSS tree.
- * @param theme_config $theme The theme config object.
- */
-function theme_clboost_css_tree_post_processor($tree, $theme) {
-    theme_boost_css_tree_post_processor($tree, $theme);
-}
-
-/**
  * Inject additional SCSS.
  *
  * @param theme_config $theme The theme config object.
@@ -74,12 +64,10 @@ function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @throws dml_exception
  */
 function theme_clboost_get_main_scss_content($theme) {
-    // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.
-    $pre = file_get_contents(utils::get_real_theme_path($theme, 'scss/pre.scss'));
-    // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.
-    $post = file_get_contents(utils::get_real_theme_path($theme, 'scss/post.scss'));
 
-    return  $pre . $theme->settings->scss . $post;
+    $scss = file_get_contents(utils::get_real_theme_path($theme, 'scss/commons.scss'));
+
+    return  $theme->settings->scss . $scss;
 }
 
 /**

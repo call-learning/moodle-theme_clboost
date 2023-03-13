@@ -80,7 +80,6 @@ class renderer_test extends advanced_testcase {
             'isloggedin' => true,
             'themebasepath' => $CFG->dirroot . '/theme/clboost',
             'themename' => 'clboost',
-            'hasnavdrawer' => true
         );
         $this->assertEquals($expected, $additionalinfo);
     }

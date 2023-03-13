@@ -76,11 +76,6 @@ class settings {
 
         $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
 
-        $setting = new \admin_setting_configcheckbox($themefullname . '/hasnavdrawer',
-            static::get_string('hasnavdrawer', $themefullname),
-            static::get_string('hasnavdrawer_desc', $themefullname),
-            true
-        );
         $setting = new \admin_setting_configtext($themefullname . '/additionalmenusitems',
             static::get_string('additionalmenusitems', $themefullname),
             static::get_string('additionalmenusitems_desc', $themefullname),

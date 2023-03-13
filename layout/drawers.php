@@ -25,5 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 $templatecontext = \theme_clboost\local\utils::prepare_standard_page($OUTPUT, $PAGE, 'side-pre');
-echo $OUTPUT->render_from_template('theme_clboost/columns2', $templatecontext);
+echo $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
 

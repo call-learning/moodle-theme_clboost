@@ -131,34 +131,85 @@ class utils {
         global $CFG, $SITE;
         user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
         require_once($CFG->libdir . '/behat/lib.php');
+        require_once($CFG->dirroot . '/course/lib.php');
 
-        $hasnavdrawer = static::has_nav_drawer($page);
-        if ($hasnavdrawer && isloggedin() && !isguestuser()) {
-            $navdraweropen = (get_user_preferences('drawer-open-nav', 'false') == 'true');
+        // Add block button in editing mode.
+        $addblockbutton = $output->addblockbutton();
+
+        user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
+        user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
+
+        if (isloggedin()) {
+            $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
+            $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
         } else {
-            $navdraweropen = false;
+            $courseindexopen = false;
+            $blockdraweropen = false;
         }
-        $extraclasses = [];
-        if ($navdraweropen) {
-            $extraclasses[] = 'drawer-open-left';
+
+        if (defined('BEHAT_SITE_RUNNING')) {
+            $blockdraweropen = true;
         }
-        if (!$hasnavdrawer) {
-            $extraclasses[] = 'no-nav-drawer';
+
+        $extraclasses = ['uses-drawers'];
+        if ($courseindexopen) {
+            $extraclasses[] = 'drawer-open-index';
         }
-        $bodyattributes = $output->body_attributes($extraclasses);
+
         $blockshtml = $output->blocks($blockside);
-        $hasblocks = strpos($blockshtml, 'data-block=') !== false;
-        $buildregionmainsettings = !$page->include_region_main_settings_in_header_actions();
+        $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+        if (!$hasblocks) {
+            $blockdraweropen = false;
+        }
+        $courseindex = core_course_drawer();
+        if (!$courseindex) {
+            $courseindexopen = false;
+        }
+
+        $bodyattributes = $output->body_attributes($extraclasses);
+        $forceblockdraweropen = $output->firstview_fakeblocks();
+
+        $secondarynavigation = false;
+        $overflow = '';
+        if ($page->has_secondary_navigation()) {
+            $tablistnav = $page->has_tablist_secondary_navigation();
+            $moremenu = new \core\navigation\output\more_menu($page->secondarynav, 'nav-tabs', true, $tablistnav);
+            $secondarynavigation = $moremenu->export_for_template($output);
+            $overflowdata = $page->secondarynav->get_overflow_menu_data();
+            if (!is_null($overflowdata)) {
+                $overflow = $overflowdata->export_for_template($output);
+            }
+        }
+
+        $primary = new \core\navigation\output\primary($page);
+        $renderer = $page->get_renderer('core');
+        $primarymenu = $primary->export_for_template($renderer);
+        $buildregionmainsettings = !$page->include_region_main_settings_in_header_actions() && !$page->has_secondary_navigation();
         // If the settings menu will be included in the header then don't add it here.
         $regionmainsettingsmenu = $buildregionmainsettings ? $output->region_main_settings_menu() : false;
+
+        $header = $page->activityheader;
+        $headercontent = $header->export_for_template($renderer);
+
         $templatecontext = [
             'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
             'output' => $output,
             'hasblocks' => $hasblocks,
             'bodyattributes' => $bodyattributes,
-            'navdraweropen' => $navdraweropen,
+            'courseindexopen' => $courseindexopen,
+            'blockdraweropen' => $blockdraweropen,
+            'courseindex' => $courseindex,
+            'primarymoremenu' => $primarymenu['moremenu'],
+            'secondarymoremenu' => $secondarynavigation ?: false,
+            'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+            'usermenu' => $primarymenu['user'],
+            'langmenu' => $primarymenu['lang'],
+            'forceblockdraweropen' => $forceblockdraweropen,
             'regionmainsettingsmenu' => $regionmainsettingsmenu,
-            'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu)
+            'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+            'overflow' => $overflow,
+            'headercontent' => $headercontent,
+            'addblockbutton' => $addblockbutton
         ];
 
         switch ($blockside) {
@@ -169,26 +220,8 @@ class utils {
                 $templatecontext['sidepreblocks'] = $blockshtml;
                 break;
         }
-        $nav = $page->flatnav;
-        $templatecontext['flatnavigation'] = $nav;
-        $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+
         return $templatecontext;
     }
 
-    /**
-     * Check if navdrawer is enabled
-     *
-     * Note : nav drawer is always enabled for admins.
-     *
-     * @param \moodle_page $page
-     * @return bool|mixed|object|string|null
-     * @throws \dml_exception
-     */
-    public static function has_nav_drawer(\moodle_page $page) {
-        $currentthemename = $page->theme->name;
-        $hasnavdrawer = get_config('theme_' . $currentthemename, 'hasnavdrawer');
-        $result = is_siteadmin();
-        $result = $result || is_null($hasnavdrawer) ? true : boolval($hasnavdrawer);
-        return $result;
-    }
 }

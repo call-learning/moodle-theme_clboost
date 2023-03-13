@@ -62,20 +62,9 @@
     {{> theme_boost/nav-drawer }}
 
     <div id="page" class="container-fluid d-print-block">
-        {{{ output.context_header_settings_menu }}}
-
-        <div id="page-content" class="row pb-3 d-print-block">
+        <div id="page-content" class="row py-3 d-print-block">
             <div id="region-main-box" class="col-12">
-                {{#hasregionmainsettingsmenu}}
-                <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
-                    <div> {{{ output.region_main_settings_menu }}} </div>
-                </div>
-                {{/hasregionmainsettingsmenu}}
                 <section id="region-main" aria-label="{{#str}}content{{/str}}">
-
-                    {{#hasregionmainsettingsmenu}}
-                        <div class="region_main_settings_menu_proxy"></div>
-                    {{/hasregionmainsettingsmenu}}
                     {{{ output.course_content_header }}}
                     {{#hasblocks}}
                         {{{ contentblocks }}}
@@ -93,4 +82,3 @@
 
 </body>
 </html>
-{{> theme_clboost/twostatedrawer }}
