@@ -3,6 +3,14 @@
 #nav-drawer.closed {
     left: -($drawer-width-semi-expanded + $drawer-offscreen-gutter);
 }
+#nav-drawer::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+#nav-drawer {
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
 
 @include media-breakpoint-up(md) {
     #nav-drawer.closed {
@@ -32,40 +40,12 @@
 }
 
 [data-region="drawer"] {
-    .media-body {
-        white-space: nowrap; // Prevent two line in resizing menu.
-        // As per accessibility guidelines we should not use display: none;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        // This will prevent the media-body to take any space at all.
-        width: 0;
-
-        visibility: visible;
-        max-width: initial;
-    }
-
-    .nav-drawer-maximise-action {
-        .list-group-item {
-            background-color: transparent;
-            border: none;
-            margin: auto;
-
-            i.icon {
-                font-size: 24px;
-                width: 24px;
-                height: 16px;
-                margin: 0;
-                padding: 0;
-            }
-        }
-    }
+    padding: 0; // Padding in all cases.
 
     .nav-drawer-maximise-action {
         display: none;
     }
 
-    -webkit-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
-    -moz-transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
     transition: width 0.5s ease, right 0.5s ease, left 0.5s ease;
 
     &.closed {
@@ -79,15 +59,40 @@
             display: flex;
         }
     }
+    .nav-drawer-list .drawer-item {
+        line-height: 2.5rem;
+        min-height: 2.5rem;
+        height: auto;
+        color: $navbar-light-color;
+        text-decoration: none;
+        &:hover {
+            color: $navbar-light-hover-color;
+        }
+        .icon {
+            font-size: 1.2rem;
+            line-height: 24px;
+            width: 24px;
+            height: 24px;
+            margin: 13px;
+            position: relative;
 
-    padding: 20px 20px; // Padding in all cases.
+        }
+        &.active {
+            .item-inner {
+                background-color: $primary;
+                .icon,
+                .navname {
+                    color: $white;
+                }
+            }
+        }
+    }
 }
 
+// BAS Not sure why this is needed.
 @include media-breakpoint-down(md) {
     [data-region="drawer"],
     [data-region="drawer-toggle"] {
-        -webkit-transition: initial;
-        -moz-transition: initial;
         transition: initial;
     }
 }
@@ -107,9 +112,9 @@ body.notloggedin {
             width: $drawer-width-semi-expanded;
         }
     }
-    body.drawer-left {
+    // Prevents the jumping of the content when the page is loaded.
+    body:not(.notloggedin) {
         margin-left: $drawer-width-semi-expanded;
-        margin-right: auto;
     }
     body.drawer-right {
         margin-right: $drawer-width-semi-expanded;
@@ -129,25 +134,7 @@ body.notloggedin {
         margin-left: auto;
         margin-right: auto;
     }
-    //body:not(.drawer-open-left):not(.notloggedin) {
-    //    &:not(.drawer-right) {
-    //        margin-left: $drawer-width-semi-expanded;
-    //
-    //        [data-region="drawer-toggle"] {
-    //            width: $drawer-width-semi-expanded;
-    //        }
-    //
-    //    }
-    //}
-    //body:not(.drawer-open-right):not(.notloggedin) {
-    //    &:not(.drawer-left) {
-    //        margin-right: $drawer-width-semi-expanded;
-    //
-    //        [data-region="drawer-toggle"] {
-    //            width: $drawer-width-semi-expanded;
-    //        }
-    //    }
-    //}
+
 }
 
 // Fix: Make sure that nav-item do not go over the navbar max height

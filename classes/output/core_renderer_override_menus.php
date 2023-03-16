@@ -80,7 +80,7 @@ trait core_renderer_override_menus {
         }
 
         // Add a class for when $withlinks is false.
-        $usermenuclasses = 'usermenu nav-link';
+        $usermenuclasses = 'usermenu';
         if (!$withlinks) {
             $usermenuclasses .= ' withoutlinks';
         }
@@ -272,8 +272,7 @@ trait core_renderer_override_menus {
 
         $am = new action_menu();
         $am->set_menu_trigger(
-            $returnstr,
-            'nav-link' // CL BOOST : We changed this here.
+            $returnstr
         );
         $am->set_action_label(get_string('usermenu'));
         $am->set_alignment(action_menu::TR, action_menu::BR);
