@@ -56,3 +56,7 @@ body {
     max-height: $drawer-height;
 }
 
+.userloggedinas .usermenu .usertext .meta,
+.userswitchedrole .usermenu .usertext .meta {
+    display: block;
+}

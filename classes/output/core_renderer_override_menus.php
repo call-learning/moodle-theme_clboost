@@ -51,4 +51,31 @@ trait core_renderer_override_menus {
         }
         return $currentheader;
     }
+
+    /**
+     * Override usermenu, remove 'Your are not logged in' message
+     * @param stdClass $user A user object, usually $USER.
+     * @param bool $withlinks true if a dropdown should be built.
+     * @return string HTML fragment.
+     */
+    public function user_menu($user = null, $withlinks = null) {
+        global $USER;
+        // Get some navigation opts.
+        if (is_null($user)) {
+            $user = $USER;
+        }
+        $opts = user_get_user_navigation_info($user, $this->page);
+
+        $loginpage = $this->is_login_page();
+        $loginurl = get_login_url();
+        if (!empty($opts->unauthenticateduser)) {
+            $returnstr = '';
+            // If not logged in, show the typical not-logged-in string.
+            if (!$loginpage && (!$opts->unauthenticateduser['guest'] || $withlinks)) {
+                return html_writer::link(new moodle_url($loginurl), get_string('login'), ['class' => 'nav-link']);
+            }
+            return '';
+        }
+        return parent::user_menu($user, $withlinks);
+    }
 }
