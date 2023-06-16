@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2023031300; /* This is the version number to increment when changes needing an update are made */
+$plugin->version   = 2023061600; /* This is the version number to increment when changes needing an update are made */
 $plugin->requires  = 2022112800;
-$plugin->release   = '0.1.2';
-$plugin->maturity  = MATURITY_ALPHA;
+$plugin->release   = '4.1.0';
+$plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'theme_clboost';
 $plugin->dependencies = [
     'theme_boost' => ANY_VERSION
