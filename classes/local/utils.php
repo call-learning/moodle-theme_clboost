@@ -18,7 +18,12 @@ namespace theme_clboost\local;
 use coding_exception;
 use context;
 use context_course;
+use moodle_page;
+use navigation_node;
 use stdClass;
+use theme_boost\output\core_renderer;
+use theme_clboost\output\teacherdashboard_menu;
+
 /**
  * Theme utilities.
  *
@@ -123,11 +128,11 @@ class utils {
      *
      * @param \core_renderer $output
      * @param \moodle_page $page
-     * @param string $blockside
+     * @param bool $islimitedwitdh if false, we will forcefully remove the limitedwidth class from the page
      * @return array
      * @throws coding_exception
      */
-    public static function prepare_standard_page($output, $page, $blockside = 'content') {
+    public static function prepare_standard_page(core_renderer $output, moodle_page $page, bool $islimitedwitdh = true): array {
         global $CFG, $SITE;
         user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
         require_once($CFG->libdir . '/behat/lib.php');
@@ -156,17 +161,16 @@ class utils {
             $extraclasses[] = 'drawer-open-index';
         }
 
-        $blockshtml = $output->blocks($blockside);
-        $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
-        if (!$hasblocks) {
-            $blockdraweropen = false;
-        }
         $courseindex = core_course_drawer();
         if (!$courseindex) {
             $courseindexopen = false;
         }
 
         $bodyattributes = $output->body_attributes($extraclasses);
+        // This is a small hack to take over the normal layout and remove the limitedwidth class from the body tag.
+        if (!$islimitedwitdh) {
+            $bodyattributes = str_replace('limitedwidth', '', $bodyattributes);
+        }
         $forceblockdraweropen = $output->firstview_fakeblocks();
 
         $secondarynavigation = false;
@@ -194,10 +198,8 @@ class utils {
         $templatecontext = [
             'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
             'output' => $output,
-            'hasblocks' => $hasblocks,
             'bodyattributes' => $bodyattributes,
             'courseindexopen' => $courseindexopen,
-            'blockdraweropen' => $blockdraweropen,
             'courseindex' => $courseindex,
             'primarymoremenu' => $primarymenu['moremenu'],
             'secondarymoremenu' => $secondarynavigation ?: false,
@@ -211,17 +213,30 @@ class utils {
             'headercontent' => $headercontent,
             'addblockbutton' => $addblockbutton
         ];
+        // Check if we have blocks on the side.
+        $blockshtml = $output->blocks('side-pre');
+        $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+        if (!$hasblocks) {
+            $blockdraweropen = false;
+        }
+        $templatecontext['hasblocks'] = $hasblocks; // This is the flag for side block, in common cases.
+        $templatecontext['sidepreblocks'] = $blockshtml;
+        $templatecontext['blockdraweropen'] = $blockdraweropen;
 
-        switch ($blockside) {
-            case 'content':
-                $templatecontext['contentblocks'] = $blockshtml;
-                break;
-            case 'side-pre':
-                $templatecontext['sidepreblocks'] = $blockshtml;
-                break;
+        // Now (and for page that will allow it), check if there are blocks in the content.
+        $blockshtml = $output->blocks('content');
+        $hasblocks = strpos($blockshtml, 'data-block=') !== false;
+        $templatecontext['hascontentblocks'] = $hasblocks; // This is the flag for side block, in common cases.
+        $templatecontext['contentblocks'] = $blockshtml;
+
+        if ($page->course && $page->course->id != SITEID) {
+            $settingsnode = $page->settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
+            if ($settingsnode) {
+                $tdwidget = new teacherdashboard_menu($page->course);
+                $templatecontext['teacherdbmenu'] = $tdwidget->export_for_template($output);
+            }
         }
 
         return $templatecontext;
     }
-
 }

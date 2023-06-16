@@ -15,11 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost/frontpage
+    @template theme_boost/drawers
 
-    Admin time setting template.
-
-    Boost 2 column layout template for the frontpage.
+    Boost drawer template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -43,8 +41,6 @@
         "bodyattributes":"",
         "sidepreblocks": "<h2>Blocks html goes here</h2>",
         "hasblocks":true,
-        "hascontentblocks":true,
-        "contentblocks": "<h2>Blocks html goes here</h2>",
         "courseindexopen": true,
         "navdraweropen": false,
         "blockdraweropen": true,
@@ -62,7 +58,19 @@
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_boost/navbar }}
-
+    {{#courseindex}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                {{{courseindex}}}
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+            {{$drawerstate}}show-drawer-left{{/drawerstate}}
+            {{$tooltipplacement}}right{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/courseindex}}
     {{#hasblocks}}
         {{< theme_boost/drawer }}
             {{$id}}theme_boost-drawers-blocks{{/id}}
@@ -118,6 +126,19 @@
                     </div>
                 {{/hasblocks}}
             </div>
+            {{{ output.full_header }}}
+            {{! CORE MODIFICATIONS }}
+            {{#secondarymoremenu}}
+                <div class="secondary-navigation d-print-none d-flex">
+                    <div class="flex-grow-1">{{> core/moremenu}}</div>
+                    <div class="teacherdbmenu">
+                        {{#teacherdbmenu}}
+                            {{>theme_clboost/teacherdashboard_menu}}
+                        {{/teacherdbmenu}}
+                    </div>
+                </div>
+            {{/secondarymoremenu}}
+            {{! END CORE MODIFICATIONS }}
             <div id="page-content" class="pb-3 d-print-block">
                 <div id="region-main-box">
                     {{#hasregionmainsettingsmenu}}
@@ -141,9 +162,6 @@
                                 </div>
                             </div>
                         {{/overflow}}
-                        {{#hascontentblocks}}
-                            {{{ contentblocks }}}
-                        {{/hascontentblocks}}
                         {{{ output.main_content }}}
                         {{{ output.activity_navigation }}}
                         {{{ output.course_content_footer }}}

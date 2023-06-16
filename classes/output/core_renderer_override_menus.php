@@ -36,22 +36,6 @@ use theme_clboost\local\utils;
  * @package theme_clboost
  */
 trait core_renderer_override_menus {
-
-    /**
-     * Course additional menu
-     * Show all course menu option in one go
-     */
-    public function page_heading_button() {
-        $currentheader = parent::page_heading_button();
-        if ($this->page->course && $this->page->course->id != SITEID) {
-            $settingsnode = $this->page->settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
-            if ($settingsnode) {
-                $currentheader = $this->render(new teacherdashboard_menu($this->page->course)) . $currentheader;
-            }
-        }
-        return $currentheader;
-    }
-
     /**
      * Override usermenu, remove 'Your are not logged in' message
      * @param stdClass $user A user object, usually $USER.

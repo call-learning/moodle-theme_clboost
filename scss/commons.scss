@@ -8,7 +8,6 @@
 
 // Import Core moodle CSS
 @import "moodle";
-
 @import "post";
 
 // Reset a couple of values
@@ -43,7 +42,8 @@ body {
     @include button-outline-variant($warning-outline);
 }
 // Specific to some version of Moodle.
-@include bg-variant(".bg-gray", $gray-200);
+// Note : this will be deprecated in BS 5.
+@include bg-variant(".bg-gray", $gray-200, true);
 
 .pagelayout-frontpage {
     #region-main {

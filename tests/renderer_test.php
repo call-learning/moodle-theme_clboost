@@ -44,7 +44,7 @@ class renderer_test extends advanced_testcase {
      * Get this theme's renderer
      *
      */
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
         $this->resetAfterTest();
         $this->setAdminUser();
@@ -110,8 +110,6 @@ class renderer_test extends advanced_testcase {
         $templatefinder = new mustache_template_finder();
         $this->assertEquals($CFG->dirroot . '/theme/boost/templates/secure.mustache',
             $templatefinder->get_template_filepath('theme_boost/secure'));
-        $this->assertEquals($CFG->dirroot . '/theme/clboost/templates/theme_boost/navbar.mustache',
-            $templatefinder->get_template_filepath('theme_boost/navbar'));
         $this->assertEquals($CFG->dirroot . '/theme/clboost/templates/frontpage.mustache',
             $templatefinder->get_template_filepath('theme_clboost/frontpage'));
         $this->assertEquals($CFG->dirroot . '/theme/boost/templates/navbar-secure.mustache',
@@ -161,8 +159,8 @@ class renderer_test extends advanced_testcase {
         set_config('ganalytics', $gacode, 'theme_clboost');
         list($output, $page) = $this->create_output('embedded');
         $headcode = $output->standard_head_html();
-        $this->assertContains($gacode, $page->requires->get_end_code($output));
-        $this->assertContains('GoogleAnalyticsObject', $headcode);
+        $this->assertStringContainsString($gacode, $page->requires->get_end_code($output));
+        $this->assertStringContainsString('GoogleAnalyticsObject', $headcode);
     }
 
     /**
@@ -179,7 +177,7 @@ class renderer_test extends advanced_testcase {
         set_config('ganalytics', $gacode, 'theme_clboost');
         list($output, $page) = $this->create_output('embedded');
         $headcode = $output->standard_head_html();
-        $this->assertNotContains('GoogleAnalyticsObject', $headcode);
-        $this->assertNotContains($gacode, $page->requires->get_end_code($output));
+        $this->assertStringNotContainsString($gacode, $page->requires->get_end_code($output));
+        $this->assertStringNotContainsString('GoogleAnalyticsObject', $headcode);
     }
 }

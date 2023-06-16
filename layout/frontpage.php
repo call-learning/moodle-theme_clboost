@@ -25,7 +25,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-$templatecontext = \theme_clboost\local\utils::prepare_standard_page($OUTPUT, $PAGE);
+$templatecontext = \theme_clboost\local\utils::prepare_standard_page($OUTPUT, $PAGE, false);
 // Bit of a hack here: we prevent the index page from displaying anything else than we decided to in the template.
 // It would usually display the course list, news, and so on (see @core_renderer::frontpage).
 $CFG->frontpage = '';

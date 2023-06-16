@@ -27,5 +27,5 @@ Feature: Teacher dashboard: I can edit a course I have a quick menu that leads t
   Scenario: Student cannot use the context settings menu
     And I log in as "student1"
     And I am on "Course 1" course homepage
-    And ".teacherdashboard-menu [role=button]" "css_element" should not be visible
+    And ".teacherdashboard-menu [role=button]" "css_element" should not exist
     And I log out

@@ -77,7 +77,7 @@ class teacherdashboard_menu implements renderable, templatable {
                 new moodle_url(''),
                 '',
                 null,
-                array('class' => 'btn btn-outline-dark', 'role' => 'button'),
+                array('class' => 'btn btn-link', 'role' => 'button'),
                 new pix_icon('teacherdb', get_string('teacherdashboardmenu', 'theme_clboost'), 'theme_clboost')
             );
             $data->action = $action->export_for_template($output);

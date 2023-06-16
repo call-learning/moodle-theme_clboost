@@ -15,8 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 namespace theme_clboost\output;
 
+use navigation_node;
 use stdClass;
-use theme_clboost\local\utils;
+
 /**
  * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
@@ -54,6 +55,5 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $additionalinfo->themename = $themename;
         return $additionalinfo;
     }
-
 }
 
