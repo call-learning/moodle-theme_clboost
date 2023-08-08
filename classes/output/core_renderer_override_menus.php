@@ -53,9 +53,8 @@ trait core_renderer_override_menus {
         $loginpage = $this->is_login_page();
         $loginurl = get_login_url();
         if (!empty($opts->unauthenticateduser)) {
-            $returnstr = '';
             // If not logged in, show the typical not-logged-in string.
-            if (!$loginpage && (!$opts->unauthenticateduser['guest'] || $withlinks)) {
+            if (!$loginpage || $withlinks) {
                 return html_writer::link(new moodle_url($loginurl), get_string('login'), ['class' => 'nav-link']);
             }
             return '';
