@@ -54,7 +54,7 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
         $themename = clean_param($themename, PARAM_COMPONENT);
 
         // Find the parent themes.
-        $parents = array();
+        $parents = [];
         if ($themename === $PAGE->theme->name) {
             $parents = $PAGE->theme->parents;
         } else {

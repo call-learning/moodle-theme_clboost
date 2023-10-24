@@ -41,7 +41,7 @@ $strheading = 'Element Library: Moodle Forms: Grouped controls';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/mform_grouped.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -85,37 +85,37 @@ class grouped_form_elements extends moodleform {
         $mform->addElement('header', null, 'Heading element');
 
         // TODO: add more examples of grouped form elements e.g. buttons etc.
-        $radiogroup = array();
+        $radiogroup = [];
         $radiogroup[] =& $mform->createElement('radio', 'more_radio', null, 'Radio A', 0);
         $radiogroup[] =& $mform->createElement('radio', 'more_radio', null, 'Radio B', 1);
         // Here <br /> is a separator between elements.
-        $mform->addGroup($radiogroup, 'radiogroup', 'A group of radios', array('<br />'), false);
+        $mform->addGroup($radiogroup, 'radiogroup', 'A group of radios', ['<br />'], false);
         $mform->disabledIf('radiogroup', 'disableelements', 'checked');
 
-        $checkboxgroup = array();
+        $checkboxgroup = [];
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test1', 'more_checkbox', 'checkbox_desc', array('group' => 1));
+            'advcheckbox', 'test1', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test2', 'more_checkbox', 'checkbox_desc', array('group' => 1));
+            'advcheckbox', 'test2', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test3', 'more_checkbox', 'checkbox_desc', array('group' => 1));
+            'advcheckbox', 'test3', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test4', 'more_checkbox', 'checkbox_desc', array('group' => 1));
+            'advcheckbox', 'test4', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
         $mform->setDefault('test1', 1);
-        $mform->addGroup($checkboxgroup, 'more_checkbox', 'A group of checkboxes', array('<br />'), false);
+        $mform->addGroup($checkboxgroup, 'more_checkbox', 'A group of checkboxes', ['<br />'], false);
         $mform->disabledIf('more_checkbox', 'disableelements', 'checked');
 
-        $checkboxgroup2 = array();
+        $checkboxgroup2 = [];
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test5', 'more_checkbox_2', 'checkbox_desc', array('group' => 2));
+            'advcheckbox', 'test5', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test6', 'more_checkbox_2', 'checkbox_desc', array('group' => 2));
+            'advcheckbox', 'test6', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test7', 'more_checkbox_2', 'checkbox_desc', array('group' => 2));
+            'advcheckbox', 'test7', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test8', 'more_checkbox_2', 'checkbox_desc', array('group' => 2));
+            'advcheckbox', 'test8', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
         $mform->addGroup($checkboxgroup2, 'more_checkbox_2', 'Another group of checkboxes',
-            array(' [first sep] ', ' [second sep] ', ' [third sep] '), false);
+            [' [first sep] ', ' [second sep] ', ' [third sep] '], false);
         $mform->disabledIf('more_checkbox_2', 'disableelements', 'checked');
 
         $mform->addElement('static', 'sepdesc', '', 'The above group uses different separators between each element.');
@@ -131,7 +131,7 @@ class grouped_form_elements extends moodleform {
      * @return array
      */
     public function validation($formelements) {
-        $err = array();
+        $err = [];
         $err['radiogroup'] = 'Custom validation message';
         $err['more_checkbox'] = 'Custom validation message';
         $err['more_checkbox_2'] = 'Custom validation message';

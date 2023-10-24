@@ -79,7 +79,7 @@ class utils {
      * @throws coding_exception
      */
     public static function generic_pluginfile($themename, $course, $cm, $context, $filearea, $args, $forcedownload,
-        array $options = array()) {
+        array $options = []) {
         if ($context->contextlevel == CONTEXT_SYSTEM) {
             $theme = \theme_config::load($themename);
             // By default, theme files must be cache-able by both browsers and proxies.
@@ -211,7 +211,7 @@ class utils {
             'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
             'overflow' => $overflow,
             'headercontent' => $headercontent,
-            'addblockbutton' => $addblockbutton
+            'addblockbutton' => $addblockbutton,
         ];
         // Check if we have blocks on the side.
         $blockshtml = $output->blocks('side-pre');

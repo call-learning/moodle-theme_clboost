@@ -63,7 +63,7 @@ class teacherdashboard_menu implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         $page = new moodle_page();
-        $page->set_url('/course/admin.php', array('courseid' => $this->course->id));
+        $page->set_url('/course/admin.php', ['courseid' => $this->course->id]);
         $page->set_course($this->course);
         $page->set_context(context_course::instance($this->course->id));
         $page->set_pagelayout('incourse');
@@ -77,7 +77,7 @@ class teacherdashboard_menu implements renderable, templatable {
                 new moodle_url(''),
                 '',
                 null,
-                array('class' => 'btn btn-link', 'role' => 'button'),
+                ['class' => 'btn btn-link', 'role' => 'button'],
                 new pix_icon('teacherdb', get_string('teacherdashboardmenu', 'theme_clboost'), 'theme_clboost')
             );
             $data->action = $action->export_for_template($output);

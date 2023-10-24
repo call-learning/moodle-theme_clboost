@@ -50,10 +50,10 @@ echo $OUTPUT->action_icon(
     new \popup_action('click', $boostwatchurl)
 );
 echo html_writer::tag('iframe', '',
-    array('id' => 'main',
+    ['id' => 'main',
         'name' => 'main',
         'width' => '100%',
         'height' => '800px',
-        'src' => $boostwatchurl));
+        'src' => $boostwatchurl, ]);
 
 echo $OUTPUT->footer();

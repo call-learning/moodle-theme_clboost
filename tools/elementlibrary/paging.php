@@ -34,7 +34,7 @@ $strheading = 'Element Library: Paging';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/paging.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);

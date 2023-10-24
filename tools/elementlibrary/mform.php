@@ -46,7 +46,7 @@ $strheading = 'Element Library: Moodle Forms';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/moodleforms.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -63,10 +63,10 @@ echo $OUTPUT->box_start();
 echo $OUTPUT->container('Examples of different types of form.');
 echo $OUTPUT->container_start();
 
-echo html_writer::alist(array(
+echo html_writer::alist([
     html_writer::link(new moodle_url('mform_standard.php'), 'Standard form elements'),
     html_writer::link(new moodle_url('mform_grouped.php'), 'Grouped form elements'),
-));
+]);
 
 echo $OUTPUT->container_end();
 echo $OUTPUT->box_end();

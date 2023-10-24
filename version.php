@@ -30,5 +30,5 @@ $plugin->release   = '4.1.1';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'theme_clboost';
 $plugin->dependencies = [
-    'theme_boost' => ANY_VERSION
+    'theme_boost' => ANY_VERSION,
 ];

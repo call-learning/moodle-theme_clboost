@@ -48,7 +48,7 @@ function get_source_output($filename) {
     }
     ob_start();
     include($filename);
-    return htmlentities(ob_get_clean());
+    return htmlentities(ob_get_clean(), ENT_QUOTES, 'UTF-8');
 }
 
 /**
@@ -62,7 +62,7 @@ function get_html_output($filename) {
     if (!file_exists($filename)) {
         return false;
     }
-    return htmlentities(file_get_contents($filename));
+    return htmlentities(file_get_contents($filename), ENT_QUOTES, 'UTF-8');
 }
 
 

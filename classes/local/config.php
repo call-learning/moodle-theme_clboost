@@ -31,112 +31,112 @@ class config {
     public static function get_layouts() {
         return [
             // Most backwards compatible layout without the blocks - this is the layout used by default.
-            'base' => array(
+            'base' => [
                 'file' => 'drawers.php',
-                'regions' => array(),
-            ),
+                'regions' => [],
+            ],
             // Standard layout with blocks, this is recommended for most pages with general information.
-            'standard' => array(
+            'standard' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
+            ],
             // Main course page.
-            'course' => array(
+            'course' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-                'options' => array('langmenu' => true),
-            ),
-            'coursecategory' => array(
+                'options' => ['langmenu' => true],
+            ],
+            'coursecategory' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
+            ],
             // Part of course, typical for modules - default page layout if $cm specified in require_login().
-            'incourse' => array(
+            'incourse' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
+            ],
             // The site home page.
-            'frontpage' => array(
+            'frontpage' => [
                 'file' => 'frontpage.php',
-                'regions' => array('content'),
+                'regions' => ['content'],
                 'defaultregion' => 'content',
-                'options' => array('nonavbar' => true),
-            ),
+                'options' => ['nonavbar' => true],
+            ],
             // Server administration scripts.
-            'admin' => array(
+            'admin' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
+            ],
             // My dashboard page.
-            'mydashboard' => array(
+            'mydashboard' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-                'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
-            ),
+                'options' => ['nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true],
+            ],
             // My public page.
-            'mypublic' => array(
+            'mypublic' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
-            'login' => array(
+            ],
+            'login' => [
                 'file' => 'login.php',
-                'regions' => array(),
-                'options' => array('langmenu' => true),
-            ),
+                'regions' => [],
+                'options' => ['langmenu' => true],
+            ],
             // Pages that appear in pop-up windows - no navigation, no blocks, no header.
-            'popup' => array(
+            'popup' => [
                 'file' => 'columns1.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nonavbar' => true),
-            ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nonavbar' => true],
+            ],
             // No blocks and minimal footer - used for legacy frame layouts only!
-            'frametop' => array(
+            'frametop' => [
                 'file' => 'columns1.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nocoursefooter' => true),
-            ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nocoursefooter' => true],
+            ],
             // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
-            'embedded' => array(
+            'embedded' => [
                 'file' => 'embedded.php',
-                'regions' => array()
-            ),
+                'regions' => [],
+            ],
             // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
             // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
             // Please be extremely careful if you are modifying this layout.
-            'maintenance' => array(
+            'maintenance' => [
                 'file' => 'maintenance.php',
-                'regions' => array(),
-            ),
+                'regions' => [],
+            ],
             // Should display the content and basic headers only.
-            'print' => array(
+            'print' => [
                 'file' => 'columns1.php',
-                'regions' => array(),
-                'options' => array('nofooter' => true, 'nonavbar' => false),
-            ),
+                'regions' => [],
+                'options' => ['nofooter' => true, 'nonavbar' => false],
+            ],
             // The pagelayout used when a redirection is occuring.
-            'redirect' => array(
+            'redirect' => [
                 'file' => 'embedded.php',
-                'regions' => array(),
-            ),
+                'regions' => [],
+            ],
             // The pagelayout used for reports.
-            'report' => array(
+            'report' => [
                 'file' => 'drawers.php',
-                'regions' => array('side-pre'),
+                'regions' => ['side-pre'],
                 'defaultregion' => 'side-pre',
-            ),
+            ],
             // The pagelayout used for safebrowser and securewindow.
-            'secure' => array(
+            'secure' => [
                 'file' => 'secure.php',
-                'regions' => array('side-pre'),
-                'defaultregion' => 'side-pre'
-            )
+                'regions' => ['side-pre'],
+                'defaultregion' => 'side-pre',
+            ],
         ];
     }
 
@@ -172,7 +172,7 @@ class config {
         $theme->extrascsscallback = static::get_theme_callback('get_extra_scss', $themename);
         $theme->prescsscallback = static::get_theme_callback('get_pre_scss', $themename);
         $theme->precompiledcsscallback = static::get_theme_callback('get_precompiled_css', $themename);
-        $theme->yuicssmodules = array();
+        $theme->yuicssmodules = [];
         $theme->rendererfactory = 'theme_overridden_renderer_factory';
         $theme->requiredblocks = '';
         $theme->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
@@ -181,7 +181,7 @@ class config {
         $theme->usescourseindex = true;
         // By default, all boost theme do not need their titles displayed.
         $theme->activityheaderconfig = [
-            'notitle' => true
+            'notitle' => true,
         ];
         return $theme;
     }
@@ -199,7 +199,7 @@ class config {
         if (is_dir($stylefolder)) {
             $cdir = scandir($stylefolder);
             foreach ($cdir as $value) {
-                if (!in_array($value, array(".", ".."))) {
+                if (!in_array($value, [".", ".."])) {
                     $filepath = $stylefolder . DIRECTORY_SEPARATOR . $value;
                     if (is_file($filepath)) {
                         $stylesfiles[] = basename($filepath, '.css');

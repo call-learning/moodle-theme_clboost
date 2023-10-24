@@ -76,11 +76,11 @@ class renderer_test extends advanced_testcase {
     public function test_template_additional_information() {
         global $CFG;
         $additionalinfo = $this->output->get_template_additional_information();
-        $expected = (object) array(
+        $expected = (object) [
             'isloggedin' => true,
             'themebasepath' => $CFG->dirroot . '/theme/clboost',
             'themename' => 'clboost',
-        );
+        ];
         $this->assertEquals($expected, $additionalinfo);
     }
 
@@ -127,22 +127,22 @@ class renderer_test extends advanced_testcase {
         $templatefinder = new mustache_template_finder();
         $folders = $templatefinder->get_template_directories_for_component('block_myoverview');
         $this->assertEquals(
-            array (
+             [
                 $CFG->dirroot . '/theme/clboost/templates/block_myoverview/',
                 $CFG->dirroot . '/theme/boost/templates/block_myoverview/',
                 $CFG->dirroot . '/blocks/myoverview/templates/',
-                $CFG->dirroot . '/theme/boost/templates/'
-            ),
-            $folders);
+                $CFG->dirroot . '/theme/boost/templates/',
+             ],
+             $folders);
         $folders = $templatefinder->get_template_directories_for_component('');
         $this->assertEquals(
-            array (
+             [
                 $CFG->dirroot . '/theme/clboost/templates/',
                 $CFG->dirroot . '/theme/boost/templates/',
                 $CFG->dirroot . '/lib/templates/',
-                $CFG->dirroot . '/theme/boost/templates/'
-            ),
-            $folders);
+                $CFG->dirroot . '/theme/boost/templates/',
+             ],
+             $folders);
     }
 
     /**

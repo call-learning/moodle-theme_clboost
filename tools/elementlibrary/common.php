@@ -36,7 +36,7 @@ $url = new moodle_url('/theme/clboost/tools/elementlibrary/common.php');
 
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -57,7 +57,7 @@ echo html_writer::start_tag('p');
 // List of inline elements from:
 // http://htmlhelp.com/reference/html40/inline.html.
 echo ' Lorum Ipsum ';
-$params = array('t' => time()); // To prevent the link being visited.
+$params = ['t' => time()]; // To prevent the link being visited.
 echo html_writer::link(new moodle_url('index.php', $params), 'an unvisited text link');
 echo ' Lorum Ipsum ';
 echo html_writer::link(new moodle_url(qualified_me()), 'a visited text link');
@@ -76,9 +76,9 @@ echo html_writer::tag('u', 'underlined but not a link');
 echo ' Lorum Ipsum ';
 echo html_writer::tag('blink', 'blinking text');
 echo ' Lorum Ipsum ';
-echo html_writer::tag('abbr', 'Abbr. txt.', array('title' => 'Abbreviated text'));
+echo html_writer::tag('abbr', 'Abbr. txt.', ['title' => 'Abbreviated text']);
 echo ' Lorum Ipsum ';
-echo html_writer::tag('acronym', 'RADAR acronym text', array('title' => 'radio detecting and ranging'));
+echo html_writer::tag('acronym', 'RADAR acronym text', ['title' => 'radio detecting and ranging']);
 echo ' Lorum Ipsum ';
 echo html_writer::tag('big', 'big text');
 echo ' Lorum Ipsum ';

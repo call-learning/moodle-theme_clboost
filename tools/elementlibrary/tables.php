@@ -34,7 +34,7 @@ $strheading = 'Element Library: Tables';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/tables.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -58,23 +58,23 @@ echo $OUTPUT->heading('Standard moodle tables (class "generaltable")', 3);
 echo $OUTPUT->heading('Simplest way to make a table', 4);
 
 $table = new html_table();
-$table->head = array('Name', 'Grade');
-$table->data = array(
-    array('Harry Potter', '76%'),
-    array('Hermione Granger', '100%'),
-);
+$table->head = ['Name', 'Grade'];
+$table->data = [
+    ['Harry Potter', '76%'],
+    ['Hermione Granger', '100%'],
+];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('Column headings spanning multiple columns', 4);
 
 // With column heading spanning multiple columns.
 $table = new html_table();
-$table->head = array('Name', 'Location');
-$table->headspan = array(1, 2);
-$table->data = array(
-    array('Bob', '75S', '24E'),
-    array('Joe', '10N', '145W'),
-);
+$table->head = ['Name', 'Location'];
+$table->headspan = [1, 2];
+$table->data = [
+    ['Bob', '75S', '24E'],
+    ['Joe', '10N', '145W'],
+];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('With fine-grained control over cells', 4);
@@ -90,21 +90,21 @@ $cell2->text = 'Normal cell';
 $cell3 = new html_table_cell();
 $cell3->text = 'Normal cell';
 $row2 = new html_table_row();
-$row2->cells = array($cell2, $cell3);
-$table->data = array($row1, $row2);
+$row2->cells = [$cell2, $cell3];
+$table->data = [$row1, $row2];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('Applying classes and ids to every element in a table', 4);
 
 // Don't use align, size or wrap properties - assign all styles via stylesheets using classes instead.
 $table = new html_table();
-$table->head = array('Name', 'Grade');
-$table->rowclasses = array('first-row-class', 'second-row-class');
-$table->colclasses = array('first-col-class', 'second-col-class');
-$table->data = array(
-    array('Joe Bloggs', '76%'),
-    array('Jane Doe', '100%'),
-);
+$table->head = ['Name', 'Grade'];
+$table->rowclasses = ['first-row-class', 'second-row-class'];
+$table->colclasses = ['first-col-class', 'second-col-class'];
+$table->data = [
+    ['Joe Bloggs', '76%'],
+    ['Jane Doe', '100%'],
+];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('Applying more specific ids/classes to any element', 4);
@@ -122,7 +122,7 @@ $head2->header = true;
 $head2->id = 'right-head-id';
 $head2->attributes['class'] = 'right-head-class';
 $head = new html_table_row();
-$head->cells = array($head1, $head2);
+$head->cells = [$head1, $head2];
 $head->id = 'header-id';
 $head->attributes['class'] = 'header-class';
 $cell1 = new html_table_cell();
@@ -134,7 +134,7 @@ $cell2->id = 'top-right-cell-id';
 $cell2->attributes['class'] = 'top-right-cell-class';
 $cell2->text = 'Top Right';
 $row1 = new html_table_row();
-$row1->cells = array($cell1, $cell2);
+$row1->cells = [$cell1, $cell2];
 $row1->id = 'row1-id';
 $row1->attributes['class'] = 'row1-class';
 $cell3 = new html_table_cell();
@@ -146,10 +146,10 @@ $cell4->id = 'bottom-right-cell-id';
 $cell4->attributes['class'] = 'bottom-right-cell-class';
 $cell4->text = 'Bottom Right';
 $row2 = new html_table_row();
-$row2->cells = array($cell3, $cell4);
+$row2->cells = [$cell3, $cell4];
 $row2->id = 'row2-id';
 $row2->attributes['class'] = 'row2-class';
-$table->data = array($head, $row1, $row2);
+$table->data = [$head, $row1, $row2];
 echo html_writer::table($table);
 
 
@@ -166,7 +166,7 @@ $cell1->text = 'Data associated with First Heading';
 $cell2 = new html_table_cell();
 $cell2->text = 'More data associated with First Heading';
 $row1 = new html_table_row();
-$row1->cells = array($head1, $cell1, $cell2);
+$row1->cells = [$head1, $cell1, $cell2];
 $head2 = new html_table_cell();
 $head2->text = 'Second Heading';
 $head2->scope = 'row';
@@ -176,8 +176,8 @@ $cell3->text = 'Data associated with Second Heading';
 $cell4 = new html_table_cell();
 $cell4->text = 'More data associated with Second Heading';
 $row2 = new html_table_row();
-$row2->cells = array($head2, $cell3, $cell4);
-$table->data = array($row1, $row2);
+$row2->cells = [$head2, $cell3, $cell4];
+$table->data = [$row1, $row2];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('Turning off the default "generaltable" classes is not very easy, you have to'.
@@ -185,14 +185,14 @@ echo $OUTPUT->heading('Turning off the default "generaltable" classes is not ver
     ' remove the generaltable class', 4);
 
 $table = new html_table();
-$table->head = array('Name', 'Grade');
-$table->attributes = array('class' => ""); // Need some other class stop the "generaltable" class
+$table->head = ['Name', 'Grade'];
+$table->attributes = ['class' => ""]; // Need some other class stop the "generaltable" class
 // but no easy way to do the same on the cells.
-$table->head = array('Name', 'Grade');
-$table->data = array(
-    array('Joe Bloggs', '76%'),
-    array('Jane Doe', '100%'),
-);
+$table->head = ['Name', 'Grade'];
+$table->data = [
+    ['Joe Bloggs', '76%'],
+    ['Jane Doe', '100%'],
+];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('If you need a plain table, you can build it yourself using html_writer:', 4);
@@ -217,12 +217,12 @@ echo $OUTPUT->heading('A "flexible table" moodle table (class "flexible"). Usefu
 require_once($CFG->libdir . '/tablelib.php');
 $table = new flexible_table('test-flexible-table');
 $table->define_baseurl($url);
-$table->define_columns(array('col1', 'col2'));
-$table->define_headers(array('Column 1', 'Column 2'));
+$table->define_columns(['col1', 'col2']);
+$table->define_headers(['Column 1', 'Column 2']);
 $table->sortable(true, 'col1', SORT_ASC);
 $table->setup();
-$table->add_data(array('Top Left', 'Top Right'));
-$table->add_data(array('Bottom Left', 'Bottom Right'));
+$table->add_data(['Top Left', 'Top Right']);
+$table->add_data(['Bottom Left', 'Bottom Right']);
 $table->finish_html();
 
 echo $OUTPUT->heading('By default tables are left aligned. Use the boxaligncenter class if you'.
@@ -230,25 +230,25 @@ echo $OUTPUT->heading('By default tables are left aligned. Use the boxaligncente
 
 $table = new html_table();
 $table->attributes['class'] = 'boxaligncenter';
-$table->head = array('Name', 'Grade');
-$table->data = array(
-    array('Harry Potter', '76%'),
-    array('Hermione Granger', '100%'),
-);
+$table->head = ['Name', 'Grade'];
+$table->data = [
+    ['Harry Potter', '76%'],
+    ['Hermione Granger', '100%'],
+];
 echo html_writer::table($table);
 
 echo $OUTPUT->heading('You can specify \'hr\' as a row to get a horizontal rule that spans all columns. Note'.
     ' this only works if you have the table \'head\' defined!', 4);
 
 $table = new html_table();
-$table->head = array('Name', 'Grade');
-$table->data = array(
-    array('Harry Potter', '76%'),
-    array('Hermione Granger', '100%'),
+$table->head = ['Name', 'Grade'];
+$table->data = [
+    ['Harry Potter', '76%'],
+    ['Hermione Granger', '100%'],
     'hr',
-    array('Harry Potter', '76%'),
-    array('Hermione Granger', '100%'),
-);
+    ['Harry Potter', '76%'],
+    ['Hermione Granger', '100%'],
+];
 echo html_writer::table($table);
 
 

@@ -102,15 +102,15 @@ class setup_utils_test extends advanced_testcase {
                     'files' => [
                         'sample.jpg' => [
                             'filepath' => 'theme/clboost/tests/fixtures/sample.jpg',
-                        ]
+                        ],
                     ],
                     'configdata' => [
                         'text' => 'A text with image <img src="@@PLUGINFILE@@/sample.jpg">',
                         'title' => 'Title',
                         'classes' => 'a class',
-                        'format' => '1'
-                    ]
-                ]
+                        'format' => '1',
+                    ],
+                ],
             ]
         );
         $otherpage = setup_utils::set_virtual_global_page(false, 'standard', 'general',

@@ -35,7 +35,7 @@ $strheading = 'Element Library: Moodle Forms: Standard elements';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/mform_standard.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -84,11 +84,11 @@ class standard_form_elements extends moodleform {
 
         $this->add_checkbox_controller(1);
         $mform->addElement(
-            'advcheckbox', 'advcheckboxfield1', 'Advanced checkbox 1', 'Label next to advanced checkbox 1', array('group' => 1));
+            'advcheckbox', 'advcheckboxfield1', 'Advanced checkbox 1', 'Label next to advanced checkbox 1', ['group' => 1]);
         $mform->addElement(
-            'advcheckbox', 'advcheckboxfield2', 'Advanced checkbox 2', 'Label next to advanced checkbox 2', array('group' => 1));
+            'advcheckbox', 'advcheckboxfield2', 'Advanced checkbox 2', 'Label next to advanced checkbox 2', ['group' => 1]);
         $mform->addElement(
-            'advcheckbox', 'advcheckboxfield3', 'Advanced checkbox 3', 'Label next to advanced checkbox 3', array('group' => 1));
+            'advcheckbox', 'advcheckboxfield3', 'Advanced checkbox 3', 'Label next to advanced checkbox 3', ['group' => 1]);
         $mform->disabledIf('advcheckboxfield1', 'disableelements', 'checked');
         $mform->disabledIf('advcheckboxfield2', 'disableelements', 'checked');
         $mform->disabledIf('advcheckboxfield3', 'disableelements', 'checked');
@@ -134,30 +134,30 @@ class standard_form_elements extends moodleform {
         $mform->addElement('radio', 'radiofield', 'Radio 2', 'Text to right of radio 2', 2);
         $mform->disabledIf('radiofield', 'disableelements', 'checked');
 
-        $mform->addElement('select', 'selectfield', 'Single select', array(0 => 'Item 1', 1 => 'Item 2', 3 => 'Item 3'));
+        $mform->addElement('select', 'selectfield', 'Single select', [0 => 'Item 1', 1 => 'Item 2', 3 => 'Item 3']);
         $mform->disabledIf('selectfield', 'disableelements', 'checked');
 
         $mform->addElement('static', 'multiselectdesc', '', 'Use checkboxes instead of multiselects where possible. ' .
             'If you must use, include a label indicating ctrl can be used to select/unselect multiple items');
         $select = &$mform->addElement(
-            'select', 'multiselectfield', 'Multi select', array(0 => 'Item 1', 1 => 'Item 2', 3 => 'Item 3'));
+            'select', 'multiselectfield', 'Multi select', [0 => 'Item 1', 1 => 'Item 2', 3 => 'Item 3']);
         $select->setMultiple(true);
         $mform->disabledIf('multiselectfield', 'disableelements', 'checked');
 
         // To disable individual options, build the select manually.
         $select2 = $mform->createElement('select', 'selectwithdisabledoptionsfield', 'Select with disabled options');
         $select2->addOption('An active option', '');
-        $select2->addOption('A disabled option', '', array('disabled' => 'disabled'));
+        $select2->addOption('A disabled option', '', ['disabled' => 'disabled']);
         $select2->addOption('Another active option', '');
-        $select2->addOption('Another disabled option', '', array('disabled' => 'disabled'));
+        $select2->addOption('Another disabled option', '', ['disabled' => 'disabled']);
         $mform->addElement($select2);
         $mform->disabledIf('selectwithdisabledoptionsfield', 'disableelements', 'checked');
 
-        $groupselectoptions = array(
-            'group one' => array(1 => 'one', 2 => 'two', 3 => 'three'),
-            'group two' => array(1 => 'one', 2 => 'two', 3 => 'three'),
-            'group three' => array(1 => 'one', 2 => 'two', 3 => 'three'),
-        );
+        $groupselectoptions = [
+            'group one' => [1 => 'one', 2 => 'two', 3 => 'three'],
+            'group two' => [1 => 'one', 2 => 'two', 3 => 'three'],
+            'group three' => [1 => 'one', 2 => 'two', 3 => 'three'],
+        ];
         $mform->addElement('selectgroups', "groupedselectfield", 'Grouped select', $groupselectoptions);
         $mform->disabledIf('groupedselectfield', 'disableelements', 'checked');
 
@@ -165,8 +165,8 @@ class standard_form_elements extends moodleform {
         $mform->disabledIf('selectyesnofield', 'disableelements', 'checked');
 
         $mform->addElement(
-            'selectwithlink', 'selectwithlinkfield', 'Select with link', array(1 => 'One', 2 => 'Two', 3 => 'Three'), null,
-            array('link' => $CFG->wwwroot . '/theme/clboost/tools/elementlibrary/', 'label' => 'A label'));
+            'selectwithlink', 'selectwithlinkfield', 'Select with link', [1 => 'One', 2 => 'Two', 3 => 'Three'], null,
+            ['link' => $CFG->wwwroot . '/theme/clboost/tools/elementlibrary/', 'label' => 'A label']);
         $mform->disabledIf('selectwithlinkfield', 'disableelements', 'checked');
 
         $mform->addElement(
@@ -218,7 +218,7 @@ class standard_form_elements extends moodleform {
      * @return array
      */
     public function validation($formelements, $files) {
-        $err = array();
+        $err = [];
         foreach ($formelements as $name => $value) {
             $err[$name] = 'Custom validation message for ' . $name;
         }

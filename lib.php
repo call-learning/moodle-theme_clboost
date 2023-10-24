@@ -47,7 +47,7 @@ function theme_clboost_get_extra_scss($theme) {
  * @return bool
  * @throws coding_exception
  */
-function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     return theme_clboost\local\utils::generic_pluginfile('clboost', $course, $cm, $context, $filearea, $args, $forcedownload,
         $options);
 }
@@ -125,6 +125,6 @@ function theme_clboost_get_pre_scss($theme) {
  */
 function theme_clboost_get_fontawesome_icon_map() {
     return [
-        'theme_clboost:teacherdb' => 'fa-cogs'
+        'theme_clboost:teacherdb' => 'fa-cogs',
     ];
 }

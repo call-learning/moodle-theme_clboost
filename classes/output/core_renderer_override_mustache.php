@@ -77,18 +77,18 @@ trait core_renderer_override_mustache {
             // Additional information used in the templates.
             $additionalinfo = $this->get_template_additional_information();
             // End additional info.
-            $helpers = array('config' => $safeconfig,
-                'str' => array($stringhelper, 'str'),
-                'cleanstr' => array($cleanstringhelper, 'cleanstr'),
-                'quote' => array($quotehelper, 'quote'),
-                'js' => array($jshelper, 'help'),
-                'pix' => array($pixhelper, 'pix'),
-                'shortentext' => array($shortentexthelper, 'shorten'),
-                'userdate' => array($userdatehelper, 'transform'),
-                'additionalinfo' => $additionalinfo
-            );
+            $helpers = ['config' => $safeconfig,
+                'str' => [$stringhelper, 'str'],
+                'cleanstr' => [$cleanstringhelper, 'cleanstr'],
+                'quote' => [$quotehelper, 'quote'],
+                'js' => [$jshelper, 'help'],
+                'pix' => [$pixhelper, 'pix'],
+                'shortentext' => [$shortentexthelper, 'shorten'],
+                'userdate' => [$userdatehelper, 'transform'],
+                'additionalinfo' => $additionalinfo,
+            ];
 
-            $this->mustache = new \core\output\mustache_engine(array(
+            $this->mustache = new \core\output\mustache_engine([
                 'cache' => $cachedir,
                 'escape' => 's',
                 'loader' => $loader,
@@ -100,7 +100,7 @@ trait core_renderer_override_mustache {
                 'disallowednestedhelpers' => ['js'],
                 // Disable lambda rendering - content in helpers is already rendered, no need to render it again.
                 'disable_lambda_rendering' => true,
-            ));
+            ]);
 
         }
 

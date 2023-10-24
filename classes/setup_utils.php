@@ -39,7 +39,7 @@ class setup_utils {
         global $DB;
         $transaction = $DB->start_delegated_transaction(); // Do not commit transactions until the end.
         $blocks = $page->blocks;
-        $blocks->add_regions(array($regionname), false);
+        $blocks->add_regions([$regionname], false);
         $blocks->set_default_region($regionname);
         $blocks->load_blocks();
 
@@ -89,7 +89,7 @@ class setup_utils {
             }
             foreach ($contextdefs as $capability => $roles) {
                 foreach ($roles as $rolename => $permission) {
-                    $roleid = $DB->get_field('role', 'id', array('shortname' => $rolename));
+                    $roleid = $DB->get_field('role', 'id', ['shortname' => $rolename]);
                     if ($roleid) {
                         role_change_permission($roleid, $block->context, $capability, $permission);
                     }
@@ -121,7 +121,7 @@ class setup_utils {
             (object) [
                 'id' => $blockinstance->id,
                 'configdata' => base64_encode(serialize($configdata)),
-                'timemodified' => time()
+                'timemodified' => time(),
             ]);
     }
 
@@ -153,7 +153,7 @@ class setup_utils {
                     'filearea' => $filearea,
                     'itemid' => $itemid,
                     'filepath' => '/',
-                    'filename' => $filename
+                    'filename' => $filename,
                 ], $originalfilepath);
         }
         return $file;

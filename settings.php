@@ -37,7 +37,7 @@ if ($hassiteconfig) {
             'boostwatchpreview',
             $pagedesc,
             $pageurl,
-            array('moodle/site:config') // Only for admins.
+            ['moodle/site:config'] // Only for admins.
         )
     );
     $pagedesc = get_string('elementlibrary', 'theme_clboost');
@@ -47,7 +47,7 @@ if ($hassiteconfig) {
             'clboostelementlibrary',
             $pagedesc,
             $pageurl,
-            array('moodle/site:config') // Only for admins.
+            ['moodle/site:config'] // Only for admins.
         )
     );
 }

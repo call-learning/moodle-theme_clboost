@@ -1,7 +1,7 @@
 CALL Learning Boost Based theme
 ==
 
-[![Moodle plugin CI for Moodle 3.9 and 3.10](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml/badge.svg)](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml)
+[![Moodle plugin CI](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml/badge.svg)](https://github.com/call-learning/moodle-theme_clboost/actions/workflows/main.yml)
 
 This theme is intended to be used as a parent theme. It brings additional utilities
 and fixes from the standard boost theme. 

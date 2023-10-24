@@ -34,7 +34,7 @@ $strheading = 'Element Library: Lists';
 $url = new moodle_url('/theme/clboost/tools/elementlibrary/lists.php');
 
 // Start setting up the page.
-$params = array();
+$params = [];
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_title($strheading);
@@ -51,22 +51,22 @@ echo $OUTPUT->box_start();
 
 echo $OUTPUT->container_start();
 echo $OUTPUT->heading('Unordered List', 3);
-$items = array('item one', 'item two', 'item three', 'item four', 'item five');
+$items = ['item one', 'item two', 'item three', 'item four', 'item five'];
 echo html_writer::alist($items);
 
 echo $OUTPUT->heading('Ordered List', 3);
 echo html_writer::alist($items, null, 'ol');
 
 echo $OUTPUT->heading('Nested unordered List', 3);
-$subitems = array('item two point one', 'item two point two');
+$subitems = ['item two point one', 'item two point two'];
 $sublist = html_writer::alist($subitems);
-$items = array('item one', "item two\n$sublist", 'item three', 'item four', 'item five');
+$items = ['item one', "item two\n$sublist", 'item three', 'item four', 'item five'];
 echo html_writer::alist($items);
 
 
 echo $OUTPUT->heading('Nested ordered List', 3);
 $sublist = html_writer::alist($subitems, null, 'ol');
-$items = array('item one', "item two\n$sublist", 'item three', 'item four', 'item five');
+$items = ['item one', "item two\n$sublist", 'item three', 'item four', 'item five'];
 echo html_writer::alist($items, null, 'ol');
 
 echo $OUTPUT->heading('Deeply nested unordered List', 3);
