@@ -1,0 +1,45 @@
+{{!
+    This file is part the Local Analytics plugin for Moodle
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_clboost/gtag
+
+    Template for adding the Google Universal Tracking script.
+
+    A big thank to Bas for his moodle-local_analytics code that helped the migration to G4.
+    TODO: Add support for this plugin directly in this theme.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * siteid The Google tracking code
+    * addition Page tracking info added by this plugin
+
+    Example context (json):
+    {
+        "gtagtrackingid": "X-YYYY"
+    }
+}}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{{gtagtrackingid}}}"></script>
+{{#js}}
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{{gtagtrackingid}}}'{{#addition}}, { {{{addition}}} }{{/addition}});
+{{/js}}

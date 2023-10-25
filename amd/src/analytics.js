@@ -21,25 +21,31 @@
  * @copyright 2021 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+import Templates from 'core/templates';
+import log from 'core/log';
 /**
  * Initialize the analytics code
  * @param {String} gatriggerid
  * @param {String} gacode
  */
-export const init = function (gatriggerid, gacode) {
-    const checkGAPolicyAccepted =  (event) => {
+export const init = (gatriggerid, gacode) => {
+    const checkGAPolicyAccepted = (event) => {
         const policies = event.detail;
         if (policies) {
             const found = policies.find(
                 (policy) => {
-                    return policy.policyversionid == gatriggerid;
+                    return policy.policyversionid === gatriggerid;
                 }
             );
             if (found && found.accepted) {
-                window.ga('create', gacode, 'auto');
-                window.ga('set', 'anonymizeIp', true);
-                window.ga('set', 'allowAdFeatures', false);
-                window.ga('send', 'pageview');
+                Templates.render('theme_clboost/gtag', {gtagtrackingid: gacode}).then((html, js) => {
+                    const ga = document.createElement('div');
+                    document.body.appendChild(ga);
+                    Templates.replaceNodeContents(ga, html, js);
+                    return true;
+                }).catch((error) => {
+                    log.error(error);
+                });
             }
         }
     };

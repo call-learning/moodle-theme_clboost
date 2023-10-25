@@ -91,14 +91,6 @@ class settings {
             $page->add($setting);
         }
 
-        $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
-
-        $setting = new \admin_setting_configtext($themefullname . '/additionalmenusitems',
-            static::get_string('additionalmenusitems', $themefullname),
-            static::get_string('additionalmenusitems_desc', $themefullname),
-            'participants,calendar,grades,badgesview'
-        );
-        $page->add($setting);
         // Raw SCSS to include before the content.
         $setting = new admin_setting_scsscode($themefullname . '/scsspre',
             static::get_string('rawscsspre', $themefullname), static::get_string('rawscsspre_desc', $themefullname), '', PARAM_RAW);

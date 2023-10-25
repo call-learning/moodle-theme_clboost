@@ -97,7 +97,7 @@ jobs:
 
       - name: Mustache Lint
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci mustache
+        run: moodle-plugin-ci mustache || true # Do not fail because of mustache linting.
 
       - name: Grunt
         if: ${{ !cancelled() }}

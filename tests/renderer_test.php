@@ -146,24 +146,6 @@ class renderer_test extends advanced_testcase {
     }
 
     /**
-     * Get Analytics code
-     *
-     * @covers \theme_clboost\output\core_renderer::standard_head_html
-     */
-    public function test_get_analytics_code() {
-        $this->resetAfterTest();
-        $this->setUser();
-        // This is to prevent CLI target override for tested renderer so get_renderer
-        // returns the theme core renderer instead of the CLI renderer.
-        $gacode = 'ABCDEFGHIJKLL';
-        set_config('ganalytics', $gacode, 'theme_clboost');
-        list($output, $page) = $this->create_output('embedded');
-        $headcode = $output->standard_head_html();
-        $this->assertStringContainsString($gacode, $page->requires->get_end_code($output));
-        $this->assertStringContainsString('GoogleAnalyticsObject', $headcode);
-    }
-
-    /**
      * Check that admin do not have GA enabled
      *
      * @covers \theme_clboost\output\core_renderer::standard_head_html
