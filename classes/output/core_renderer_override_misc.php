@@ -84,7 +84,7 @@ trait core_renderer_override_misc {
         $currentthemename = $this->page->theme->name;
         $gacode = get_config('theme_' . $currentthemename, 'ganalytics');
         $gatriggerid = get_config('theme_' . $currentthemename, 'ganalyticstrigger');
-        if ($gacode && !is_siteadmin() && $gatriggerid) {
+        if ($gacode && !is_siteadmin() && $gatriggerid > 0) {
             $this->page->requires->js_call_amd('theme_clboost/analytics', 'init', [$gatriggerid, $gacode]);
         }
         return $output;

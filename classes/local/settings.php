@@ -78,14 +78,16 @@ class settings {
 
         if (!during_initial_install()) {
             $policies = api::list_current_versions(policy_version::AUDIENCE_ALL) ?? [];
-            $policyset = [];
+            $policyset = [
+                -1 => get_string('noselection', 'core_form'),
+            ];
             foreach ($policies as $p) {
                 $policyset[$p->id] = $p->name;
             }
             $setting = new \admin_setting_configselect($themefullname . '/ganalyticstrigger',
                 static::get_string('ganalytics_policy_trigger', $themefullname),
                 static::get_string('ganalytics_policy_trigger_desc', $themefullname),
-                0,
+                -1,
                 $policyset
             );
             $page->add($setting);
