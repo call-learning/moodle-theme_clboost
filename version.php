@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2023100500; /* This is the version number to increment when changes needing an update are made */
-$plugin->requires  = 2022112802;
-$plugin->release   = '4.1.3';
+$plugin->version   = 2026070600; /* This is the version number to increment when changes needing an update are made */
+$plugin->requires  = 2024100700; // Moodle 4.5.x required.
+$plugin->release   = '4.5.3';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'theme_clboost';
 $plugin->dependencies = [
