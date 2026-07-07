@@ -49,11 +49,15 @@ echo $OUTPUT->action_icon(
     new \pix_icon('e/search', get_string('view')),
     new \popup_action('click', $boostwatchurl)
 );
-echo html_writer::tag('iframe', '',
+echo html_writer::tag(
+    'iframe',
+    '',
     ['id' => 'main',
         'name' => 'main',
         'width' => '100%',
         'height' => '800px',
-        'src' => $boostwatchurl, ]);
+    'src' => $boostwatchurl,
+    ]
+);
 
 echo $OUTPUT->footer();

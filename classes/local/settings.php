@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost\local;
 use admin_setting_configcolourpicker;
 use admin_setting_configstoredfile;
@@ -30,7 +31,6 @@ use tool_policy\policy_version;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class settings {
-
     /**
      * Create settings for the current theme (clboost by default)
      *
@@ -41,8 +41,10 @@ class settings {
         $themefullname = 'theme_' . $currentthemename;
 
         $settings =
-            new theme_boost_admin_settingspage_tabs('themesetting' . $currentthemename,
-                static::get_string('configtitle', $themefullname));
+            new theme_boost_admin_settingspage_tabs(
+                'themesetting' . $currentthemename,
+                static::get_string('configtitle', $themefullname)
+            );
         $page = new admin_settingpage($themefullname . '_general', static::get_string('generalsettings', $themefullname));
 
         // Background image setting.
@@ -68,7 +70,8 @@ class settings {
         // Advanced settings.
         $page = new admin_settingpage($themefullname . '_advanced', static::get_string('advancedsettings', $themefullname));
 
-        $setting = new \admin_setting_configtext($themefullname . '/ganalytics',
+        $setting = new \admin_setting_configtext(
+            $themefullname . '/ganalytics',
             static::get_string('ganalytics', $themefullname),
             static::get_string('ganalytics_desc', $themefullname),
             '',
@@ -84,7 +87,8 @@ class settings {
             foreach ($policies as $p) {
                 $policyset[$p->id] = $p->name;
             }
-            $setting = new \admin_setting_configselect($themefullname . '/ganalyticstrigger',
+            $setting = new \admin_setting_configselect(
+                $themefullname . '/ganalyticstrigger',
                 static::get_string('ganalytics_policy_trigger', $themefullname),
                 static::get_string('ganalytics_policy_trigger_desc', $themefullname),
                 -1,
@@ -94,14 +98,24 @@ class settings {
         }
 
         // Raw SCSS to include before the content.
-        $setting = new admin_setting_scsscode($themefullname . '/scsspre',
-            static::get_string('rawscsspre', $themefullname), static::get_string('rawscsspre_desc', $themefullname), '', PARAM_RAW);
+        $setting = new admin_setting_scsscode(
+            $themefullname . '/scsspre',
+            static::get_string('rawscsspre', $themefullname),
+            static::get_string('rawscsspre_desc', $themefullname),
+            '',
+            PARAM_RAW
+        );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 
         // Raw SCSS to include after the content.
-        $setting = new admin_setting_scsscode($themefullname . '/scss', static::get_string('rawscss', $themefullname),
-            static::get_string('rawscss_desc', $themefullname), '', PARAM_RAW);
+        $setting = new admin_setting_scsscode(
+            $themefullname . '/scss',
+            static::get_string('rawscss', $themefullname),
+            static::get_string('rawscss_desc', $themefullname),
+            '',
+            PARAM_RAW
+        );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
 

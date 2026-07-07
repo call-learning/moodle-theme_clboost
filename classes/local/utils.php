@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost\local;
 
 use coding_exception;
@@ -32,7 +33,6 @@ use theme_clboost\output\teacherdashboard_menu;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class utils {
-
     /**
      * Get either the current theme path or the clboost matching path if it does not exist
      * in the subtheme
@@ -59,9 +59,13 @@ class utils {
                 return $p;
             }
         }
-        throw new \moodle_exception('filenotfound',
-            'theme_clboost', null, null,
-            "Cannot find the right theme path {$theme->name}/{$subpath}");
+        throw new \moodle_exception(
+            'filenotfound',
+            'theme_clboost',
+            null,
+            null,
+            "Cannot find the right theme path {$theme->name}/{$subpath}"
+        );
     }
 
     /**
@@ -78,8 +82,16 @@ class utils {
      * @return bool
      * @throws coding_exception
      */
-    public static function generic_pluginfile($themename, $course, $cm, $context, $filearea, $args, $forcedownload,
-        array $options = []) {
+    public static function generic_pluginfile(
+        $themename,
+        $course,
+        $cm,
+        $context,
+        $filearea,
+        $args,
+        $forcedownload,
+        array $options = []
+    ) {
         if ($context->contextlevel == CONTEXT_SYSTEM) {
             $theme = \theme_config::load($themename);
             // By default, theme files must be cache-able by both browsers and proxies.

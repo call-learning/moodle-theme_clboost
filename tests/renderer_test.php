@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Unit tests for theme_clboost\local\utils
  *
@@ -33,8 +34,7 @@ use theme_clboost\output\mustache_template_finder;
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer_test extends advanced_testcase {
-
+final class renderer_test extends advanced_testcase {
     /**
      * @var \theme_clboost\output\core_renderer $output
      */
@@ -48,7 +48,7 @@ class renderer_test extends advanced_testcase {
         parent::setUp();
         $this->resetAfterTest();
         $this->setAdminUser();
-        list($this->output) = $this->create_output();
+        [$this->output] = $this->create_output();
     }
 
     /**
@@ -57,7 +57,7 @@ class renderer_test extends advanced_testcase {
      * @param string $layout
      * @return array
      */
-    protected function create_output($layout='standard') {
+    protected function create_output($layout = 'standard') {
         global $SITE;
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
@@ -73,7 +73,7 @@ class renderer_test extends advanced_testcase {
      *
      * @covers \theme_clboost\output\core_renderer::get_template_additional_information
      */
-    public function test_template_additional_information() {
+    public function test_template_additional_information(): void {
         global $CFG;
         $additionalinfo = $this->output->get_template_additional_information();
         $expected = (object) [
@@ -90,13 +90,17 @@ class renderer_test extends advanced_testcase {
      * @covers \theme_clboost\output\core_renderer::get_logo_url
      * @covers \theme_clboost\output\core_renderer::get_compact_logo_url
      */
-    public function test_get_logo_url() {
+    public function test_get_logo_url(): void {
         $logourl = $this->output->get_logo_url();
-        $this->assertEquals('https://www.example.com/moodle/theme/clboost/pix/logo.png',
-            $logourl->out());
+        $this->assertEquals(
+            'https://www.example.com/moodle/theme/clboost/pix/logo.png',
+            $logourl->out()
+        );
         $clogourl = $this->output->get_compact_logo_url();
-        $this->assertEquals('https://www.example.com/moodle/theme/clboost/pix/logo-compact.png',
-            $clogourl->out());
+        $this->assertEquals(
+            'https://www.example.com/moodle/theme/clboost/pix/logo-compact.png',
+            $clogourl->out()
+        );
     }
 
     /**
@@ -104,16 +108,22 @@ class renderer_test extends advanced_testcase {
      *
      * @covers \theme_clboost\output\mustache_template_finder::get_template_filepath
      */
-    public function test_get_mustache_template() {
+    public function test_get_mustache_template(): void {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
         $templatefinder = new mustache_template_finder();
-        $this->assertEquals($CFG->dirroot . '/theme/boost/templates/secure.mustache',
-            $templatefinder->get_template_filepath('theme_boost/secure'));
-        $this->assertEquals($CFG->dirroot . '/theme/clboost/templates/frontpage.mustache',
-            $templatefinder->get_template_filepath('theme_clboost/frontpage'));
-        $this->assertEquals($CFG->dirroot . '/theme/boost/templates/navbar-secure.mustache',
-            $templatefinder->get_template_filepath('theme_boost/navbar-secure'));
+        $this->assertEquals(
+            $CFG->dirroot . '/theme/boost/templates/secure.mustache',
+            $templatefinder->get_template_filepath('theme_boost/secure')
+        );
+        $this->assertEquals(
+            $CFG->dirroot . '/theme/clboost/templates/frontpage.mustache',
+            $templatefinder->get_template_filepath('theme_clboost/frontpage')
+        );
+        $this->assertEquals(
+            $CFG->dirroot . '/theme/boost/templates/navbar-secure.mustache',
+            $templatefinder->get_template_filepath('theme_boost/navbar-secure')
+        );
     }
 
     /**
@@ -121,28 +131,30 @@ class renderer_test extends advanced_testcase {
      *
      * @covers \theme_clboost\output\mustache_template_finder::get_template_directories_for_component
      */
-    public function test_get_mustache_template_dirs() {
+    public function test_get_mustache_template_dirs(): void {
         global $CFG, $PAGE;
         $PAGE->force_theme('clboost'); // Important, if not it will just go through boost theme.
         $templatefinder = new mustache_template_finder();
         $folders = $templatefinder->get_template_directories_for_component('block_myoverview');
         $this->assertEquals(
-             [
+            [
                 $CFG->dirroot . '/theme/clboost/templates/block_myoverview/',
                 $CFG->dirroot . '/theme/boost/templates/block_myoverview/',
                 $CFG->dirroot . '/blocks/myoverview/templates/',
                 $CFG->dirroot . '/theme/boost/templates/',
              ],
-             $folders);
+            $folders
+        );
         $folders = $templatefinder->get_template_directories_for_component('');
         $this->assertEquals(
-             [
+            [
                 $CFG->dirroot . '/theme/clboost/templates/',
                 $CFG->dirroot . '/theme/boost/templates/',
                 $CFG->dirroot . '/lib/templates/',
                 $CFG->dirroot . '/theme/boost/templates/',
              ],
-             $folders);
+            $folders
+        );
     }
 
     /**
@@ -150,14 +162,14 @@ class renderer_test extends advanced_testcase {
      *
      * @covers \theme_clboost\output\core_renderer::standard_head_html
      */
-    public function test_get_analytics_code_admin() {
+    public function test_get_analytics_code_admin(): void {
         $this->resetAfterTest();
         $this->setAdminUser();
         // This is to prevent CLI target override for tested renderer so get_renderer
         // returns the theme core renderer instead of the CLI renderer.
         $gacode = 'ABCDEFGHIJKLL';
         set_config('ganalytics', $gacode, 'theme_clboost');
-        list($output, $page) = $this->create_output('embedded');
+        [$output, $page] = $this->create_output('embedded');
         $headcode = $output->standard_head_html();
         $this->assertStringNotContainsString($gacode, $page->requires->get_end_code($output));
         $this->assertStringNotContainsString('GoogleAnalyticsObject', $headcode);

@@ -32,5 +32,3 @@ $CFG->frontpage = '';
 $CFG->frontpageloggedin = '';
 
 echo $OUTPUT->render_from_template('theme_clboost/frontpage', $templatecontext);
-
-

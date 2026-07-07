@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -67,7 +70,6 @@ echo $OUTPUT->container_start();
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class grouped_form_elements extends moodleform {
-
     /**
      * Form definition
      *
@@ -94,34 +96,78 @@ class grouped_form_elements extends moodleform {
 
         $checkboxgroup = [];
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test1', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
+            'advcheckbox',
+            'test1',
+            'more_checkbox',
+            'checkbox_desc',
+            ['group' => 1]
+        );
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test2', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
+            'advcheckbox',
+            'test2',
+            'more_checkbox',
+            'checkbox_desc',
+            ['group' => 1]
+        );
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test3', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
+            'advcheckbox',
+            'test3',
+            'more_checkbox',
+            'checkbox_desc',
+            ['group' => 1]
+        );
         $checkboxgroup[] =& $mform->createElement(
-            'advcheckbox', 'test4', 'more_checkbox', 'checkbox_desc', ['group' => 1]);
+            'advcheckbox',
+            'test4',
+            'more_checkbox',
+            'checkbox_desc',
+            ['group' => 1]
+        );
         $mform->setDefault('test1', 1);
         $mform->addGroup($checkboxgroup, 'more_checkbox', 'A group of checkboxes', ['<br />'], false);
         $mform->disabledIf('more_checkbox', 'disableelements', 'checked');
 
         $checkboxgroup2 = [];
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test5', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
+            'advcheckbox',
+            'test5',
+            'more_checkbox_2',
+            'checkbox_desc',
+            ['group' => 2]
+        );
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test6', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
+            'advcheckbox',
+            'test6',
+            'more_checkbox_2',
+            'checkbox_desc',
+            ['group' => 2]
+        );
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test7', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
+            'advcheckbox',
+            'test7',
+            'more_checkbox_2',
+            'checkbox_desc',
+            ['group' => 2]
+        );
         $checkboxgroup2[] =& $mform->createElement(
-            'advcheckbox', 'test8', 'more_checkbox_2', 'checkbox_desc', ['group' => 2]);
-        $mform->addGroup($checkboxgroup2, 'more_checkbox_2', 'Another group of checkboxes',
-            [' [first sep] ', ' [second sep] ', ' [third sep] '], false);
+            'advcheckbox',
+            'test8',
+            'more_checkbox_2',
+            'checkbox_desc',
+            ['group' => 2]
+        );
+        $mform->addGroup(
+            $checkboxgroup2,
+            'more_checkbox_2',
+            'Another group of checkboxes',
+            [' [first sep] ', ' [second sep] ', ' [third sep] '],
+            false
+        );
         $mform->disabledIf('more_checkbox_2', 'disableelements', 'checked');
 
         $mform->addElement('static', 'sepdesc', '', 'The above group uses different separators between each element.');
 
         $this->add_action_buttons(true, get_string('savechanges'));
-
     }
 
     /**
@@ -137,7 +183,6 @@ class grouped_form_elements extends moodleform {
         $err['more_checkbox_2'] = 'Custom validation message';
         return $err;
     }
-
 }
 
 $form = new grouped_form_elements();

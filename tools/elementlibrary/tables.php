@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -180,8 +183,8 @@ $row2->cells = [$head2, $cell3, $cell4];
 $table->data = [$row1, $row2];
 echo html_writer::table($table);
 
-echo $OUTPUT->heading('Turning off the default "generaltable" classes is not very easy, you have to'.
-    ' override the class attribute on the table element. Note that setting any class, will by default'.
+echo $OUTPUT->heading('Turning off the default "generaltable" classes is not very easy, you have to' .
+    ' override the class attribute on the table element. Note that setting any class, will by default' .
     ' remove the generaltable class', 4);
 
 $table = new html_table();
@@ -225,7 +228,7 @@ $table->add_data(['Top Left', 'Top Right']);
 $table->add_data(['Bottom Left', 'Bottom Right']);
 $table->finish_html();
 
-echo $OUTPUT->heading('By default tables are left aligned. Use the boxaligncenter class if you'.
+echo $OUTPUT->heading('By default tables are left aligned. Use the boxaligncenter class if you' .
     ' want the table to be centred instead', 4);
 
 $table = new html_table();
@@ -237,7 +240,7 @@ $table->data = [
 ];
 echo html_writer::table($table);
 
-echo $OUTPUT->heading('You can specify \'hr\' as a row to get a horizontal rule that spans all columns. Note'.
+echo $OUTPUT->heading('You can specify \'hr\' as a row to get a horizontal rule that spans all columns. Note' .
     ' this only works if you have the table \'head\' defined!', 4);
 
 $table = new html_table();

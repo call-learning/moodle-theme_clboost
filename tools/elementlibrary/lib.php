@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -64,5 +67,3 @@ function get_html_output($filename) {
     }
     return htmlentities(file_get_contents($filename), ENT_QUOTES, 'UTF-8');
 }
-
-

@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Core renderer override
  *
@@ -108,7 +109,6 @@ trait core_renderer_override_mustache {
                 // Disable lambda rendering - content in helpers is already rendered, no need to render it again.
                 'disable_lambda_rendering' => true,
             ]);
-
         }
 
         return $this->mustache;

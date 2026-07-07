@@ -33,19 +33,20 @@ use theme_config;
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class utils_test extends advanced_testcase {
-
+final class utils_test extends advanced_testcase {
     /**
      * Test real theme path
      *
      * @covers \theme_clboost\local\utils::get_real_theme_path
      */
-    public function test_get_real_theme_path() {
+    public function test_get_real_theme_path(): void {
         global $CFG;
         $theme = theme_config::load('clboost');
         $this->assertEquals($CFG->dirroot . '/theme/clboost/', utils::get_real_theme_path($theme));
-        $this->assertEquals($CFG->dirroot . '/theme/clboost/layout/frontpage.php',
-            utils::get_real_theme_path($theme, 'layout/frontpage.php'));
+        $this->assertEquals(
+            $CFG->dirroot . '/theme/clboost/layout/frontpage.php',
+            utils::get_real_theme_path($theme, 'layout/frontpage.php')
+        );
     }
 
     /**
@@ -53,7 +54,7 @@ class utils_test extends advanced_testcase {
      *
      * @covers \theme_clboost\local\utils::convert_from_config
      */
-    public function test_convert_from_config() {
+    public function test_convert_from_config(): void {
         $lineparser = function ($setting, $index, &$currentobject) {
             if (!empty($setting)) {
                 switch ($index) {
@@ -77,8 +78,9 @@ class utils_test extends advanced_testcase {
         $expectedresults =
             json_decode(
                 '[{"title":"AddressName1","address":"PostalAddress1","tel":"Tel1"},'
-                .'{"title":"AddressName2","address":"PostalAddress2","tel":"Tel2"}]');
-        $this->assertEquals($expectedresults , $parsed1);
+                . '{"title":"AddressName2","address":"PostalAddress2","tel":"Tel2"}]'
+            );
+        $this->assertEquals($expectedresults, $parsed1);
         $this->assertEquals($expectedresults, $parsed2);
     }
 
@@ -86,7 +88,7 @@ class utils_test extends advanced_testcase {
      * Convert from config with empties
      * @covers \theme_clboost\local\utils::convert_from_config
      */
-    public function test_convert_from_config_with_empties() {
+    public function test_convert_from_config_with_empties(): void {
         $lineparser = function ($setting, $index, &$currentobject) {
             if (!empty($setting)) {
                 switch ($index) {
@@ -113,8 +115,9 @@ class utils_test extends advanced_testcase {
         $expectedresults =
             json_decode(
                 '[{"title":"AddressName1","address":"PostalAddress1","tel":"Tel1"},'
-                .'{"title":"AddressName2","address":"PostalAddress2","postcode":"Postcode","tel":"Tel2"}]');
-        $this->assertEquals($expectedresults , $parsed1);
+                . '{"title":"AddressName2","address":"PostalAddress2","postcode":"Postcode","tel":"Tel2"}]'
+            );
+        $this->assertEquals($expectedresults, $parsed1);
         $this->assertEquals($expectedresults, $parsed2);
     }
 }

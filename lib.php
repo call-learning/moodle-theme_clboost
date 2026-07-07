@@ -48,8 +48,16 @@ function theme_clboost_get_extra_scss($theme) {
  * @throws coding_exception
  */
 function theme_clboost_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
-    return theme_clboost\local\utils::generic_pluginfile('clboost', $course, $cm, $context, $filearea, $args, $forcedownload,
-        $options);
+    return theme_clboost\local\utils::generic_pluginfile(
+        'clboost',
+        $course,
+        $cm,
+        $context,
+        $filearea,
+        $args,
+        $forcedownload,
+        $options
+    );
 }
 
 /**
@@ -107,7 +115,7 @@ function theme_clboost_get_pre_scss($theme) {
         if (empty($value)) {
             continue;
         }
-        array_map(function($target) use (&$scss, $value) {
+        array_map(function ($target) use (&$scss, $value) {
             $scss .= '$' . $target . ': ' . $value . ";\n";
         }, (array) $targets);
     }

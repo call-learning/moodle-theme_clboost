@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -39,7 +42,7 @@
 require_once(dirname(__FILE__) . '../../../../../config.php');
 global $CFG, $PAGE, $OUTPUT;
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->dirroot.'/lib/formslib.php');
+require_once($CFG->dirroot . '/lib/formslib.php');
 
 
 $strheading = 'Element Library: Moodle Forms';

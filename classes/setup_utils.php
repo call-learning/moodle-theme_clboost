@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost;
 use context_block;
 use context_system;
@@ -63,7 +64,6 @@ class setup_utils {
             }
             if (!empty($blockinstance->configdata)) {
                 $blockinstance->configdata = base64_encode(serialize((object) $blockinstance->configdata));
-
             } else {
                 $blockinstance->configdata = '';
             }
@@ -108,21 +108,36 @@ class setup_utils {
      */
     public static function upload_files_in_block($blockinstance, $files) {
         global $DB;
-        $configdata = unserialize(base64_decode($blockinstance->configdata));
+        $configdata = \unserialize_object(base64_decode($blockinstance->configdata));
         $context = context_block::instance($blockinstance->id);
         foreach ($files as $filename => $filespec) {
-            static::upload_file($context->id, 'block_' . $blockinstance->blockname, $filespec['filearea'] ?? 'content',
-                $filespec['itemid'] ?? 0, $filespec['filepath'], $filename);
+            static::upload_file(
+                $context->id,
+                'block_' . $blockinstance->blockname,
+                $filespec['filearea'] ?? 'content',
+                $filespec['itemid'] ?? 0,
+                $filespec['filepath'],
+                $filename
+            );
             $textfields = $filespec['textfields'] ?? ['text'];
-            static::adjust_plugin_file_url($configdata, $textfields, $context->id, 'block_' . $blockinstance->blockname,
-                $filespec['filearea'] ?? 'content', $blockinstance->id, $filename);
+            static::adjust_plugin_file_url(
+                $configdata,
+                $textfields,
+                $context->id,
+                'block_' . $blockinstance->blockname,
+                $filespec['filearea'] ?? 'content',
+                $blockinstance->id,
+                $filename
+            );
         }
-        $DB->update_record('block_instances',
+        $DB->update_record(
+            'block_instances',
             (object) [
                 'id' => $blockinstance->id,
                 'configdata' => base64_encode(serialize($configdata)),
                 'timemodified' => time(),
-            ]);
+            ]
+        );
     }
 
     /**
@@ -154,7 +169,9 @@ class setup_utils {
                     'itemid' => $itemid,
                     'filepath' => '/',
                     'filename' => $filename,
-                ], $originalfilepath);
+                ],
+                $originalfilepath
+            );
         }
         return $file;
     }
@@ -172,13 +189,22 @@ class setup_utils {
      * @param string $filename
      * @return mixed
      */
-    public static function adjust_plugin_file_url(&$originalobject, $textfields, $contextid, $component, $filearea, $itemid,
-        $filepath, $filename = null) {
+    public static function adjust_plugin_file_url(
+        &$originalobject,
+        $textfields,
+        $contextid,
+        $component,
+        $filearea,
+        $itemid,
+        $filepath,
+        $filename = null
+    ) {
         $textfieldstructure = new \stdClass();
         if (!empty($textfields)) {
             foreach ($textfields as $textfield) {
                 $originalobject->{$textfield} =
-                    file_rewrite_pluginfile_urls($originalobject->{$textfield},
+                    file_rewrite_pluginfile_urls(
+                        $originalobject->{$textfield},
                         'pluginfile.php',
                         $contextid,
                         $component,
@@ -201,8 +227,14 @@ class setup_utils {
      * @param int $subpageid
      * @return moodle_page
      */
-    public static function set_virtual_global_page($restoresettings = false, $layout = 'standard', $type = 'general',
-        $regiontoadd = 'content', $context = null, $subpageid = 0) {
+    public static function set_virtual_global_page(
+        $restoresettings = false,
+        $layout = 'standard',
+        $type = 'general',
+        $regiontoadd = 'content',
+        $context = null,
+        $subpageid = 0
+    ) {
         static $oldpage = null;
         global $PAGE;
         if ($restoresettings && $oldpage) {

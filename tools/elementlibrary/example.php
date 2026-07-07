@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -52,7 +55,7 @@ echo $OUTPUT->header();
 echo html_writer::link(new moodle_url('index.php'), '&laquo; Back to index');
 echo $OUTPUT->heading($strheading);
 
-echo $OUTPUT->box('This is an example of how we could use a single <a href="example.txt">source file</a> to '.
+echo $OUTPUT->box('This is an example of how we could use a single <a href="example.txt">source file</a> to ' .
     'display the code for the developer, an example of the output, and the html source.');
 
 echo $OUTPUT->container('<p>This is the code you should use to create a top level heading:</p>');

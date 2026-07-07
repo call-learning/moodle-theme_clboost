@@ -32,7 +32,8 @@ if ($hassiteconfig) {
     // Add new page that will display styles as in Boostwatch. For theme designers.
     $pagedesc = get_string('boostwatchpreview', 'theme_clboost');
     $pageurl = new moodle_url($CFG->wwwroot . '/theme/clboost/tools/boostwatch.php');
-    $ADMIN->add('development',
+    $ADMIN->add(
+        'development',
         new admin_externalpage(
             'boostwatchpreview',
             $pagedesc,
@@ -42,7 +43,8 @@ if ($hassiteconfig) {
     );
     $pagedesc = get_string('elementlibrary', 'theme_clboost');
     $pageurl = new moodle_url($CFG->wwwroot . '/theme/clboost/tools/elementlibrary/index.php');
-    $ADMIN->add('development',
+    $ADMIN->add(
+        'development',
         new admin_externalpage(
             'clboostelementlibrary',
             $pagedesc,

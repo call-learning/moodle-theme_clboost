@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost\output;
 
 use navigation_node;
@@ -56,4 +57,3 @@ class core_renderer extends \theme_boost\output\core_renderer {
         return $additionalinfo;
     }
 }
-

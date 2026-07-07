@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -47,9 +50,9 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($strheading);
 
 echo $OUTPUT->box_start();
-echo $OUTPUT->container('This page contains a set of sample elements used on this site. '.
-    'It can be used to ensure that everything has been correctly themed (remember to check in a right-to-left language too), '.
-    'and for developers to see examples of how to implement particular elements. Developers: if you need an element that is not '.'
+echo $OUTPUT->container('This page contains a set of sample elements used on this site. ' .
+    'It can be used to ensure that everything has been correctly themed (remember to check in a right-to-left language too), ' .
+    'and for developers to see examples of how to implement particular elements. Developers: if you need an element that is not ' . '
     represented here, add it here first - the idea is to build up a library of all the elements used across the site.');
 
 echo $OUTPUT->container_start();

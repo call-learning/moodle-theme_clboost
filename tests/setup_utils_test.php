@@ -32,14 +32,13 @@ use context_system;
  * @copyright 2020 - CALL Learning - Laurent David <laurent@call-learning.fr>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class setup_utils_test extends advanced_testcase {
-
+final class setup_utils_test extends advanced_testcase {
     /**
      * Test Set virtual global page
      *
      * @covers \theme_clboost\local\setup_utils::set_virtual_global_page
      */
-    public function test_set_virtual_global_page() {
+    public function test_set_virtual_global_page(): void {
         $this->resetAfterTest();
         global $PAGE;
         $oldpage = $PAGE;
@@ -47,7 +46,6 @@ class setup_utils_test extends advanced_testcase {
         $this->assertNotEquals($oldpage, $PAGE);
         $this->assertEquals($page, $PAGE);
         $this->assertEquals(3, $page->subpage);
-
     }
 
     /**
@@ -55,7 +53,7 @@ class setup_utils_test extends advanced_testcase {
      *
      * @covers \theme_clboost\local\setup_utils::upload_file
      */
-    public function test_upload_file() {
+    public function test_upload_file(): void {
         $this->resetAfterTest();
         global $CFG;
         $context = context_system::instance();
@@ -64,9 +62,11 @@ class setup_utils_test extends advanced_testcase {
         $itemid = 0;
         // Delete all test files.
         $fs = get_file_storage();
-        $fs->delete_area_files($context->id,
+        $fs->delete_area_files(
+            $context->id,
             $component,
-            $filearea);
+            $filearea
+        );
 
         setup_utils::upload_file(
             $context->id,
@@ -74,10 +74,11 @@ class setup_utils_test extends advanced_testcase {
             $filearea,
             $itemid,
             'theme/clboost/tests/fixtures/sample.jpg',
-            'sample.jpg');
+            'sample.jpg'
+        );
         $allareafiles = $fs->get_area_files($context->id, 'theme_clboost', 'test');
         $this->assertCount(2, $allareafiles);
-        $this->assertTrue(in_array('sample.jpg', array_map(function($areafile) {
+        $this->assertTrue(in_array('sample.jpg', array_map(function ($areafile) {
             return $areafile->get_filename();
         }, $allareafiles)));
     }
@@ -87,12 +88,19 @@ class setup_utils_test extends advanced_testcase {
      *
      * @covers \theme_clboost\local\setup_utils::set_virtual_global_page
      */
-    public function test_setup_page_blocks() {
+    public function test_setup_page_blocks(): void {
         global $CFG, $OUTPUT;
         $this->resetAfterTest();
-        $page = setup_utils::set_virtual_global_page(false, 'standard', 'general',
-            'content', null, 3);
-        setup_utils::setup_page_blocks($page,
+        $page = setup_utils::set_virtual_global_page(
+            false,
+            'standard',
+            'general',
+            'content',
+            null,
+            3
+        );
+        setup_utils::setup_page_blocks(
+            $page,
             [
                 [
                     'blockname' => 'html',
@@ -113,8 +121,14 @@ class setup_utils_test extends advanced_testcase {
                 ],
             ]
         );
-        $otherpage = setup_utils::set_virtual_global_page(false, 'standard', 'general',
-            'content', null, 3);
+        $otherpage = setup_utils::set_virtual_global_page(
+            false,
+            'standard',
+            'general',
+            'content',
+            null,
+            3
+        );
         $otherpage->blocks->load_blocks();
         $blocks = $otherpage->blocks->get_content_for_region('content', $OUTPUT);
         $this->assertCount(1, $blocks);

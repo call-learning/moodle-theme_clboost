@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost\output;
 
 use coding_exception;
@@ -71,7 +72,7 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
         }
 
         // Normalise directories if component is not set or empty.
-        return array_map(function($d) {
+        return array_map(function ($d) {
             return str_replace('//', '/', $d);
         }, $dirs);
     }
@@ -91,7 +92,7 @@ class mustache_template_finder extends \core\output\mustache_template_finder {
                 ' (' . s($name) . ' requested) ');
         }
 
-        list($component, $templatename) = explode('/', $name, 2);
+        [$component, $templatename] = explode('/', $name, 2);
         $component = clean_param($component, PARAM_COMPONENT);
 
         // If the original method had a static call, this override would not be necessary !!

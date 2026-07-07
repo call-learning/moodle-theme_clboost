@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -75,8 +78,10 @@ $optoptions = [
 ];
 echo html_writer::select($optoptions, 'name4');
 
-echo html_writer::tag('p',
-    'To render a time selector - you can choose the units (years, months, days, hours, minutes):');
+echo html_writer::tag(
+    'p',
+    'To render a time selector - you can choose the units (years, months, days, hours, minutes):'
+);
 
 echo html_writer::select_time('years', 'name5', time(), 5, $attr);
 

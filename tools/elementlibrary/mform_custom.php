@@ -13,6 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+// phpcs:ignoreFile
+
 /**
  * An Element Library to help theme development.
  *
@@ -68,7 +71,6 @@ echo $OUTPUT->heading('Tabular form (class "tabularform")', 3);
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tabular_form extends moodleform {
-
     /**
      * Define the form
      */
@@ -80,14 +82,22 @@ class tabular_form extends moodleform {
         // A $renderer->clearAllTemplates()  might be useful here depending on requirements.
 
         // Lmitation - we can't use the 'html_writer:table()' or 'flexible_table()' methods?
-        $theadrow = html_writer::tag('thead', html_writer::tag('tr',
+        $theadrow = html_writer::tag('thead', html_writer::tag(
+            'tr',
             html_writer::tag('th', 'Select', ['class' => 'header c0', 'scope' => 'col']) .
-            html_writer::tag('th', 'Item', ['class' => 'header c1', 'scope' => 'col'])));
+            html_writer::tag('th', 'Item', ['class' => 'header c1', 'scope' => 'col'])
+        ));
         $templatewrap = html_writer::tag('table', $theadrow . '{content}', ['class' => 'generaltable fcontainer']);
-        $templateelement = html_writer::tag('tr',
+        $templateelement = html_writer::tag(
+            'tr',
             html_writer::tag('td', '<!-- END error -->{element}', ['class' => 'felement']) .
-            html_writer::tag('td', '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{label}',
-                ['class' => 'fitemtitle']), ['class' => 'fitem']);
+            html_writer::tag(
+                'td',
+                '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{label}',
+                ['class' => 'fitemtitle']
+            ),
+            ['class' => 'fitem']
+        );
 
         $renderer->setGroupTemplate($templatewrap, 'tabular_checkboxes');
         $renderer->setGroupElementTemplate($templateelement, 'tabular_checkboxes');
@@ -110,7 +120,6 @@ class tabular_form extends moodleform {
             $mform->updateAttributes(['class' => 'tabularform']);
         }
     }
-
 }
 
 $form = new tabular_form();
@@ -118,9 +127,11 @@ $data = $form->get_data();
 $form->display();
 
 echo html_writer::empty_tag('hr');
-echo $OUTPUT->heading('Form with grouped \'action\' controls above \'data\' controls (class "actionform"),' .
+echo $OUTPUT->heading(
+    'Form with grouped \'action\' controls above \'data\' controls (class "actionform"),' .
     ' by providing new template markup to the Renderer.',
-    3);
+    3
+);
 
 /**
  * Class action_form
@@ -140,17 +151,26 @@ class action_form extends moodleform {
 
         // All 'action' controls grouped together here.
         $templateawrap = html_writer::tag('div', '{content}', ['class' => 'fcontainer actionform']);
-        $templateaelement = html_writer::tag('div',
-            html_writer::tag('div', '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{label}',
-                ['class' => 'fitemtitle']) .
-            html_writer::tag('div', '<!-- END error -->{element}', ['class' => 'felement']), ['class' => 'fitem']);
+        $templateaelement = html_writer::tag(
+            'div',
+            html_writer::tag(
+                'div',
+                '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{label}',
+                ['class' => 'fitemtitle']
+            ) .
+            html_writer::tag('div', '<!-- END error -->{element}', ['class' => 'felement']),
+            ['class' => 'fitem']
+        );
 
         $renderer->setGroupTemplate($templateawrap, 'action_group');
         $renderer->setGroupElementTemplate($templateaelement, 'action_group');
 
         $group = [];
-        $group[] =& $mform->createElement('date_time_selector', 'date_select',
-            'Choose a date:'); // Grouped date_time_selector objects don't run the JS enhancement?
+        $group[] =& $mform->createElement(
+            'date_time_selector',
+            'date_select',
+            'Choose a date:'
+        ); // Grouped date_time_selector objects don't run the JS enhancement?
         $c1 = $mform->createElement('text', 'text_entry', 'Search term:');
         $mform->setType('text_entry', PARAM_INT);
         $group[] =& $c1;
@@ -163,14 +183,22 @@ class action_form extends moodleform {
         $mform->addElement('submit', 'submit_btn_2', 'Submit');
 
         // Render the table containing more controls.
-        $theadrow = html_writer::tag('thead', html_writer::tag('tr',
+        $theadrow = html_writer::tag('thead', html_writer::tag(
+            'tr',
             html_writer::tag('th', 'Select', ['class' => 'header c0', 'scope' => 'col']) .
-            html_writer::tag('th', 'Item', ['class' => 'header c1', 'scope' => 'col'])));
+            html_writer::tag('th', 'Item', ['class' => 'header c1', 'scope' => 'col'])
+        ));
         $templatebwrap = html_writer::tag('table', $theadrow . '{content}', ['class' => 'generaltable fcontainer']);
-        $templatebelement = html_writer::tag('tr',
+        $templatebelement = html_writer::tag(
+            'tr',
             html_writer::tag('td', '<!-- END error -->{element}', ['class' => 'felement']) .
-            html_writer::tag('td', '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{help}{label}',
-                ['class' => 'fitemtitle']), ['class' => 'fitem']);
+            html_writer::tag(
+                'td',
+                '<!-- BEGIN required -->' . $mform->getReqHTML() . '<!-- END required -->{help}{label}',
+                ['class' => 'fitemtitle']
+            ),
+            ['class' => 'fitem']
+        );
 
         $renderer->setGroupTemplate($templatebwrap, 'tabular_checkboxes_2');
         $renderer->setGroupElementTemplate($templatebelement, 'tabular_checkboxes_2');
@@ -183,7 +211,6 @@ class action_form extends moodleform {
         $group[] =& $mform->createElement('checkbox', 'tabular_checkbox10', 'checkbox_name');
 
         $mform->addGroup($group, 'tabular_checkboxes_2', '', [' '], false);
-
     }
 }
 
@@ -202,7 +229,6 @@ echo $OUTPUT->heading('Minimal forms', 3);
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class minimal_form extends moodleform {
-
     /**
      * Define the form
      */
@@ -211,12 +237,12 @@ class minimal_form extends moodleform {
         $mform =& $this->_form;
 
         switch ($this->_customdata['type']) {
-            case 'search' :
+            case 'search':
                 $mform->addElement('text', 'search');
                 $mform->setType('search', PARAM_RAW);
                 $mform->addElement('submit', 'search_btn', 'Go');
                 break;
-            case 'single_button' :
+            case 'single_button':
                 $this->add_action_buttons(false, 'Turn editing on');
                 break;
             default:

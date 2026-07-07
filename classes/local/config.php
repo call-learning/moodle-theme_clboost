@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 namespace theme_clboost\local;
 
 /**
@@ -153,7 +154,7 @@ class config {
         $theme->editor_sheets = [];
         $theme->editor_scss = ['editor'];
         $theme->usefallback = true;
-        $theme->scss = function($theme) use ($themename) {
+        $theme->scss = function ($theme) use ($themename) {
             $callback = static::get_theme_callback('get_main_scss_content', $themename);
             return $callback($theme);
         };
