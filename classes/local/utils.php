@@ -239,7 +239,8 @@ class utils {
 
         if ($page->course && $page->course->id != SITEID) {
             $settingsnode = $page->settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
-            if ($settingsnode) {
+            $context = context_course::instance($page->course->id);
+            if ($settingsnode && has_capability('moodle/course:update', $context)) {
                 $tdwidget = new teacherdashboard_menu($page->course);
                 $templatecontext['teacherdbmenu'] = $tdwidget->export_for_template($output);
             }
